@@ -1,28 +1,9 @@
-void test_while() {
-	const int j = 100;
-	int sum,i,array[101];
-	sum = 0;
-	i = 0;
-	while (i < j) {
-		array[i] = i;
-		i = i + 1;
-	}
-	;;;;;;
-	{{{}}{}}
-	i = 0;
-	while (i < j) {
-		sum = sum + i;
-		i = i + 1;
-	}
-	if (sum == 4950) {
-		printf("success!");
-		return;
-	}
-	printf("fail!");
-	return;
-}
-
 void main()
 {
-    test_while();
+	const char  const_char_b = 'a';
+    int test_if_result, loop_num;
+    test_if_result=-1001;
+    loop_num=15;
+    loop_num = +loop_num - test_if_result + 10 * const_char_b - 100 + 42 + 34 + 2 * test_if_result;
+    printf(loop_num);
 }

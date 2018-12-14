@@ -1,0 +1,8 @@
+digraph testInputOutput{
+label =testInputOutput
+B79[label="B79:\nSCF,,,int_test_input\nSCF,,,char_test_input\nPRF,3,str,1\nPRF,4,str,0\nPRF,int_test_input,0,1\nPRF,5,str,0\nPRF,char_test_input,1,1\nASS,@344,,int_global_var\nASS,@345,,char_global_var\nRET,,,\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B79->exit
+enter->B79
+}

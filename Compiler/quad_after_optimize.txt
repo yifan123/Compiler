@@ -1,316 +1,518 @@
-FUNC   Fibonacci
-NEQ n @1 Lab0
-RET @2  
-LAB   Lab0
-NEQ n @4 Lab3
-RET @5  
-LAB   Lab3
-SUB n @6 @7
-PARA Fibonacci 0 @7
-CALL Fibonacci  
-SW $v0  @8
-SUB n @9 @10
-PARA Fibonacci 0 @10
-CALL Fibonacci  
-SW $v0  @11
-ADD @8 @11 @12
-RET @12  
-RET   
-FUNC   test_recursion
-PARA Fibonacci 0 @14
-CALL Fibonacci  
-SW $v0  @15
-NEQ @15 @16 Lab13
-PRF 0 str 1
-RET @17  
+FUNC   testIfWhile
+ASS @0  test_if_result
+ASS @1  loop_num
+LEQ @4 @6 Lab2
+LAB   Lab7
+GEQ test_if_result @9 Lab8
+ADD test_if_result loop_num @10
+ASS @10  test_if_result
+ADD loop_num @11 @12
+ASS @12  loop_num
+JMP   Lab7
+LAB   Lab8
+SUB test_if_result @14 @15
+MUL @15 @16 @17
+NEQ @17 @18 Lab19
+MUL test_if_result @20 @21
+NEG @21  @22
+MUL @23 loop_num @24
+ADD @22 @24 @25
+ADD @25 @26 @27
+SUB @27 const_char_a @28
+ASS @28  test_if_result
+SUB loop_num test_if_result @29
+ADD @29 @31 @32
+SUB @32 @33 @34
+ADD @34 @35 @36
+ADD @36 @37 @38
+MUL @39 test_if_result @40
+ADD @38 @40 @41
+ASS @41  loop_num
+JMP   Lab13
+LAB   Lab19
+MUL test_if_result @42 @43
+MUL @44 loop_num @45
+ADD @43 @45 @46
+ADD @46 @47 @48
+SUB @48 const_char_b @49
+ADD @49 @50 @51
+ASS @51  test_if_result
+NEG loop_num  @52
+ADD @52 test_if_result @53
+ADD @53 @55 @56
+SUB @56 @57 @58
+ADD @58 @59 @60
+ADD @60 @61 @62
+MUL @63 test_if_result @64
+SUB @62 @64 @65
+ASS @65  loop_num
 LAB   Lab13
-PRF 1 str 1
-RET @18  
-RET   
-FUNC   test_if
-ASS @19  ch
-ADD ch plus @21
-LEQ @21 flag Lab20
-PRF 2 str 1
-LAB   Lab20
-EQL ch $0 Lab22
-PRF 3 str 1
-LAB   Lab22
-EQL @24 $0 Lab23
-PRF 4 str 1
-LAB   Lab23
-RET @25  
-RET   
-FUNC   test_while
-ASS @26  sum
-ASS @27  i
-LAB   Lab28
-GEQ i j Lab29
-ARAS i i array
-ADD i @30 @31
-ASS @31  i
-JMP   Lab28
-LAB   Lab29
-ASS @32  i
-LAB   Lab33
-GEQ i j Lab34
-ADD sum i @35
-ASS @35  sum
-ADD i @36 @37
-ASS @37  i
-JMP   Lab33
-LAB   Lab34
-NEQ sum @39 Lab38
-PRF 5 str 1
-RET   
-LAB   Lab38
-PRF 6 str 1
-RET   
-RET   
-FUNC   test_switch
-ASS @40  flag
-NEQ flag @42 Lab43
-PRF 7 str 1
-JMP   Lab41
-LAB   Lab43
-PRF 8 str 1
-LAB   Lab41
-RET   
-FUNC   to_upper
-SUB a b @44
-RET @44  
-RET   
-FUNC   test_scanf_printf
-SCF   a
-SCF   b
-SCF   c
-PRF 9 str 1
-PRF a 1 1
-PRF b 1 1
-PRF c 1 1
-PARA to_upper 0 a
-PARA to_upper 1 @45
-CALL to_upper  
-SW $v0  @46
-PRF @46 0 1
-PARA to_upper 0 b
-PARA to_upper 1 @47
-CALL to_upper  
-SW $v0  @48
-PRF @48 0 1
-PARA to_upper 0 c
-PARA to_upper 1 @49
-CALL to_upper  
-SW $v0  @50
-PRF @50 0 1
-RET   
-FUNC   test_relation_operator
-NEQ x y Lab51
-PRF 10 str 1
-LAB   Lab51
-LEQ x y Lab52
-PRF 11 str 1
-LAB   Lab52
-GEQ x y Lab53
-PRF 12 str 1
-LAB   Lab53
-LSS x y Lab54
-PRF 13 str 1
-LAB   Lab54
-GTR x y Lab55
-PRF 14 str 1
-LAB   Lab55
-EQL x y Lab56
-PRF 15 str 1
-LAB   Lab56
-RET   
-FUNC   test_expression
-ASS @57  x
-ASS @58  y
-ASS %174  @61
-ARAS @62 @61 A
-MUL @63 x @64
-ASAR @65 A @66
-MUL @64 @66 @67
-NEG y  @68
-MUL @67 @68 @69
-MUL @69 y @70
-DIV @70 @71 @72
-NEG @72  @73
-ADD @73 @74 @75
-ASS %175  @78
-PARA to_upper 0 @76
-PARA to_upper 1 @78
-CALL to_upper  
-SW $v0  @79
-ADD @75 @79 @80
-SUB @80 @81 @82
-ADD x @82 @83
-ASS @83  z
-NEQ z @85 Lab84
-PRF 16 str 1
-RET   
-LAB   Lab84
-PRF 17 str 1
-RET   
-RET   
-FUNC   test_symbol
-ASS @86  _a1
-ASS @87  _a2
-ASS @88  _a3
-ASS @89  _a4
-ASS @90  _a5
-ASS @91  aa
-ASS @92  Aa
-NEQ aa @94 Lab93
-PRF 18 str 1
-LAB   Lab93
-ASS @95  i
-ADD _a1 _a2 @96
-ADD @96 _a3 @97
-ADD @97 _a4 @98
-ADD @98 _a5 @99
-ASS @99  sum
-LAB   Lab100
-GEQ i @102 Lab101
-ARAS i i array
-ADD i @103 @104
-ASS @104  i
-JMP   Lab100
+LAB   Lab2
+PRF test_if_result 0 1
+PRF loop_num 0 1
+ASS @66  test_if_result
+ASS @67  loop_num
+LSS @70 @72 Lab68
+LAB   Lab73
+GEQ test_if_result @75 Lab74
+LEQ loop_num @77 Lab76
+ADD test_if_result loop_num @78
+ASS @78  test_if_result
+LAB   Lab76
+ADD loop_num @79 @80
+ASS @80  loop_num
+DIV test_if_result @82 @83
+MUL @83 @84 @85
+NEQ @85 test_if_result Lab81
+ADD loop_num @86 @87
+ASS @87  loop_num
+LAB   Lab81
+JMP   Lab73
+LAB   Lab74
+LAB   Lab68
+PRF test_if_result 0 1
+PRF loop_num 0 1
+ASS @88  test_if_result
+ASS @89  loop_num
+GEQ test_if_1 test_if_2 Lab90
+LAB   Lab91
+GEQ test_if_result @93 Lab92
+DIV test_if_result @95 @96
+MUL @96 @97 @98
+SUB test_if_result @98 @99
+NEQ @99 @100 Lab101
+ADD test_if_result @102 @103
+ASS @103  test_if_result
+JMP   Lab94
 LAB   Lab101
+NEQ @99 @104 Lab105
+ADD test_if_result loop_num @106
+ASS @106  test_if_result
+JMP   Lab94
 LAB   Lab105
-GEQ i @107 Lab106
-ADD @108 i @109
-SUB @109 @110 @111
-ARAS @111 i array
-ADD i @112 @113
-ASS @113  i
-JMP   Lab105
-LAB   Lab106
-LAB   Lab114
-GEQ i @116 Lab115
-ADD @117 i @118
-SUB @118 @119 @120
-ARAS @120 i array
-ADD i @121 @122
-ASS @122  i
-JMP   Lab114
-LAB   Lab115
-ASS @123  i
-LAB   Lab124
-GEQ i @126 Lab125
-ASAR i array @127
-ADD sum @127 @128
-ASS @128  sum
-ADD i @129 @130
-ASS @130  i
-JMP   Lab124
-LAB   Lab125
-NEQ sum @132 Lab131
-PRF 19 str 1
-RET   
-LAB   Lab131
-PRF 20 str 1
-RET   
-RET   
-FUNC   local_scope
-ASS @133  scope_var
-PRF 21 str 0
-PRF scope_var 0 1
-RET   
-FUNC   test_scope
-ASS @134  scope_var
-ASS scope_var  tem
-PRF 22 str 0
-PRF scope_var 0 1
-CALL local_scope  
-PRF 23 str 0
-PRF scope_var 0 1
-NEQ tem scope_var Lab135
-PRF 24 str 1
-RET   
-LAB   Lab135
-PRF 25 str 1
-RET   
-RET   
-FUNC   test
-ASS @136  j
-ASS @137  k
+LAB   Lab94
+ADD loop_num @107 @108
+ASS @108  loop_num
+JMP   Lab91
+LAB   Lab92
+DIV test_if_result @110 @111
+MUL @111 @112 @113
+NEQ test_if_result @113 Lab109
+MUL test_if_result @114 @115
+MUL @116 loop_num @117
+ADD @115 @117 @118
+ADD @118 @119 @120
+SUB @120 const_char_b @121
+ADD @121 @122 @123
+ASS @123  test_if_result
+NEG loop_num  @124
+ADD @124 test_if_result @125
+ADD @125 @127 @128
+SUB @128 @129 @130
+ADD @130 @131 @132
+ADD @132 @133 @134
+MUL @135 test_if_result @136
+SUB @134 @136 @137
+ASS @137  loop_num
+LAB   Lab109
+LAB   Lab90
+PRF test_if_result 0 1
+PRF loop_num 0 1
+GTR test_if_2 test_if_1 Lab138
+PRF 0 str 1
 LAB   Lab138
-GEQ j k Lab139
-SCF   i
-NEQ i @141 Lab142
-PRF 26 str 1
-CALL test_recursion  
-SW $v0  @143
-JMP   Lab140
-LAB   Lab142
-NEQ i @144 Lab145
-PRF 27 str 1
-PARA test_if 0 @146
-CALL test_if  
-SW $v0  @147
-JMP   Lab140
-LAB   Lab145
-NEQ i @148 Lab149
-PRF 28 str 1
-CALL test_while  
-JMP   Lab140
-LAB   Lab149
-NEQ i @150 Lab151
-PRF 29 str 1
-CALL test_switch  
-JMP   Lab140
-LAB   Lab151
-NEQ i @152 Lab153
-PRF 30 str 1
-CALL test_scanf_printf  
-JMP   Lab140
-LAB   Lab153
-NEQ i @154 Lab155
-PRF 31 str 1
-CALL test_expression  
-JMP   Lab140
-LAB   Lab155
-NEQ i @156 Lab157
-PRF 32 str 1
-CALL test_symbol  
-JMP   Lab140
-LAB   Lab157
-NEQ i @158 Lab159
-PRF 33 str 1
-ASS %176  @161
-ASS %177  @163
-PARA test_relation_operator 0 @161
-PARA test_relation_operator 1 @163
-CALL test_relation_operator  
-ASS %178  @165
-ASS %179  @167
-PARA test_relation_operator 0 @165
-PARA test_relation_operator 1 @167
-CALL test_relation_operator  
-ASS %180  @169
-PARA test_relation_operator 0 @169
-PARA test_relation_operator 1 con2
-CALL test_relation_operator  
-JMP   Lab140
-LAB   Lab159
-NEQ i @170 Lab171
-PRF 34 str 1
-CALL test_scope  
-JMP   Lab140
-LAB   Lab171
-LAB   Lab140
-PRF 35 str 1
-ADD j @172 @173
-ASS @173  j
-JMP   Lab138
+NEQ test_if_1 test_if_2 Lab139
+PRF 1 str 1
 LAB   Lab139
-ASS ch1  ch
-PRF 36 str 0
-PRF ch 1 1
-PRF 37 str 1
+ASS @140  test_if_result
+ASS @141  loop_num
+EQL test_if_1 test_if_2 Lab142
+MUL loop_num @144 @145
+SUB test_if_result @145 @146
+NEQ @146 @147 Lab148
+LAB   Lab149
+GEQ test_if_result @151 Lab150
+DIV test_if_result @153 @154
+MUL @154 @155 @156
+SUB @156 test_if_result @157
+NEQ @157 @158 Lab159
+ADD test_if_result @160 @161
+ASS @161  test_if_result
+JMP   Lab152
+LAB   Lab159
+NEQ @157 @162 Lab163
+ADD test_if_result loop_num @164
+ASS @164  test_if_result
+JMP   Lab152
+LAB   Lab163
+LAB   Lab152
+ADD loop_num @165 @166
+ASS @166  loop_num
+JMP   Lab149
+LAB   Lab150
+JMP   Lab143
+LAB   Lab148
+ASS @168  test_if_result
+ASS @170  loop_num
+LAB   Lab143
+LAB   Lab142
+PRF test_if_result 0 1
+PRF loop_num 0 1
+EQL @172 $0 Lab171
+PRF 2 str 1
+LAB   Lab171
+ASS @174  int_global_var
+ASS @175  char_global_var
+RET   
+FUNC   testSwitchCase
+NEQ test_switch_int @177 Lab178
+LAB   Lab179
+MUL test_switch_int @181 @182
+ADD @182 @185 @186
+GEQ @186 @187 Lab180
+GTR test_switch_int @189 Lab188
+ADD test_switch_int @190 @191
+ASS @191  test_switch_int
+LAB   Lab188
+JMP   Lab179
+LAB   Lab180
+JMP   Lab176
+LAB   Lab178
+NEQ test_switch_int @192 Lab193
+SUB test_switch_int @195 @196
+NEQ @196 @197 Lab194
+LAB   Lab198
+GTR test_switch_int @200 Lab199
+ADD test_switch_int @201 @202
+MUL @202 @203 @204
+ASS @204  test_switch_int
+JMP   Lab198
+LAB   Lab199
+LAB   Lab194
+JMP   Lab176
+LAB   Lab193
+NEQ test_switch_int @205 Lab206
+ASS @208  test_switch_int
+JMP   Lab176
+LAB   Lab206
+ASS @209  test_switch_int
+LAB   Lab176
+NEQ test_switch_char @211 Lab212
+ASS const_char_a  test_switch_char
+JMP   Lab210
+LAB   Lab212
+NEQ test_switch_char @213 Lab214
+ASS const_char_A  test_switch_char
+JMP   Lab210
+LAB   Lab214
+NEQ test_switch_char @215 Lab216
+ASS const_char_num  test_switch_char
+JMP   Lab210
+LAB   Lab216
+NEQ test_switch_char @217 Lab218
+ASS const_char_underline  test_switch_char
+JMP   Lab210
+LAB   Lab218
+NEQ test_switch_char @219 Lab220
+ASS const_char_add  test_switch_char
+JMP   Lab210
+LAB   Lab220
+NEQ test_switch_char @221 Lab222
+ASS const_char_mul  test_switch_char
+JMP   Lab210
+LAB   Lab222
+ASS @223  test_switch_char
+LAB   Lab210
+NEQ @225 @226 Lab227
+JMP   Lab224
+LAB   Lab227
+LAB   Lab224
+PRF test_switch_int 0 1
+PRF test_switch_char 1 1
+ASS @229  int_global_var
+ASS @230  char_global_var
+RET   
+FUNC   returnInt
+RET @231  
+RET   
+FUNC   returnChar
+RET @232  
+RET   
+FUNC   returnIntParameter
+NEQ select @234 Lab235
+ASS int_parameter_1  _tmp
+JMP   Lab233
+LAB   Lab235
+NEQ select @236 Lab237
+ASS int_parameter_2  _tmp
+JMP   Lab233
+LAB   Lab237
+NEQ select @238 Lab239
+ASS int_parameter_3  _tmp
+JMP   Lab233
+LAB   Lab239
+NEQ select @240 Lab241
+ASS int_parameter_4  _tmp
+JMP   Lab233
+LAB   Lab241
+ASS @242  _tmp
+LAB   Lab233
+RET _tmp  
+RET   
+FUNC   returnCharParameter
+NEQ select @244 Lab245
+RET char_parameter_1  
+JMP   Lab243
+LAB   Lab245
+NEQ select @246 Lab247
+RET char_parameter_2  
+JMP   Lab243
+LAB   Lab247
+NEQ select @248 Lab249
+RET char_parameter_3  
+JMP   Lab243
+LAB   Lab249
+NEQ select @250 Lab251
+RET char_parameter_4  
+JMP   Lab243
+LAB   Lab251
+RET @252  
+LAB   Lab243
+RET   
+FUNC   testAssign
+CALL returnChar  
+SW $v0  @259
+SUB @259 const_char_a @260
+PARA returnIntParameter 0 @254
+PARA returnIntParameter 1 @256
+PARA returnIntParameter 2 @258
+PARA returnIntParameter 3 test_assign_10
+PARA returnIntParameter 4 @260
+CALL returnIntParameter  
+SW $v0  @261
+MUL @261 @263 @264
+DIV @264 @265 @266
+ADD @253 @266 @267
+ASS @267  int_test_assign
+DIV int_test_assign @268 @269
+ADD @269 const_char_a @270
+SUB @270 @271 @272
+SUB @272 @273 @274
+ARAS @276 @274 int_array_test_assign
+ASAR @278 int_array_test_assign @279
+DIV int_test_assign @279 @280
+ADD @277 @280 @281
+CALL returnInt  
+SW $v0  @282
+ADD @281 @282 @283
+SUB @283 @284 @285
+CALL returnInt  
+SW $v0  @286
+NEG @286  @287
+CALL returnChar  
+SW $v0  @288
+SUB @288 const_char_a @289
+MUL test_assign_10 @289 @290
+CALL returnInt  
+SW $v0  @296
+PARA returnIntParameter 0 @291
+PARA returnIntParameter 1 @295
+PARA returnIntParameter 2 @296
+PARA returnIntParameter 3 test_assign_10
+PARA returnIntParameter 4 @297
+CALL returnIntParameter  
+SW $v0  @298
+ADD @290 @298 @299
+ADD @287 @299 @300
+ARAS @300 @285 int_array_test_assign
+ASAR @303 int_array_test_assign @304
+ADD @302 @304 @305
+ADD @305 @308 @309
+SUB @309 @310 @311
+ARAS @315 @311 int_array_test_assign
+CALL returnChar  
+SW $v0  @316
+ASS @316  char_test_assign
+CALL returnChar  
+SW $v0  @320
+CALL returnChar  
+SW $v0  @321
+PARA returnCharParameter 0 @318
+PARA returnCharParameter 1 @319
+PARA returnCharParameter 2 @320
+PARA returnCharParameter 3 @321
+PARA returnCharParameter 4 const_char_a
+CALL returnCharParameter  
+SW $v0  @322
+ARAS @322 @317 char_array_test_assign
+ASAR @324 char_array_test_assign @325
+ARAS @325 @323 char_array_test_assign
+ARAS @327 @326 char_array_test_assign
+PRF int_test_assign 0 1
+ASAR @328 int_array_test_assign @329
+PRF @329 0 1
+ASAR @330 int_array_test_assign @331
+PRF @331 0 1
+ASAR @332 int_array_test_assign @333
+PRF @333 0 1
+PRF char_test_assign 1 1
+ASAR @334 char_array_test_assign @335
+PRF @335 1 1
+ASAR @336 char_array_test_assign @337
+PRF @337 1 1
+ASAR @338 char_array_test_assign @339
+PRF @339 1 1
+ASS @341  int_global_var
+ASS @342  char_global_var
+RET   
+FUNC   testInputOutput
+SCF   int_test_input
+SCF   char_test_input
+PRF 3 str 1
+PRF 4 str 0
+PRF int_test_input 0 1
+PRF 5 str 0
+PRF char_test_input 1 1
+ASS @344  int_global_var
+ASS @345  char_global_var
+RET   
+FUNC   testTrick
+RET   
+FUNC   judge1
+ASS @346  ret
+GEQ a b Lab347
+LSS c d Lab348
+ASS @349  ret
+LAB   Lab348
+LAB   Lab347
+RET ret  
+RET   
+FUNC   judge2
+ASS @350  ret
+GEQ a b Lab351
+GTR c d Lab352
+ASS @353  ret
+LAB   Lab352
+LAB   Lab351
+RET ret  
+RET   
+FUNC   Qsort
+ASS low  first
+ASS high  last
+ASAR first sort @354
+ASS @354  key
+LSS low high Lab355
+RET   
+LAB   Lab355
+LAB   Lab356
+GEQ first last Lab357
+LAB   Lab358
+ASAR last sort @360
+PARA judge1 0 first
+PARA judge1 1 last
+PARA judge1 2 @360
+PARA judge1 3 key
+CALL judge1  
+SW $v0  @361
+NEQ @361 @362 Lab359
+SUB last @363 @364
+ASS @364  last
+JMP   Lab358
+LAB   Lab359
+ASAR last sort @365
+ARAS @365 first sort
+LAB   Lab366
+ASAR first sort @368
+PARA judge2 0 first
+PARA judge2 1 last
+PARA judge2 2 @368
+PARA judge2 3 key
+CALL judge2  
+SW $v0  @369
+NEQ @369 @370 Lab367
+ADD first @371 @372
+ASS @372  first
+JMP   Lab366
+LAB   Lab367
+ASAR first sort @373
+ARAS @373 last sort
+JMP   Lab356
+LAB   Lab357
+ARAS key first sort
+SUB first @374 @375
+PARA Qsort 0 low
+PARA Qsort 1 @375
+CALL Qsort  
+ADD first @376 @377
+PARA Qsort 0 @377
+PARA Qsort 1 high
+CALL Qsort  
+RET   
+RET   
+FUNC   testRecursion
+ARAS @379 @378 sort
+ARAS @381 @380 sort
+ARAS @383 @382 sort
+ARAS @385 @384 sort
+ARAS @387 @386 sort
+ARAS @389 @388 sort
+ARAS @391 @390 sort
+ARAS @393 @392 sort
+PARA Qsort 0 @394
+PARA Qsort 1 @395
+CALL Qsort  
+ASS @396  i
+LAB   Lab397
+GEQ i @399 Lab398
+ASAR i sort @400
+PRF @400 0 1
+ADD i @401 @402
+ASS @402  i
+JMP   Lab397
+LAB   Lab398
+ASS @404  int_global_var
+ASS @405  char_global_var
+RET   
+FUNC   testCallFunction
+SCF   test_select
+NEQ test_select @407 Lab408
+CALL testIfWhile  
+JMP   Lab406
+LAB   Lab408
+NEQ test_select @409 Lab410
+PARA testSwitchCase 0 const_int_postive
+PARA testSwitchCase 1 const_char_a
+CALL testSwitchCase  
+PARA testSwitchCase 0 const_int_negtive
+PARA testSwitchCase 1 @411
+CALL testSwitchCase  
+PARA testSwitchCase 0 @412
+PARA testSwitchCase 1 @413
+CALL testSwitchCase  
+PARA testSwitchCase 0 @414
+PARA testSwitchCase 1 @415
+CALL testSwitchCase  
+JMP   Lab406
+LAB   Lab410
+NEQ test_select @416 Lab417
+CALL testAssign  
+JMP   Lab406
+LAB   Lab417
+NEQ test_select @418 Lab419
+CALL testInputOutput  
+JMP   Lab406
+LAB   Lab419
+NEQ test_select @420 Lab421
+CALL testRecursion  
+JMP   Lab406
+LAB   Lab421
+LAB   Lab406
+PRF int_global_var 0 1
+PRF char_global_var 1 1
 RET   
 FUNC   main
-CALL test  
+ASS @422  int_global_var
+ASS @423  char_global_var
+CALL testCallFunction  
+CALL testTrick  
 RET   

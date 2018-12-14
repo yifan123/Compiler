@@ -1061,6 +1061,8 @@ void Parser::expression(string &exp_name, TabType &exp_type) {
 	TabType item_type;
 	string op;
 	Symbol tem_sym = PLUS;
+	SymTableItem item_sym;
+	int item_g;
 	int type_flag = 0;//只要表达式中出现了运算，flag就置为1，代表最终表达式类型为int
 	if (lexer.token.sym == PLUS || lexer.token.sym == MINUS) {
 		type_flag = 1;
@@ -1076,8 +1078,14 @@ void Parser::expression(string &exp_name, TabType &exp_type) {
 		dst_name = item_name;
 		if (tem_sym == MINUS) {
 			type_flag = 1;
-			dst_name = newtvar();
-			quadtable.push_back(QuadRuple("NEG",item_name,"", dst_name));
+			find_sym_table(dst_name, item_sym, item_g);
+			if (item_sym.obj == constantobj) {
+				dst_name = newtconst(-item_sym.adr);
+			}
+			else {
+				dst_name = newtvar();
+				quadtable.push_back(QuadRuple("NEG", item_name, "", dst_name));
+			}
 		}
 	}
 	tem_name = dst_name;
@@ -1091,8 +1099,28 @@ void Parser::expression(string &exp_name, TabType &exp_type) {
 			error(lexer.line, OPRAND_TYPE_ERROR);
 			skip();
 		}
-		dst_name = newtvar();
-		quadtable.push_back(QuadRuple(op, tem_name, item_name, dst_name));
+		SymTableItem symitem1;
+		SymTableItem symitem2;
+		SymTableItem symitem3;
+		int g1;
+		int g2;
+		int g3;
+		int result=0;
+		find_sym_table(tem_name, symitem1, g1);
+		find_sym_table(item_name, symitem2, g2);
+		if (symitem1.obj == constantobj && symitem2.obj == constantobj) {
+			if (op == "ADD") {	//加法
+				result = symitem1.adr + symitem2.adr;
+			}
+			else if (op == "SUB") { //减法
+				result = symitem1.adr - symitem2.adr;
+			}
+			dst_name = newtconst(result);
+		}
+		else {
+			dst_name = newtvar();
+			quadtable.push_back(QuadRuple(op, tem_name, item_name, dst_name));
+		}
 		tem_name = dst_name;
 	}
 	exp_name = dst_name;
@@ -1103,11 +1131,17 @@ void Parser::expression(string &exp_name, TabType &exp_type) {
 void Parser::item(string &item_name, TabType &item_type) {
 	string factor_name = "", tem_name = "", dst_name = "";
 	TabType factor_type;
+	TabObj factor_obj;
 	string op;
 	int type_flag = 0;//只要因子中出现了运算，flag就置为1，代表最终因子类型为int
 	factor(factor_name, factor_type);
 	tem_name = factor_name;
 	dst_name = factor_name;
+	SymTableItem symitem1;
+	SymTableItem symitem2;
+	int g1;
+	int g2;
+	int result=0;
 	while (lexer.token.sym == MULT || lexer.token.sym == DIV)
 	{
 		type_flag = 1;
@@ -1118,8 +1152,21 @@ void Parser::item(string &item_name, TabType &item_type) {
 			error(lexer.line, OPRAND_TYPE_ERROR);
 			skip();
 		}
-		dst_name = newtvar();
-		quadtable.push_back(QuadRuple(op, tem_name, factor_name, dst_name));
+		find_sym_table(tem_name, symitem1, g1);
+		find_sym_table(factor_name, symitem2, g2);
+		if (symitem1.obj == constantobj && symitem2.obj == constantobj) {
+			if (op == "MUL") {	//加法
+				result = symitem1.adr * symitem2.adr;
+			}
+			else if (op == "DIV") { //减法
+				result = symitem1.adr / symitem2.adr;
+			}
+			dst_name = newtconst(result);
+		}
+		else {
+			dst_name = newtvar();
+			quadtable.push_back(QuadRuple(op, tem_name, factor_name, dst_name));
+		}
 		tem_name = dst_name;
 	}
 	item_name = dst_name;
@@ -1219,7 +1266,7 @@ void Parser::factor(string &fac_name, TabType &fac_type) {
 	DEBUG("This is a factor！\n");
 }
 void Parser::integer(int &value) {
-	int flag = 1;;
+	int flag = 1;
 	if (lexer.token.sym == PLUS || lexer.token.sym == MINUS) {
 		flag = lexer.token.sym == PLUS ? 1 : -1;
 		lexer.getsym();

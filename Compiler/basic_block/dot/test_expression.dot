@@ -1,6 +1,6 @@
 digraph test_expression{
 label =test_expression
-B27[label="B27:\nASS,@57,,x\nASS,@58,,y\nASS,%174,,@61\nARAS,@62,@61,A\nMUL,@63,x,@64\nASAR,@65,A,@66\nMUL,@64,@66,@67\nNEG,y,,@68\nMUL,@67,@68,@69\nMUL,@69,y,@70\nDIV,@70,@71,@72\nNEG,@72,,@73\nADD,@73,@74,@75\nASS,%175,,@78\nPARA,to_upper,0,@76\nPARA,to_upper,1,@78\nCALL,to_upper,,\nSW,$v0,,@79\nADD,@75,@79,@80\nSUB,@80,@81,@82\nADD,x,@82,@83\nASS,@83,,z\nNEQ,z,@85,Lab84\n" shape=box]
+B27[label="B27:\nASS,@57,,x\nASS,@58,,y\nARAS,@62,@61,A\nMUL,@63,x,@64\nASAR,@65,A,@66\nMUL,@64,@66,@67\nNEG,y,,@68\nMUL,@67,@68,@69\nMUL,@69,y,@70\nDIV,@70,@71,@72\nNEG,@72,,@73\nADD,@73,@74,@75\nPARA,to_upper,0,@76\nPARA,to_upper,1,@78\nCALL,to_upper,,\nSW,$v0,,@79\nADD,@75,@79,@80\nSUB,@80,@81,@82\nADD,x,@82,@83\nASS,@83,,z\nNEQ,z,@85,Lab84\n" shape=box]
 B28[label="B28:\nPRF,16,str,1\nRET,,,\n" shape=box]
 Lab84[label="Lab84:\nLAB,,,Lab84\nPRF,17,str,1\nRET,,,\nRET,,,\n" shape=box]
 enter[label="enter:\n" shape=box]

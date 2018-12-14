@@ -1,8 +1,8 @@
 digraph main{
 label =main
-B64[label="B64:\nCALL,test,,\nRET,,,\n" shape=box]
+B109[label="B109:\nASS,@422,,int_global_var\nASS,@423,,char_global_var\nCALL,testCallFunction,,\nCALL,testTrick,,\nRET,,,\n" shape=box]
 enter[label="enter:\n" shape=box]
 exit[label="exit:\n" shape=box]
-B64->exit
-enter->B64
+B109->exit
+enter->B109
 }
