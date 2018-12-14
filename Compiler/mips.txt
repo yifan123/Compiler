@@ -1,0 +1,996 @@
+.data
+enter: .asciiz "\n"
+string0: .asciiz"success!"
+string1: .asciiz"fail!"
+string2: .asciiz"success1!"
+string3: .asciiz"success2!"
+string4: .asciiz"fail1!"
+string5: .asciiz"success!"
+string6: .asciiz"fail!"
+string7: .asciiz"success!"
+string8: .asciiz"fail!"
+string9: .asciiz"Input is:"
+string10: .asciiz" x==y:true"
+string11: .asciiz" x>y:true"
+string12: .asciiz" x<y:true"
+string13: .asciiz" x>=y:true"
+string14: .asciiz" x<=y:true"
+string15: .asciiz" x!=y:true"
+string16: .asciiz"success!"
+string17: .asciiz"fail!"
+string18: .asciiz"fail1!"
+string19: .asciiz"success!"
+string20: .asciiz"fail2!"
+string21: .asciiz"the local scope_var = "
+string22: .asciiz"the global scope_var = "
+string23: .asciiz"the global scope_var = "
+string24: .asciiz"success!"
+string25: .asciiz"fail!"
+string26: .asciiz"test_recursion begin:"
+string27: .asciiz"test_if begin:"
+string28: .asciiz"test_while begin:"
+string29: .asciiz"test_switch begin:"
+string30: .asciiz"test_scanf_printf begin:"
+string31: .asciiz"test_expression begin:"
+string32: .asciiz"test_symbol begin:"
+string33: .asciiz"test_relation_operator begin:"
+string34: .asciiz"test_scope begin:"
+string35: .asciiz"*********************"
+string36: .asciiz"ch="
+string37: .asciiz"@#$$&*^^^^test end"
+.text
+add $gp, $sp, $0
+subi $sp, $sp,416
+jal main
+Fibonacci:
+subi $sp, $sp,60
+sw $ra,0($sp)
+lw $t0,36($sp)
+li $t1,1
+bne $t0,$t1,Lab0
+li $v0,1
+lw $ra, 0($sp)
+addi $sp, $sp,60
+jr $ra
+Lab0:
+lw $t0,36($sp)
+li $t1,2
+bne $t0,$t1,Lab3
+li $v0,1
+lw $ra, 0($sp)
+addi $sp, $sp,60
+jr $ra
+Lab3:
+lw $t0,36($sp)
+li $t1,1
+sub $t2,$t0,$t1
+sw $t2,40($sp)
+lw $t0,40($sp)
+subi $sp,$sp,60
+sw $t0,36($sp)
+addi $sp,$sp,60
+jal Fibonacci
+sw $v0,44($sp)
+lw $t0,36($sp)
+li $t1,2
+sub $t2,$t0,$t1
+sw $t2,48($sp)
+lw $t0,48($sp)
+subi $sp,$sp,60
+sw $t0,36($sp)
+addi $sp,$sp,60
+jal Fibonacci
+sw $v0,52($sp)
+lw $t0,44($sp)
+lw $t1,52($sp)
+add $t2,$t0,$t1
+sw $t2,56($sp)
+lw $v0,56($sp)
+lw $ra, 0($sp)
+addi $sp, $sp,60
+jr $ra
+lw $ra, 0($sp)
+addi $sp, $sp,60
+jr $ra
+test_recursion:
+subi $sp, $sp,40
+sw $ra,0($sp)
+li $t0,8
+subi $sp,$sp,60
+sw $t0,36($sp)
+addi $sp,$sp,60
+jal Fibonacci
+sw $v0,36($sp)
+lw $t0,36($sp)
+li $t1,21
+bne $t0,$t1,Lab13
+li $v0, 4
+la $a0,string0
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+li $v0,0
+lw $ra, 0($sp)
+addi $sp, $sp,40
+jr $ra
+Lab13:
+li $v0, 4
+la $a0,string1
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+li $v0,0
+lw $ra, 0($sp)
+addi $sp, $sp,40
+jr $ra
+lw $ra, 0($sp)
+addi $sp, $sp,40
+jr $ra
+test_if:
+subi $sp, $sp,48
+sw $ra,0($sp)
+li $t0,97
+sw $t0,40($sp)
+lw $t0,40($sp)
+lw $t1,36($sp)
+add $t2,$t0,$t1
+sw $t2,44($sp)
+lw $t0,44($sp)
+li $t1,103
+ble $t0,$t1,Lab20
+li $v0, 4
+la $a0,string2
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+Lab20:
+lw $t0,40($sp)
+add $t1,$0,$0
+beq $t0,$t1,Lab22
+li $v0, 4
+la $a0,string3
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+Lab22:
+li $t0,0
+add $t1,$0,$0
+beq $t0,$t1,Lab23
+li $v0, 4
+la $a0,string4
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+Lab23:
+li $v0,0
+lw $ra, 0($sp)
+addi $sp, $sp,48
+jr $ra
+lw $ra, 0($sp)
+addi $sp, $sp,48
+jr $ra
+test_while:
+subi $sp, $sp,52
+sw $ra,0($sp)
+li $t0,0
+sw $t0,36($sp)
+li $t0,0
+sw $t0,0($gp)
+Lab28:
+lw $t0,0($gp)
+li $t1,100
+bge $t0,$t1,Lab29
+lw $t0,0($gp)
+lw $t1,0($gp)
+sll $t1,$t1,2
+add $t3,$t1,$gp
+sw $t0, 8($t3)
+lw $t0,0($gp)
+li $t1,1
+add $t2,$t0,$t1
+sw $t2,40($sp)
+lw $t0,40($sp)
+sw $t0,0($gp)
+j Lab28
+Lab29:
+li $t0,0
+sw $t0,0($gp)
+Lab33:
+lw $t0,0($gp)
+li $t1,100
+bge $t0,$t1,Lab34
+lw $t0,36($sp)
+lw $t1,0($gp)
+add $t2,$t0,$t1
+sw $t2,44($sp)
+lw $t0,44($sp)
+sw $t0,36($sp)
+lw $t0,0($gp)
+li $t1,1
+add $t2,$t0,$t1
+sw $t2,48($sp)
+lw $t0,48($sp)
+sw $t0,0($gp)
+j Lab33
+Lab34:
+lw $t0,36($sp)
+li $t1,4950
+bne $t0,$t1,Lab38
+li $v0, 4
+la $a0,string5
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $ra, 0($sp)
+addi $sp, $sp,52
+jr $ra
+Lab38:
+li $v0, 4
+la $a0,string6
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $ra, 0($sp)
+addi $sp, $sp,52
+jr $ra
+lw $ra, 0($sp)
+addi $sp, $sp,52
+jr $ra
+test_switch:
+subi $sp, $sp,40
+sw $ra,0($sp)
+li $t0,97
+sw $t0,36($sp)
+lw $t0,36($sp)
+li $t1,97
+bne $t0,$t1,Lab43
+li $v0, 4
+la $a0,string7
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+j Lab41
+Lab43:
+li $v0, 4
+la $a0,string8
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+Lab41:
+lw $ra, 0($sp)
+addi $sp, $sp,40
+jr $ra
+to_upper:
+subi $sp, $sp,48
+sw $ra,0($sp)
+lw $t0,36($sp)
+lw $t1,40($sp)
+sub $t2,$t0,$t1
+sw $t2,44($sp)
+lw $v0,44($sp)
+lw $ra, 0($sp)
+addi $sp, $sp,48
+jr $ra
+lw $ra, 0($sp)
+addi $sp, $sp,48
+jr $ra
+test_scanf_printf:
+subi $sp, $sp,60
+sw $ra,0($sp)
+li $v0,12
+syscall
+sw $v0,36($sp)
+li $v0,12
+syscall
+sw $v0,40($sp)
+li $v0,12
+syscall
+sw $v0,44($sp)
+li $v0, 4
+la $a0,string9
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+li $v0, 11
+lw $a0,36($sp)
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+li $v0, 11
+lw $a0,40($sp)
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+li $v0, 11
+lw $a0,44($sp)
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $t0,36($sp)
+subi $sp,$sp,48
+sw $t0,36($sp)
+addi $sp,$sp,48
+li $t0,32
+subi $sp,$sp,48
+sw $t0,40($sp)
+addi $sp,$sp,48
+jal to_upper
+sw $v0,48($sp)
+li $v0, 1
+lw $a0,48($sp)
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $t0,40($sp)
+subi $sp,$sp,48
+sw $t0,36($sp)
+addi $sp,$sp,48
+li $t0,32
+subi $sp,$sp,48
+sw $t0,40($sp)
+addi $sp,$sp,48
+jal to_upper
+sw $v0,52($sp)
+li $v0, 1
+lw $a0,52($sp)
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $t0,44($sp)
+subi $sp,$sp,48
+sw $t0,36($sp)
+addi $sp,$sp,48
+li $t0,32
+subi $sp,$sp,48
+sw $t0,40($sp)
+addi $sp,$sp,48
+jal to_upper
+sw $v0,56($sp)
+li $v0, 1
+lw $a0,56($sp)
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $ra, 0($sp)
+addi $sp, $sp,60
+jr $ra
+test_relation_operator:
+subi $sp, $sp,44
+sw $ra,0($sp)
+lw $t0,36($sp)
+lw $t1,40($sp)
+bne $t0,$t1,Lab51
+li $v0, 4
+la $a0,string10
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+Lab51:
+lw $t0,36($sp)
+lw $t1,40($sp)
+ble $t0,$t1,Lab52
+li $v0, 4
+la $a0,string11
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+Lab52:
+lw $t0,36($sp)
+lw $t1,40($sp)
+bge $t0,$t1,Lab53
+li $v0, 4
+la $a0,string12
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+Lab53:
+lw $t0,36($sp)
+lw $t1,40($sp)
+blt $t0,$t1,Lab54
+li $v0, 4
+la $a0,string13
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+Lab54:
+lw $t0,36($sp)
+lw $t1,40($sp)
+bgt $t0,$t1,Lab55
+li $v0, 4
+la $a0,string14
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+Lab55:
+lw $t0,36($sp)
+lw $t1,40($sp)
+beq $t0,$t1,Lab56
+li $v0, 4
+la $a0,string15
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+Lab56:
+lw $ra, 0($sp)
+addi $sp, $sp,44
+jr $ra
+test_expression:
+subi $sp, $sp,112
+sw $ra,0($sp)
+li $t0,10
+sw $t0,36($sp)
+li $t0,1
+sw $t0,40($sp)
+li $t0,0
+li $t1,2
+mult $t0,$t1
+mflo $t2
+sw $t2,52($sp)
+li $t0,2
+lw $t1,52($sp)
+sll $t1,$t1,2
+add $t3,$t1,$sp
+sw $t0, 48($t3)
+li $t0,1
+lw $t1,36($sp)
+mult $t0,$t1
+mflo $t2
+sw $t2,56($sp)
+li $t0,0
+lw $t1,48($sp)
+sll $t0,$t0,2
+add $t3,$t0,$sp
+lw $t2, 48($t3)
+sw $t2,60($sp)
+lw $t0,56($sp)
+lw $t1,60($sp)
+mult $t0,$t1
+mflo $t2
+sw $t2,64($sp)
+lw $t0,40($sp)
+sub $t2,$0,$t0
+sw $t2,68($sp)
+lw $t0,64($sp)
+lw $t1,68($sp)
+mult $t0,$t1
+mflo $t2
+sw $t2,72($sp)
+lw $t0,72($sp)
+lw $t1,40($sp)
+mult $t0,$t1
+mflo $t2
+sw $t2,76($sp)
+lw $t0,76($sp)
+li $t1,2
+div $t0,$t1
+mflo $t2
+sw $t2,80($sp)
+lw $t0,80($sp)
+sub $t2,$0,$t0
+sw $t2,84($sp)
+lw $t0,84($sp)
+li $t1,42
+add $t2,$t0,$t1
+sw $t2,88($sp)
+li $t0,-32
+sub $t2,$0,$t0
+sw $t2,92($sp)
+li $t0,97
+subi $sp,$sp,48
+sw $t0,36($sp)
+addi $sp,$sp,48
+lw $t0,92($sp)
+subi $sp,$sp,48
+sw $t0,40($sp)
+addi $sp,$sp,48
+jal to_upper
+sw $v0,96($sp)
+lw $t0,88($sp)
+lw $t1,96($sp)
+add $t2,$t0,$t1
+sw $t2,100($sp)
+lw $t0,100($sp)
+li $t1,65
+sub $t2,$t0,$t1
+sw $t2,104($sp)
+lw $t0,36($sp)
+lw $t1,104($sp)
+add $t2,$t0,$t1
+sw $t2,108($sp)
+lw $t0,108($sp)
+sw $t0,44($sp)
+lw $t0,44($sp)
+li $t1,62
+bne $t0,$t1,Lab84
+li $v0, 4
+la $a0,string16
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $ra, 0($sp)
+addi $sp, $sp,112
+jr $ra
+Lab84:
+li $v0, 4
+la $a0,string17
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $ra, 0($sp)
+addi $sp, $sp,112
+jr $ra
+lw $ra, 0($sp)
+addi $sp, $sp,112
+jr $ra
+test_symbol:
+subi $sp, $sp,248
+sw $ra,0($sp)
+li $t0,42
+sw $t0,36($sp)
+li $t0,47
+sw $t0,40($sp)
+li $t0,43
+sw $t0,44($sp)
+li $t0,45
+sw $t0,48($sp)
+li $t0,95
+sw $t0,52($sp)
+li $t0,1
+sw $t0,56($sp)
+li $t0,0
+sw $t0,60($sp)
+lw $t0,56($sp)
+li $t1,0
+bne $t0,$t1,Lab93
+li $v0, 4
+la $a0,string18
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+Lab93:
+li $t0,0
+sw $t0,184($sp)
+lw $t0,36($sp)
+lw $t1,40($sp)
+add $t2,$t0,$t1
+sw $t2,192($sp)
+lw $t0,192($sp)
+lw $t1,44($sp)
+add $t2,$t0,$t1
+sw $t2,196($sp)
+lw $t0,196($sp)
+lw $t1,48($sp)
+add $t2,$t0,$t1
+sw $t2,200($sp)
+lw $t0,200($sp)
+lw $t1,52($sp)
+add $t2,$t0,$t1
+sw $t2,204($sp)
+lw $t0,204($sp)
+sw $t0,188($sp)
+Lab100:
+lw $t0,184($sp)
+li $t1,10
+bge $t0,$t1,Lab101
+lw $t0,184($sp)
+lw $t1,184($sp)
+sll $t1,$t1,2
+add $t3,$t1,$sp
+sw $t0, 64($t3)
+lw $t0,184($sp)
+li $t1,1
+add $t2,$t0,$t1
+sw $t2,208($sp)
+lw $t0,208($sp)
+sw $t0,184($sp)
+j Lab100
+Lab101:
+Lab105:
+lw $t0,184($sp)
+li $t1,20
+bge $t0,$t1,Lab106
+li $t0,97
+lw $t1,184($sp)
+add $t2,$t0,$t1
+sw $t2,212($sp)
+lw $t0,212($sp)
+li $t1,10
+sub $t2,$t0,$t1
+sw $t2,216($sp)
+lw $t0,216($sp)
+lw $t1,184($sp)
+sll $t1,$t1,2
+add $t3,$t1,$sp
+sw $t0, 64($t3)
+lw $t0,184($sp)
+li $t1,1
+add $t2,$t0,$t1
+sw $t2,220($sp)
+lw $t0,220($sp)
+sw $t0,184($sp)
+j Lab105
+Lab106:
+Lab114:
+lw $t0,184($sp)
+li $t1,30
+bge $t0,$t1,Lab115
+li $t0,65
+lw $t1,184($sp)
+add $t2,$t0,$t1
+sw $t2,224($sp)
+lw $t0,224($sp)
+li $t1,20
+sub $t2,$t0,$t1
+sw $t2,228($sp)
+lw $t0,228($sp)
+lw $t1,184($sp)
+sll $t1,$t1,2
+add $t3,$t1,$sp
+sw $t0, 64($t3)
+lw $t0,184($sp)
+li $t1,1
+add $t2,$t0,$t1
+sw $t2,232($sp)
+lw $t0,232($sp)
+sw $t0,184($sp)
+j Lab114
+Lab115:
+li $t0,0
+sw $t0,184($sp)
+Lab124:
+lw $t0,184($sp)
+li $t1,30
+bge $t0,$t1,Lab125
+lw $t0,184($sp)
+lw $t1,64($sp)
+sll $t0,$t0,2
+add $t3,$t0,$sp
+lw $t2, 64($t3)
+sw $t2,236($sp)
+lw $t0,188($sp)
+lw $t1,236($sp)
+add $t2,$t0,$t1
+sw $t2,240($sp)
+lw $t0,240($sp)
+sw $t0,188($sp)
+lw $t0,184($sp)
+li $t1,1
+add $t2,$t0,$t1
+sw $t2,244($sp)
+lw $t0,244($sp)
+sw $t0,184($sp)
+j Lab124
+Lab125:
+lw $t0,188($sp)
+li $t1,2027
+bne $t0,$t1,Lab131
+li $v0, 4
+la $a0,string19
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $ra, 0($sp)
+addi $sp, $sp,248
+jr $ra
+Lab131:
+li $v0, 4
+la $a0,string20
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $ra, 0($sp)
+addi $sp, $sp,248
+jr $ra
+lw $ra, 0($sp)
+addi $sp, $sp,248
+jr $ra
+local_scope:
+subi $sp, $sp,40
+sw $ra,0($sp)
+li $t0,10
+sw $t0,36($sp)
+li $v0, 4
+la $a0,string21
+syscall
+li $v0, 1
+lw $a0,36($sp)
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $ra, 0($sp)
+addi $sp, $sp,40
+jr $ra
+test_scope:
+subi $sp, $sp,40
+sw $ra,0($sp)
+li $t0,20
+sw $t0,408($gp)
+lw $t0,408($gp)
+sw $t0,36($sp)
+li $v0, 4
+la $a0,string22
+syscall
+li $v0, 1
+lw $a0,408($gp)
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+jal local_scope
+li $v0, 4
+la $a0,string23
+syscall
+li $v0, 1
+lw $a0,408($gp)
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $t0,36($sp)
+lw $t1,408($gp)
+bne $t0,$t1,Lab135
+li $v0, 4
+la $a0,string24
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $ra, 0($sp)
+addi $sp, $sp,40
+jr $ra
+Lab135:
+li $v0, 4
+la $a0,string25
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $ra, 0($sp)
+addi $sp, $sp,40
+jr $ra
+lw $ra, 0($sp)
+addi $sp, $sp,40
+jr $ra
+test:
+subi $sp, $sp,80
+sw $ra,0($sp)
+li $t0,0
+sw $t0,40($sp)
+li $t0,9
+sw $t0,44($sp)
+Lab138:
+lw $t0,40($sp)
+lw $t1,44($sp)
+bge $t0,$t1,Lab139
+li $v0,5
+syscall
+sw $v0,36($sp)
+lw $t0,36($sp)
+li $t1,0
+bne $t0,$t1,Lab142
+li $v0, 4
+la $a0,string26
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+jal test_recursion
+sw $v0,48($sp)
+j Lab140
+Lab142:
+lw $t0,36($sp)
+li $t1,1
+bne $t0,$t1,Lab145
+li $v0, 4
+la $a0,string27
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+li $t0,20
+subi $sp,$sp,48
+sw $t0,36($sp)
+addi $sp,$sp,48
+jal test_if
+sw $v0,52($sp)
+j Lab140
+Lab145:
+lw $t0,36($sp)
+li $t1,2
+bne $t0,$t1,Lab149
+li $v0, 4
+la $a0,string28
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+jal test_while
+j Lab140
+Lab149:
+lw $t0,36($sp)
+li $t1,3
+bne $t0,$t1,Lab151
+li $v0, 4
+la $a0,string29
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+jal test_switch
+j Lab140
+Lab151:
+lw $t0,36($sp)
+li $t1,4
+bne $t0,$t1,Lab153
+li $v0, 4
+la $a0,string30
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+jal test_scanf_printf
+j Lab140
+Lab153:
+lw $t0,36($sp)
+li $t1,5
+bne $t0,$t1,Lab155
+li $v0, 4
+la $a0,string31
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+jal test_expression
+j Lab140
+Lab155:
+lw $t0,36($sp)
+li $t1,6
+bne $t0,$t1,Lab157
+li $v0, 4
+la $a0,string32
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+jal test_symbol
+j Lab140
+Lab157:
+lw $t0,36($sp)
+li $t1,7
+bne $t0,$t1,Lab159
+li $v0, 4
+la $a0,string33
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+li $t0,1
+li $t1,2
+add $t2,$t0,$t1
+sw $t2,56($sp)
+li $t0,2
+li $t1,4
+add $t2,$t0,$t1
+sw $t2,60($sp)
+lw $t0,56($sp)
+subi $sp,$sp,44
+sw $t0,36($sp)
+addi $sp,$sp,44
+lw $t0,60($sp)
+subi $sp,$sp,44
+sw $t0,40($sp)
+addi $sp,$sp,44
+jal test_relation_operator
+li $t0,1
+li $t1,6
+add $t2,$t0,$t1
+sw $t2,64($sp)
+li $t0,2
+li $t1,3
+add $t2,$t0,$t1
+sw $t2,68($sp)
+lw $t0,64($sp)
+subi $sp,$sp,44
+sw $t0,36($sp)
+addi $sp,$sp,44
+lw $t0,68($sp)
+subi $sp,$sp,44
+sw $t0,40($sp)
+addi $sp,$sp,44
+jal test_relation_operator
+li $t0,1
+li $t1,1
+add $t2,$t0,$t1
+sw $t2,72($sp)
+lw $t0,72($sp)
+subi $sp,$sp,44
+sw $t0,36($sp)
+addi $sp,$sp,44
+li $t0,2
+subi $sp,$sp,44
+sw $t0,40($sp)
+addi $sp,$sp,44
+jal test_relation_operator
+j Lab140
+Lab159:
+lw $t0,36($sp)
+li $t1,8
+bne $t0,$t1,Lab171
+li $v0, 4
+la $a0,string34
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+jal test_scope
+j Lab140
+Lab171:
+Lab140:
+li $v0, 4
+la $a0,string35
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $t0,40($sp)
+li $t1,1
+add $t2,$t0,$t1
+sw $t2,76($sp)
+lw $t0,76($sp)
+sw $t0,40($sp)
+j Lab138
+Lab139:
+li $t0,95
+sw $t0,412($gp)
+li $v0, 4
+la $a0,string36
+syscall
+li $v0, 11
+lw $a0,412($gp)
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+li $v0, 4
+la $a0,string37
+syscall
+li $v0, 4
+la $a0,enter
+syscall
+lw $ra, 0($sp)
+addi $sp, $sp,80
+jr $ra
+main:
+subi $sp, $sp,4
+sw $ra,0($sp)
+jal test
+li $v0,10
+syscall

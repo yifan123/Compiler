@@ -1,0 +1,218 @@
+const int a = 10;
+const int c = -0, b = 1;
+const char k = '1';
+const char e = '3';
+const int f = +50;
+int tmp1;
+char tmp2;
+int x1, x2, x3;
+int result[10];
+
+
+void stmt() {
+	int x;
+	return;
+}
+void stmt1() {
+	const int k = 10;
+}
+void x0000() {
+
+}
+int mult(int p, int q) {
+	p = (p + a);
+	q = (q + c);
+	return(p * q);
+}
+int mult1(int p, int q) {
+	return(mult(p, q));
+}
+char getc0(char tmp3) {
+	tmp3 = tmp3 - '1';
+	tmp3 = tmp3 + '2';
+	return(tmp3);
+}
+
+void TestExpression() {
+	const int ten = 10;
+	const char x = 'x', y = 'y';
+
+	int var1, var2, test[3];
+	char var3;
+	char array[6];;;
+	var1 = ten;
+	;;;;;;;;;;;;
+	stmt();
+	stmt1();
+	result[0] = var1;
+	var2 = var1;
+	result[1] = var2;
+	tmp1 = var1;
+	result[2] = tmp1;
+	var3 = getc0(k);
+
+
+	array[0] = '5';
+	array[1] = '4';
+	array[(3 * ten - (ten - 9 + 2) * 9)] = var3;
+	var1 = array[1 + 0];
+	result[3] = var1;
+	var1 = array[1] * array[2];
+
+	var1 = -((var2 + var3)) / var1;
+	result[4] = -(-mult(var1 + 3, var1*var1) * var1 - mult1(var2 / (var1 - 1), var1)) + (ten - var3 * var2) / (-100)* +20;
+
+	result[5] = a;
+	result[6] = b;
+	result[7] = f;
+	array[4] = e;
+
+	scanf(tmp2);
+	array[5] = tmp2;
+	x1 = ten + 1;
+	x2 = ten + 2;
+	result[9] = x1;
+	result[9] = result[9] * x1*x2;
+	x1 = 0;
+
+	while (x1 < ten) {
+		if (x1 == 0)
+			printf("@#$$&*^^^^this is result12312      \n");
+		printf("result", result[x1]);
+		printf("\n");
+		printf("            ");
+		x1 = x1 + 1;
+	}
+	{
+		printf(array[0]);
+		printf(array[1]);
+		printf(array[3]);
+		printf(array[4]);
+		printf(array[5]);
+	}
+
+	return;
+}
+
+
+
+
+int Judge(int x, int y) {
+	if (x > y)
+		return(x);
+	return(y);
+}
+void TestControl() {
+	int x4;
+	x1 = 10;
+	x2 = 5;
+	x4 = 0;
+
+
+	while (x1 > 1 - 1) {
+		x1 = x1 - 1;
+		if (x1 - (x1 / 2) * 2 == 0) {
+			switch (x1) {
+			case 0: if (x2 > 4) printf("%d\n", x2);
+			case 2: x3 = Judge(x1, x2);
+			case 5: x1 = 1000;
+			case 7: return;
+			default: {printf( x1); printf( x2); printf( x3); printf(x4);  }
+			}
+		}
+	}
+
+	if (x1 == 0)
+		while (x1 < 5)
+			x1 = x1 + 1;
+
+	if (x1 + 4 <= 10 * 8 / 4 - 9 - 2 * 1) {
+		if (x2 == 5)
+			printf(x4);
+		if (x2 == 5)
+			printf("lalala\n");
+		switch (x2) {
+		case 1: return;
+		}
+	}
+}
+void TestInputOutput() {
+	int num1, num2;
+	char ch1, ch2;
+	printf("test input and output");
+	scanf(num1);
+	scanf(num2);
+	scanf(ch1);
+	scanf(ch2);
+	printf("this is num1", num1);
+
+	printf("this is num2");
+	printf(num2);
+	printf(" \n");
+	printf("this is ch1", ch1);
+	printf("\n");
+	printf("this is ch2");
+	printf(ch2);
+	printf("\n");
+
+}
+int factorial(int n) {
+	int x1;
+	x1 = n;
+	printf(x1);
+	if (n == 1)
+		return(1);
+	return(n * factorial(n - 1));
+}
+void test3(){
+	const int ten = 10,nine = 9;
+	int var1;
+	int var2;
+	int var3;
+	char list[10];
+	char x1,x2,x3;
+	scanf(x1,x2,x3); 
+	var1 = 0;
+	while(var1<=nine){ 
+		list[var1] = var1 +'0';
+		if (var1 == 4){		
+			list[var1] = 'f';
+		}
+		var2 = 0;
+		while(var2<4){    
+			switch (var2){
+				case 0: {printf("inside the loop",var1); var2 = var2+1;}
+				case 1: {var2 = var2+1;}
+				case 2: if(var2 == var2) var2 = var2+1; 
+				case 3: {var2 = var2 +1;}
+				default:printf("the loop is wrong\n");
+			}
+			var3 = var3 + 1;
+		}
+		var1 = var1 +1;
+		
+	}
+	printf("var3",var3);
+	var3 = 0;
+	list[1] = x1;
+	list[2] = x2;
+	list[3] = x3;
+	while( var3 < var1){
+		printf("list:",var3);
+		printf(list[var1+0-1*0]);
+		var3 = var3+1;
+	}	
+}
+void main() {
+	char switcher;
+	scanf(switcher);
+	switch(switcher){
+	case  '0':	{TestExpression(); printf("finish test1\n");}
+	case '1' :	{TestControl();printf("finish test2\n");}
+	case '2' :	{TestInputOutput();if(1) printf("finish test3\n");
+		printf(factorial(1+2*3/4+5));printf("finish test4\n");
+		}
+	case '3': test3();
+	}
+	return;
+}

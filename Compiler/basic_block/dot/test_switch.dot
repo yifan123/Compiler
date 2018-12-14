@@ -1,0 +1,15 @@
+digraph test_switch{
+label =test_switch
+B15[label="B15:\nASS,@40,,flag\nNEQ,flag,@42,Lab43\n" shape=box]
+B16[label="B16:\nPRF,7,str,1\nJMP,,,Lab41\n" shape=box]
+Lab41[label="Lab41:\nLAB,,,Lab41\nRET,,,\n" shape=box]
+Lab43[label="Lab43:\nLAB,,,Lab43\nPRF,8,str,1\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B15->B16
+B15->Lab43
+B16->Lab41
+Lab41->exit
+Lab43->Lab41
+enter->B15
+}

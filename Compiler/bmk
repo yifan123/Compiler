@@ -1,0 +1,123 @@
+const int true = 1;
+const int false = 0;
+
+const int bound = +8;
+
+int p[64];  
+int cnt;     
+
+void set(int r, int c, int v) {
+	p[r * 8 + c] = v;
+	return;
+}
+
+int get(int r, int c) {
+	return (p[r * 8 + c]);
+}
+
+int can(int r, int c)
+{
+	int i, rr, rc; 
+	i=0;
+	while(i<r){
+		if (get(i, c) == 1)
+			return (false);
+		i=i+1;
+	}
+
+	i=1;
+	while(i<=r){
+		rr = r - i;
+		rc = c - i;
+		if (rr >= 0) {
+			if (rc >= 0) {
+				if (get(rr, rc) == 1)
+					return (false);
+			}
+		}
+		i=i+1;
+	}
+
+	i=1;
+	while(i<=r){
+		rr = r - i;
+		rc = c + i;
+		if (rr >= 0)
+		{
+			if (rc <= 7)
+			{
+				if (get(rr, rc) == 1)
+					return (false);
+			}
+		}
+		i=i+1;
+	}
+	return (true);
+} 
+
+void show()
+{
+	int i, j;
+	i=0;
+	while(i<8){
+		j=0;
+		while(j<8){
+			if (get(i, j)) {
+				printf(j + 1);
+			}
+		}
+		j = j + 1;
+	}
+	i = i + 1;
+	printf("");
+} 
+void dfs(int r)
+{
+	int j;
+	if (r == 7)
+	{
+	
+		j=0;
+		while(j<8){
+			if (can(r, j) > 0)
+			{
+				set(r, j, true);
+				cnt = cnt + 1;               
+				printf("answer No.", cnt); 
+				show();              
+				set(r, j, false);
+			}
+			j=j+1;
+		}
+	}
+	if (r != 7)
+	{
+		j=0;
+		while(j!=8){
+		
+			if (can(r, j) > 0)
+			{
+				set(r, j, 1);
+				
+				dfs(r + 1);  
+				set(r, j, 0);
+			}
+			j = j + 1;
+		}
+	}
+}
+
+
+void main()
+{
+	int i;
+
+	cnt = 0;
+	i=0;
+	while(i<64){
+		p[i] = false;
+		i = i + 1;
+	}
+	dfs(0);
+	printf("cnt = ", cnt);
+}

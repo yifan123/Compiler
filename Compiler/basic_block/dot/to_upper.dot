@@ -1,0 +1,8 @@
+digraph to_upper{
+label =to_upper
+B18[label="B18:\nSUB,a,b,@44\nRET,@44,,\nRET,,,\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B18->exit
+enter->B18
+}

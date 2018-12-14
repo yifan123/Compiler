@@ -1,0 +1,38 @@
+digraph test_relation_operator{
+label =test_relation_operator
+B20[label="B20:\nNEQ,x,y,Lab51\n" shape=box]
+B21[label="B21:\nPRF,10,str,1\n" shape=box]
+B22[label="B22:\nPRF,11,str,1\n" shape=box]
+B23[label="B23:\nPRF,12,str,1\n" shape=box]
+B24[label="B24:\nPRF,13,str,1\n" shape=box]
+B25[label="B25:\nPRF,14,str,1\n" shape=box]
+B26[label="B26:\nPRF,15,str,1\n" shape=box]
+Lab51[label="Lab51:\nLAB,,,Lab51\nLEQ,x,y,Lab52\n" shape=box]
+Lab52[label="Lab52:\nLAB,,,Lab52\nGEQ,x,y,Lab53\n" shape=box]
+Lab53[label="Lab53:\nLAB,,,Lab53\nLSS,x,y,Lab54\n" shape=box]
+Lab54[label="Lab54:\nLAB,,,Lab54\nGTR,x,y,Lab55\n" shape=box]
+Lab55[label="Lab55:\nLAB,,,Lab55\nEQL,x,y,Lab56\n" shape=box]
+Lab56[label="Lab56:\nLAB,,,Lab56\nRET,,,\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B20->B21
+B20->Lab51
+B21->Lab51
+B22->Lab52
+B23->Lab53
+B24->Lab54
+B25->Lab55
+B26->Lab56
+Lab51->B22
+Lab51->Lab52
+Lab52->B23
+Lab52->Lab53
+Lab53->B24
+Lab53->Lab54
+Lab54->B25
+Lab54->Lab55
+Lab55->B26
+Lab55->Lab56
+Lab56->exit
+enter->B20
+}

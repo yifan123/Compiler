@@ -1,0 +1,8 @@
+digraph test_scanf_printf{
+label =test_scanf_printf
+B19[label="B19:\nSCF,,,a\nSCF,,,b\nSCF,,,c\nPRF,9,str,1\nPRF,a,1,1\nPRF,b,1,1\nPRF,c,1,1\nPARA,to_upper,0,a\nPARA,to_upper,1,@45\nCALL,to_upper,,\nSW,$v0,,@46\nPRF,@46,0,1\nPARA,to_upper,0,b\nPARA,to_upper,1,@47\nCALL,to_upper,,\nSW,$v0,,@48\nPRF,@48,0,1\nPARA,to_upper,0,c\nPARA,to_upper,1,@49\nCALL,to_upper,,\nSW,$v0,,@50\nPRF,@50,0,1\nRET,,,\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B19->exit
+enter->B19
+}

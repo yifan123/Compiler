@@ -1,0 +1,23 @@
+digraph test_if{
+label =test_if
+B5[label="B5:\nASS,@19,,ch\nADD,ch,plus,@21\nLEQ,@21,flag,Lab20\n" shape=box]
+B6[label="B6:\nPRF,2,str,1\n" shape=box]
+B7[label="B7:\nPRF,3,str,1\n" shape=box]
+B8[label="B8:\nPRF,4,str,1\n" shape=box]
+Lab20[label="Lab20:\nLAB,,,Lab20\nEQL,ch,$0,Lab22\n" shape=box]
+Lab22[label="Lab22:\nLAB,,,Lab22\nEQL,@24,$0,Lab23\n" shape=box]
+Lab23[label="Lab23:\nLAB,,,Lab23\nRET,@25,,\nRET,,,\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B5->B6
+B5->Lab20
+B6->Lab20
+B7->Lab22
+B8->Lab23
+Lab20->B7
+Lab20->Lab22
+Lab22->B8
+Lab22->Lab23
+Lab23->exit
+enter->B5
+}

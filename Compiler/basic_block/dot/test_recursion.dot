@@ -1,0 +1,14 @@
+digraph test_recursion{
+label =test_recursion
+B3[label="B3:\nPARA,Fibonacci,0,@14\nCALL,Fibonacci,,\nSW,$v0,,@15\nNEQ,@15,@16,Lab13\n" shape=box]
+B4[label="B4:\nPRF,0,str,1\nRET,@17,,\n" shape=box]
+Lab13[label="Lab13:\nLAB,,,Lab13\nPRF,1,str,1\nRET,@18,,\nRET,,,\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B3->B4
+B3->Lab13
+B4->Lab13
+B4->exit
+Lab13->exit
+enter->B3
+}
