@@ -1,0 +1,67 @@
+basic block name: enter
+def: {}
+use: {}
+ain: {@0, @1, @10, @13, @4, @6, j, }
+aout: {@0, @1, @10, @13, @4, @6, j, }
+
+basic block name: B0
+def: {i, sum, }
+use: {@0, @1, }
+ain: {@0, @1, @10, @13, @4, @6, j, }
+aout: {@10, @13, @4, @6, i, j, sum, }
+
+basic block name: Lab2
+def: {}
+use: {i, j, }
+ain: {@10, @13, @4, @6, i, j, sum, }
+aout: {@10, @13, @4, @6, i, j, sum, }
+
+basic block name: B1
+def: {@5, }
+use: {@4, i, }
+ain: {@10, @13, @4, @6, i, j, sum, }
+aout: {@10, @13, @4, @6, i, j, sum, }
+
+basic block name: Lab3
+def: {i, }
+use: {@6, }
+ain: {@10, @13, @6, j, sum, }
+aout: {@10, @13, i, j, sum, }
+
+
+basic block name: Lab7
+def: {}
+use: {i, j, }
+ain: {@10, @13, i, j, sum, }
+aout: {@10, @13, i, j, sum, }
+
+basic block name: B3
+def: {@11, @9, }
+use: {@10, i, sum, }
+ain: {@10, @13, i, j, sum, }
+aout: {@10, @13, i, j, sum, }
+
+basic block name: Lab8
+def: {}
+use: {@13, sum, }
+ain: {@13, sum, }
+aout: {}
+
+basic block name: B5
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: Lab12
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

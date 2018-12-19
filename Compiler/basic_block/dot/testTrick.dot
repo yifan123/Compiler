@@ -1,8 +1,0 @@
-digraph testTrick{
-label =testTrick
-B80[label="B80:\nRET,,,\n" shape=box]
-enter[label="enter:\n" shape=box]
-exit[label="exit:\n" shape=box]
-B80->exit
-enter->B80
-}

@@ -839,7 +839,16 @@ void Parser::assign_statement() {
 	if (lexer.token.sym == LBRACK) {
 		lexer.getsym();
 		expression(offset_name, offset_type); //得到数组索引
-		//Fix 数组下标类型和是否越界检查
+		//数组下标类型和是否越界检查
+		SymTableItem symitem1;
+		int g1;
+		find_sym_table(offset_name, symitem1, g1);
+		if (symitem1.obj == constantobj) {
+			if (symitem1.adr < 0 || symitem1.adr >= symitem.number) {
+				error(lexer.line, OUT_OF_ARRAY);
+				skip();
+			}
+		}
 		if (lexer.token.sym != RBRACK) {
 			error(lexer.line, 14);
 			skip();
@@ -854,6 +863,10 @@ void Parser::assign_statement() {
 	}
 	lexer.getsym();
 	expression(exp_name, exp_type);
+	if (symitem.type != exp_type) { //检查赋值语句左右类型是否匹配检查
+		error(lexer.line, ASS_TYPE_ERROR);
+		skip();
+	}
 	quadtable.push_back(QuadRuple(op_name,exp_name,arg2,name));
 }
 
@@ -1041,10 +1054,14 @@ void Parser::return_statement() {
 			error(lexer.line, 4);
 			skip();
 		}
-		//Fix 需要对return的参数类型是否匹配进行检查
+		//对return的参数类型是否匹配进行检查
 		find_sym_table(cur_fucname, symitem,global);
 		if (symitem.type == voidtype) {
 			error(lexer.line, VOID_RETURN_ERROR);//void 函数不能带返回值
+			skip();
+		}
+		if (symitem.type != exp_type) {
+			error(lexer.line, RETURN_TYPE_ERROR);//函数返回值类型错误
 			skip();
 		}
 		quadtable.push_back(QuadRuple("RET", exp_name, "", ""));
@@ -1235,7 +1252,16 @@ void Parser::factor(string &fac_name, TabType &fac_type) {
 				error(lexer.line, ARRAY_INDEX_TYPE_ERROR);
 				skip();
 			}
-			//Fix 数组下标是整型常量时需做越界检查
+			//数组下标类型和是否越界检查
+			SymTableItem symitem1;
+			int g1;
+			find_sym_table(tem_name, symitem1, g1);
+			if (symitem1.obj == constantobj) {
+				if (symitem1.adr < 0 || symitem1.adr >= symitem.number) {
+					error(lexer.line, OUT_OF_ARRAY);
+					skip();
+				}
+			}
 			if (lexer.token.sym != RBRACK) {
 				error(lexer.line, 14);
 				skip();

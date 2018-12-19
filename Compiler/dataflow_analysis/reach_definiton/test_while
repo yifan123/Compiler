@@ -1,0 +1,82 @@
+reach definiton information
+basic block name: B0
+gen: {<B0,0>, <B0,1>, }
+kill: {<B1,2>, <B3,1>, <B3,3>, <Lab3,1>, }
+rin: {}
+rout: {<B0,0>, <B0,1>, }
+
+basic block name: B1
+gen: {<B1,1>, <B1,2>, }
+kill: {<B0,1>, <B3,3>, <Lab3,1>, }
+rin: {<B0,0>, <B0,1>, <B1,1>, <B1,2>, }
+rout: {<B0,0>, <B1,1>, <B1,2>, }
+
+basic block name: B3
+gen: {<B3,0>, <B3,1>, <B3,2>, <B3,3>, }
+kill: {<B0,0>, <B0,1>, <B1,2>, <Lab3,1>, }
+rin: {<B0,0>, <B1,1>, <B3,0>, <B3,1>, <B3,2>, <B3,3>, <Lab3,1>, }
+rout: {<B1,1>, <B3,0>, <B3,1>, <B3,2>, <B3,3>, }
+
+basic block name: B5
+gen: {}
+kill: {}
+rin: {<B0,0>, <B1,1>, <B3,0>, <B3,1>, <B3,2>, <B3,3>, <Lab3,1>, }
+rout: {<B0,0>, <B1,1>, <B3,0>, <B3,1>, <B3,2>, <B3,3>, <Lab3,1>, }
+
+basic block name: Lab12
+gen: {}
+kill: {}
+rin: {<B0,0>, <B1,1>, <B3,0>, <B3,1>, <B3,2>, <B3,3>, <Lab3,1>, }
+rout: {<B0,0>, <B1,1>, <B3,0>, <B3,1>, <B3,2>, <B3,3>, <Lab3,1>, }
+
+basic block name: Lab2
+gen: {}
+kill: {}
+rin: {<B0,0>, <B0,1>, <B1,1>, <B1,2>, }
+rout: {<B0,0>, <B0,1>, <B1,1>, <B1,2>, }
+
+basic block name: Lab3
+gen: {<Lab3,1>, }
+kill: {<B0,1>, <B1,2>, <B3,3>, }
+rin: {<B0,0>, <B0,1>, <B1,1>, <B1,2>, }
+rout: {<B0,0>, <B1,1>, <Lab3,1>, }
+
+basic block name: Lab7
+gen: {}
+kill: {}
+rin: {<B0,0>, <B1,1>, <B3,0>, <B3,1>, <B3,2>, <B3,3>, <Lab3,1>, }
+rout: {<B0,0>, <B1,1>, <B3,0>, <B3,1>, <B3,2>, <B3,3>, <Lab3,1>, }
+
+basic block name: Lab8
+gen: {}
+kill: {}
+rin: {<B0,0>, <B1,1>, <B3,0>, <B3,1>, <B3,2>, <B3,3>, <Lab3,1>, }
+rout: {<B0,0>, <B1,1>, <B3,0>, <B3,1>, <B3,2>, <B3,3>, <Lab3,1>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B0,0>, <B1,1>, <B3,0>, <B3,1>, <B3,2>, <B3,3>, <Lab3,1>, }
+rout: {<B0,0>, <B1,1>, <B3,0>, <B3,1>, <B3,2>, <B3,3>, <Lab3,1>, }
+
+du_chain
+@11: 
+<B3,2>: {<B3,3>, }
+@5: 
+<B1,1>: {<B1,2>, }
+@9: 
+<B3,0>: {<B3,1>, }
+i: 
+<B0,1>: {<B1,0>, <B1,1>, <Lab2,1>, }
+<B1,2>: {<B1,0>, <B1,1>, <Lab2,1>, }
+<B3,3>: {<B3,0>, <B3,2>, <Lab7,1>, }
+<Lab3,1>: {<B3,0>, <B3,2>, <Lab7,1>, }
+sum: 
+<B0,0>: {<B3,0>, <Lab8,1>, }
+<B3,1>: {<B3,0>, <Lab8,1>, }

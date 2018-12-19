@@ -1,0 +1,54 @@
+reach definiton information
+basic block name: B0
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B1
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B2
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab0
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab3
+gen: {<Lab3,1>, <Lab3,4>, <Lab3,5>, <Lab3,8>, <Lab3,9>, }
+kill: {}
+rin: {}
+rout: {<Lab3,1>, <Lab3,4>, <Lab3,5>, <Lab3,8>, <Lab3,9>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<Lab3,1>, <Lab3,4>, <Lab3,5>, <Lab3,8>, <Lab3,9>, }
+rout: {<Lab3,1>, <Lab3,4>, <Lab3,5>, <Lab3,8>, <Lab3,9>, }
+
+du_chain
+@10: 
+<Lab3,5>: {}
+@11: 
+<Lab3,8>: {}
+@12: 
+<Lab3,9>: {}
+@7: 
+<Lab3,1>: {}
+@8: 
+<Lab3,4>: {}

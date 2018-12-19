@@ -1,0 +1,165 @@
+reach definiton information
+basic block name: B43
+gen: {<B43,0>, <B43,1>, }
+kill: {<Lab140,3>, }
+rin: {}
+rout: {<B43,0>, <B43,1>, }
+
+basic block name: B44
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: B45
+gen: {<B45,2>, }
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: B47
+gen: {<B47,3>, }
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: B49
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: B51
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: B53
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: B55
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: B57
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: B59
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: B61
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: Lab138
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: Lab139
+gen: {<Lab139,1>, }
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab139,1>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: Lab140
+gen: {<Lab140,2>, <Lab140,3>, }
+kill: {<B43,0>, }
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: Lab142
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: Lab145
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: Lab149
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: Lab151
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: Lab153
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: Lab155
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: Lab157
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: Lab159
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: Lab171
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab140,2>, <Lab140,3>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab139,1>, <Lab140,2>, <Lab140,3>, }
+rout: {<B43,0>, <B43,1>, <B45,2>, <B47,3>, <Lab139,1>, <Lab140,2>, <Lab140,3>, }
+
+du_chain
+@143: 
+<B45,2>: {}
+@147: 
+<B47,3>: {}
+@173: 
+<Lab140,2>: {<Lab140,3>, }
+ch: 
+<Lab139,1>: {}
+j: 
+<B43,0>: {<Lab138,1>, <Lab140,2>, }
+<Lab140,3>: {<Lab138,1>, <Lab140,2>, }
+k: 
+<B43,1>: {<Lab138,1>, }

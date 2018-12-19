@@ -7,12 +7,17 @@ class basic_block {
 public:
 	vector<QuadRuple> quadtable; //存储一个基本块内的四元组
 	set<string> next; //记录后继基本块的名字，该vector的size一般为1或2
+	set<string> succ; // 记录前驱基本块的名字，该vector的size一般为1或2
+	set<string> def, use, ain, aout; //用于活跃变量分析
+	set<string> gen, kill, rin, rout = {};//用于到达定义分析
 };
 
 class fun_blocks {
 public:
 	map<string, basic_block> basic_blocks; //存储一个函数的所有基本块
 	string func_name; //记录函数名，为跨过程优化做准备,改成map结构后，这个成员已废弃 Fix
+	map<string, map< string, set<string> > >du_chain;
+	//interference_graph
 };
 
 class Optimizer {
@@ -33,6 +38,10 @@ public:
 	void temp_reg_pool();//代码生成时合理利用临时寄存器（临时寄存器池），并能生成较高质量的目标代码
 	//后续将加入其他优化方法
 	void const_fold();  //常数折叠虽然不能直接减少指令，但它为常数传播创造了条件
+	void live_var_analysis();
+	void reach_definiton();
+	void print_reach_definiton();
+	void print_live_var_analysis();
 };
 
 

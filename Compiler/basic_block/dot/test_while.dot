@@ -1,28 +1,28 @@
 digraph test_while{
 label =test_while
-B10[label="B10:\nARAS,i,i,array\nADD,i,@30,@31\nASS,@31,,i\nJMP,,,Lab28\n" shape=box]
-B12[label="B12:\nADD,sum,i,@35\nASS,@35,,sum\nADD,i,@36,@37\nASS,@37,,i\nJMP,,,Lab33\n" shape=box]
-B14[label="B14:\nPRF,5,str,1\nRET,,,\n" shape=box]
-B9[label="B9:\nASS,@26,,sum\nASS,@27,,i\n" shape=box]
-Lab28[label="Lab28:\nLAB,,,Lab28\nGEQ,i,j,Lab29\n" shape=box]
-Lab29[label="Lab29:\nLAB,,,Lab29\nASS,@32,,i\n" shape=box]
-Lab33[label="Lab33:\nLAB,,,Lab33\nGEQ,i,j,Lab34\n" shape=box]
-Lab34[label="Lab34:\nLAB,,,Lab34\nNEQ,sum,@39,Lab38\n" shape=box]
-Lab38[label="Lab38:\nLAB,,,Lab38\nPRF,6,str,1\nRET,,,\nRET,,,\n" shape=box]
+B0[label="B0:\nASS,@0,,sum\nASS,@1,,i\n" shape=box]
+B1[label="B1:\nARAS,i,i,array\nADD,i,@4,@5\nASS,@5,,i\nJMP,,,Lab2\n" shape=box]
+B3[label="B3:\nADD,sum,i,@9\nASS,@9,,sum\nADD,i,@10,@11\nASS,@11,,i\nJMP,,,Lab7\n" shape=box]
+B5[label="B5:\nPRF,0,str,1\nRET,,,\n" shape=box]
+Lab12[label="Lab12:\nLAB,,,Lab12\nPRF,1,str,1\nRET,,,\nRET,,,\n" shape=box]
+Lab2[label="Lab2:\nLAB,,,Lab2\nGEQ,i,j,Lab3\n" shape=box]
+Lab3[label="Lab3:\nLAB,,,Lab3\nASS,@6,,i\n" shape=box]
+Lab7[label="Lab7:\nLAB,,,Lab7\nGEQ,i,j,Lab8\n" shape=box]
+Lab8[label="Lab8:\nLAB,,,Lab8\nNEQ,sum,@13,Lab12\n" shape=box]
 enter[label="enter:\n" shape=box]
 exit[label="exit:\n" shape=box]
-B10->Lab28
-B12->Lab33
-B14->Lab38
-B14->exit
-B9->Lab28
-Lab28->B10
-Lab28->Lab29
-Lab29->Lab33
-Lab33->B12
-Lab33->Lab34
-Lab34->B14
-Lab34->Lab38
-Lab38->exit
-enter->B9
+B0->Lab2
+B1->Lab2
+B3->Lab7
+B5->Lab12
+B5->exit
+Lab12->exit
+Lab2->B1
+Lab2->Lab3
+Lab3->Lab7
+Lab7->B3
+Lab7->Lab8
+Lab8->B5
+Lab8->Lab12
+enter->B0
 }

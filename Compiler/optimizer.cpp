@@ -5,6 +5,9 @@
 #include"optimizer.h"
 #include"SymTableItem.h"
 #include"SymTable.h"
+#include<algorithm>
+#include<set>
+#include <iterator>
 using namespace std;
 extern int lab_index;
 extern int cur_fun_symtab;
@@ -171,6 +174,16 @@ void Optimizer::build_blocks() {
 			 blocks[i].basic_blocks.erase(del_blocks[j]);
 		}
 	}
+
+	//补填succ
+	for (int i = 0; i < blocks.size(); i++) {
+		for (map<string, basic_block>::iterator iter = blocks[i].basic_blocks.begin(); iter != blocks[i].basic_blocks.end(); iter++) {
+			set<string> next = iter->second.next;
+			for (set<string>::iterator iter1 =next.begin() ; iter1 != next.end(); iter1++) {
+				blocks[i].basic_blocks[*iter1].succ.insert(iter->first);
+			}
+		}
+	}
 }
 
 string basic_block2str(basic_block b,string bblock_name) {
@@ -212,8 +225,406 @@ void Optimizer::graphviz_fun_block() {
 	}
 }
 
+//C=A union B
+void my_union(set<string> A, set<string> B, set<string>& C) {
+
+	set_union(A.begin(), A.end(), B.begin(), B.end(), inserter(C, C.begin()));
+}
+//C = A - B
+void my_difference(set<string> A, set<string> B, set<string>& C) {
+	set_difference(A.begin(), A.end(), B.begin(), B.end(), inserter(C, C.begin()));
+}
+
+set<string> find_reach_bblock(string define_pos, fun_blocks &fb) {
+	set<string> ret_set = {};
+	for (map<string, basic_block>::iterator iter = fb.basic_blocks.begin(); iter != fb.basic_blocks.end(); iter++) {
+		if (iter->second.rin.find(define_pos) != iter->second.rin.end()) {
+			ret_set.insert(iter->first);
+		}
+	}
+	return ret_set;
+}
+
+int belong(string use_pos, set<string> reach_bblock) {
+	//分割use_pos，提取它所在的基本块
+	string use_block="";
+	for (int i = 1; use_pos[i] != ','; i++) {
+		use_block += use_pos[i];
+	}
+	if (reach_bblock.find(use_block) != reach_bblock.end()) {
+		return 1;
+	}
+	return 0;
+}
+
+void reach_definiton_fun(fun_blocks &fb) {
+	//计算gen,kill
+	map<string, set<string>> var_def_position;//遍历函数内所有的基本块，建立每个变量的定义点，与书上不同，直接使用<B,1>,<B,2>这样的形式来代替d1,d2
+	map<string, set<string>> var_use_position;
+	//map<string, map< string, set<string> > >fb.du_chain;
+	for (map<string, basic_block>::iterator iter = fb.basic_blocks.begin(); iter != fb.basic_blocks.end(); iter++) {
+		//处理一个基本块
+		for (int i = 0; i < iter->second.quadtable.size(); i++) {
+			if (iter->second.quadtable[i].op == "ADD" ||
+				iter->second.quadtable[i].op == "SUB" ||
+				iter->second.quadtable[i].op == "MUL" ||
+				iter->second.quadtable[i].op == "DIV" ||
+				iter->second.quadtable[i].op == "NEG" ||
+				iter->second.quadtable[i].op == "ASS" ||
+				iter->second.quadtable[i].op == "ASAR" ||
+				iter->second.quadtable[i].op == "SW") {
+				var_def_position[iter->second.quadtable[i].result].insert("<" + iter->first + "," + to_string(i) + ">");
+				fb.du_chain[iter->second.quadtable[i].result]["<" + iter->first + "," + to_string(i) + ">"] = {};
+			}
+			if (iter->second.quadtable[i].arg1 != "") {  //虽然可能有arg不代表变量，但我们只是从该集合中挑选，所以多了没什么关系
+				var_use_position[iter->second.quadtable[i].arg1].insert("<" + iter->first + "," + to_string(i) + ">");
+			}
+			if (iter->second.quadtable[i].arg2 != "") {
+				var_use_position[iter->second.quadtable[i].arg2].insert("<" + iter->first + "," + to_string(i) + ">");
+			}
+		}
+	}
+	//打印变量定义点信息，用于debug
+	/*for (map<string, set<string>>::iterator iter2 = var_def_position.begin(); iter2 != var_def_position.end(); iter2++) {
+		cout << iter2->first<<": ";
+		cout << "{";
+		for (set<string>::iterator iter3 = iter2->second.begin(); iter3 != iter2->second.end(); iter3++) {
+			cout << *iter3 << ", ";
+		}
+		cout << "}"<<endl;
+	}*/
+	map<string, set<string>> gen = {}, kill = {};//每一条语句的gen,kill
+	//计算gen,kill集合，处理一个函数所有的基本块
+	for (map<string, basic_block>::iterator iter = fb.basic_blocks.begin(); iter != fb.basic_blocks.end(); iter++) {
+		//处理一个基本块
+		for (int i = 0; i < iter->second.quadtable.size(); i++) {
+			string tem= "<" + iter->first + "," + to_string(i) + ">";
+			set<string> tem1 = var_def_position[iter->second.quadtable[i].result];
+			set<string>::iterator iter1 = tem1.find(tem);
+			if (iter1 != tem1.end()) {
+				gen[tem] = { tem };
+				tem1.erase(iter1);
+				kill[tem] = tem1;
+			}
+			else {
+				gen[tem] = {};
+				kill[tem] = {};
+			}
+		}
+	}
+	/*打印每条语句的gen,kill信息，用于debug
+	cout << "gen: "<<endl;
+	for (map<string, set<string>>::iterator iter = gen.begin(); iter != gen.end(); iter++) {
+		cout << iter->first <<": ";
+		cout << "{";
+		for (set<string>::iterator iter1 = iter->second.begin(); iter1 != iter->second.end(); iter1++) {
+			cout << *iter1 << ", ";
+		}
+		cout << "}" << endl;
+	}
+	cout << "kill: "<<endl;
+	for (map<string, set<string>>::iterator iter = kill.begin(); iter != kill.end(); iter++) {
+		cout << iter->first << ": ";
+		cout << "{";
+		for (set<string>::iterator iter1 = iter->second.begin(); iter1 != iter->second.end(); iter1++) {
+			cout << *iter1 << ", ";
+		}
+		cout << "}" << endl;
+	}*/
+	    
+	//计算基本块的gen,kill
+	for (map<string, basic_block>::iterator iter = fb.basic_blocks.begin(); iter != fb.basic_blocks.end(); iter++) {
+		//计算kill
+		for (int i = 0; i < iter->second.quadtable.size(); i++) {
+			string di = "<" + iter->first + "," + to_string(i) + ">";
+			my_union(kill[di], iter->second.kill, iter->second.kill);
+		}
+		/*string dn = "<" + iter->first + "," + to_string(iter->second.quadtable.size()-1) + ">";
+		set_union(gen[dn].begin, gen[dn].end, iter->second.gen.begin, iter->second.gen.end, iter->second.gen.begin);*/
+		//计算gen
+		for (int i = iter->second.quadtable.size() - 1; i >= 0; i--) {
+			string di = "<" + iter->first + "," + to_string(i) + ">";
+			set<string> gkdi = gen[di];
+			for (int j = i + 1; j < iter->second.quadtable.size(); j++) {
+				string dj = "<" + iter->first + "," + to_string(j) + ">";
+				my_difference(gkdi,kill[dj], gkdi);
+			}
+			my_union(gkdi, iter->second.gen, iter->second.gen);
+		}
+		//打印基本块gen,kill信息，用于debug
+		/*cout << iter->first << endl;
+		cout << "gen: ";
+		cout << "{";
+		for (set<string>::iterator iter1 = iter->second.gen.begin(); iter1 != iter->second.gen.end(); iter1++) {
+			cout << *iter1 << ", ";
+		}
+		cout << "}" << endl;
+		cout << "kill: ";
+		cout << "{";
+		for (set<string>::iterator iter1 = iter->second.kill.begin(); iter1 != iter->second.kill.end(); iter1++) {
+			cout << *iter1 << ", ";
+		}
+		cout << "}" << endl;*/
+	}
+
+
+	//计算rin,rout
+	int flag=1;
+	while (flag) {
+		int flag1 = 1;
+		for (map<string, basic_block>::iterator iter = fb.basic_blocks.begin(); iter != fb.basic_blocks.end(); iter++) {
+			//cout << "基本块：" << iter->first << endl;
+			//计算in
+			for (set<string>::iterator iter1 = iter->second.succ.begin(); iter1 != iter->second.succ.end(); iter1++) {
+				my_union(iter->second.rin, fb.basic_blocks[*iter1].rout, iter->second.rin);
+			}
+			//计算out
+			set<string> in_kill;
+			map<set<string>, string> mTemp;
+			mTemp[iter->second.rout] = "1";
+			
+			my_difference(iter->second.rin, iter->second.kill, in_kill);
+			my_union(iter->second.gen, in_kill, iter->second.rout);
+			if (mTemp.find(iter->second.rout) == mTemp.end()) {
+				flag1 = 0;
+			}
+		}
+		if (flag1 == 1) {
+			flag = 0;
+		}
+	}
+
+	//构建du链
+	for (map<string, map< string, set<string> > >::iterator iter = fb.du_chain.begin(); iter != fb.du_chain.end(); iter++) {
+		//处理单个变量
+		string var_name = iter->first;
+		set<string> var_use_pos = var_use_position[var_name];
+		for (map<string, set<string> >::iterator iter1 = fb.du_chain[var_name].begin(); iter1 != fb.du_chain[var_name].end(); iter1++) {
+			//处理每个变量的一处定义点
+			string define_pos = iter1->first;
+			//查找该定义点到达的基本块
+			set<string> reach_bblock=find_reach_bblock(define_pos, fb);
+			for (set<string>::iterator iter2 = var_use_pos.begin(); iter2 != var_use_pos.end(); iter2++) {
+				if (belong(*iter2, reach_bblock)) {
+					iter1->second.insert(*iter2);
+				}
+			}
+		}
+	}
+	return;
+}
+//到达定义分析
+void Optimizer::reach_definiton() {
+	for (int i = 0; i < blocks.size(); i++) {
+		reach_definiton_fun(blocks[i]);
+	}
+}
+
+
+
+//打印
+void print_string_set(set<string> string_set,ofstream &f) {
+	f << "{";
+	for (set<string>::iterator iter = string_set.begin(); iter != string_set.end(); iter++) {
+		f << *iter << ", ";
+	}
+	f << "}" << endl;
+}
+void print_du_chain_fun(fun_blocks &fb, ofstream &f) {
+	for (map<string, map< string, set<string> > >::iterator iter = fb.du_chain.begin(); iter!= fb.du_chain.end(); iter++) {
+		f << iter->first << ": " << endl;
+		for (map< string, set<string>>::iterator iter1 = iter->second.begin(); iter1 != iter->second.end(); iter1++) {
+			f << iter1->first << ": ";
+			print_string_set(iter1->second, f);
+		}
+	}
+}
+void Optimizer::print_reach_definiton() {
+	for (int i = 0; i < blocks.size(); i++) {
+		ofstream reach_definiton_file;
+		reach_definiton_file.open("dataflow_analysis/reach_definiton/"+ blocks[i].func_name);
+		reach_definiton_file << "reach definiton information" << endl;
+		for (map<string, basic_block>::iterator iter = blocks[i].basic_blocks.begin(); iter != blocks[i].basic_blocks.end(); iter++) {
+			reach_definiton_file << "basic block name: " << iter->first << endl;
+			reach_definiton_file << "gen: ";
+			print_string_set(iter->second.gen,reach_definiton_file);
+			reach_definiton_file << "kill: ";
+			print_string_set(iter->second.kill, reach_definiton_file);
+			reach_definiton_file << "rin: ";
+			print_string_set(iter->second.rin, reach_definiton_file);
+			reach_definiton_file << "rout: ";
+			print_string_set(iter->second.rout, reach_definiton_file);
+			reach_definiton_file << endl;
+		}
+		reach_definiton_file << "du_chain" << endl;
+		print_du_chain_fun(blocks[i], reach_definiton_file);
+	}
+}
+
+void compute_bblock_def_use(basic_block &basic_block) {
+	//统计基本块中的所有变量
+	map<string,int[2]> var_set; //[0,0]分别代表变量当前是否已被定义，是否已被使用
+	for (int i = 0; i < basic_block.quadtable.size(); i++) {
+		string op = basic_block.quadtable[i].op;
+		string arg1 = basic_block.quadtable[i].arg1;
+		string arg2 = basic_block.quadtable[i].arg2;
+		string result = basic_block.quadtable[i].result;
+		if (op == "ADD" || op == "SUB" || op == "MUL" || op == "DIV") {
+			var_set[arg1][0] = 0;
+			var_set[arg1][1] = 0;
+			var_set[arg2][0] = 0;
+			var_set[arg2][1] = 0;
+			var_set[result][0] = 0;
+			var_set[result][1] = 0;
+		}
+		else if (op == "NEG" || op == "ASS" || op == "ASAR") {
+			var_set[arg1][0] = 0;
+			var_set[arg1][1] = 0;
+			var_set[result][0] = 0;
+			var_set[result][1] = 0;
+		}
+		else if (op == "LSS" || op == "LEQ" || op == "GTR" || op == "GEQ" || op == "NEQ" || op == "EQL"|| op == "ARAS") {
+			var_set[arg1][0] = 0;
+			var_set[arg1][1] = 0;
+			var_set[arg2][0] = 0;
+			var_set[arg2][1] = 0;
+		}
+		else if (op == "PARA"|| op == "SCF"|| op == "SW") {
+			var_set[result][0] = 0;
+			var_set[result][1] = 0;
+		}
+		else if (op == "RET"|| op == "PRF") {
+			var_set[arg1][0] = 0;
+			var_set[arg1][1] = 0;
+		}
+	}
+	//计算def,use集合
+	for (int i = 0; i < basic_block.quadtable.size(); i++) {
+		string op = basic_block.quadtable[i].op;
+		string arg1 = basic_block.quadtable[i].arg1;
+		string arg2 = basic_block.quadtable[i].arg2;
+		string result = basic_block.quadtable[i].result;
+		if (op == "ADD" || op == "SUB" || op == "MUL" || op == "DIV") {
+			if (var_set[arg1][0] == 0) {//还没被定义
+				basic_block.use.insert(arg1);
+				var_set[arg1][1] = 1; //
+			}
+			if (var_set[arg2][0] == 0) {//还没被定义
+				basic_block.use.insert(arg2);
+				var_set[arg2][1] = 1; //
+			}
+			if (var_set[result][1] == 0) {//还没被使用
+				basic_block.def.insert(result);
+				var_set[result][0] = 1; //
+			}
+		}
+		else if (op == "NEG" || op == "ASS" || op == "ASAR") {
+			if (var_set[arg1][0] == 0) {//还没被定义
+				basic_block.use.insert(arg1);
+				var_set[arg1][1] = 1; //
+			}
+			if (var_set[result][1] == 0) {//还没被使用
+				basic_block.def.insert(result);
+				var_set[result][0] = 1; //
+			}
+		}
+		else if (op == "LSS" || op == "LEQ" || op == "GTR" || op == "GEQ" || op == "NEQ" || op == "EQL" || op == "ARAS") {
+			if (var_set[arg1][0] == 0) {//还没被定义
+				basic_block.use.insert(arg1);
+				var_set[arg1][1] = 1; //
+			}
+			if (var_set[arg2][0] == 0) {//还没被定义
+				basic_block.use.insert(arg2);
+				var_set[arg2][1] = 1; //
+			}
+		}
+		else if (op == "PARA" || op == "SCF" || op == "SW") {
+			if (var_set[result][1] == 0) {//还没被使用
+				basic_block.def.insert(result);
+				var_set[result][0] = 1; //
+			}
+		}
+		else if (op == "RET"&& arg1 !="" ) {
+			if (var_set[arg1][0] == 0) {//还没被定义
+				basic_block.use.insert(arg1);
+				var_set[arg1][1] = 1; //
+			}
+		}
+		else if (op == "PRF"&&arg2 != "str") {
+			if (var_set[arg1][0] == 0) {//还没被定义
+				basic_block.use.insert(arg1);
+				var_set[arg1][1] = 1; //
+			}
+		}
+	}
+}
+void live_var_analysis_fun(fun_blocks &fb) {
+	//计算def,use集合，处理一个函数所有的基本块
+	for (map<string, basic_block>::iterator iter = fb.basic_blocks.begin(); iter != fb.basic_blocks.end(); iter++) {
+		//处理一个基本块
+		compute_bblock_def_use(iter->second);
+	}
+	//计算ain,aout
+	int flag = 1;
+	while (flag) {
+		int flag1 = 1;
+		for (map<string, basic_block>::reverse_iterator iter = fb.basic_blocks.rbegin(); iter != fb.basic_blocks.rend(); iter++) {
+			//cout << "基本块：" << iter->first << endl;
+			//计算out
+			for (set<string>::iterator iter1 = iter->second.next.begin(); iter1 != iter->second.next.end(); iter1++) {
+				my_union(iter->second.aout, fb.basic_blocks[*iter1].ain, iter->second.aout);
+			}
+			//计算out
+			set<string> out_def;
+			map<set<string>, string> mTemp;
+			mTemp[iter->second.ain] = "1";
+
+			my_difference(iter->second.aout, iter->second.def, out_def);
+			my_union(iter->second.use, out_def, iter->second.ain);
+			if (mTemp.find(iter->second.ain) == mTemp.end()) {
+				flag1 = 0;
+			}
+		}
+		if (flag1 == 1) {
+			flag = 0;
+		}
+	}
+	return;
+}
+//必须先划分基本块
+void Optimizer::live_var_analysis() {
+	for (int i = 0; i < blocks.size(); i++) {
+		live_var_analysis_fun(blocks[i]);
+	}
+}
+
+//打印活跃变量信息
+void Optimizer::print_live_var_analysis() {
+	for (int i = 0; i < blocks.size(); i++) {
+		ofstream live_var_file;
+		live_var_file.open("dataflow_analysis/live_var_analysis/" + blocks[i].func_name+".txt");
+		for (map<string, basic_block>::iterator iter = blocks[i].basic_blocks.begin(); iter != blocks[i].basic_blocks.end(); iter++) {
+			live_var_file << "basic block name: " << iter->first << endl;
+			live_var_file << "def: ";
+			print_string_set(iter->second.def, live_var_file);
+			live_var_file << "use: ";
+			print_string_set(iter->second.use, live_var_file);
+			live_var_file << "ain: ";
+			print_string_set(iter->second.ain, live_var_file);
+			live_var_file << "aout: ";
+			print_string_set(iter->second.aout, live_var_file);
+			live_var_file << endl;
+		}
+	}
+}
+
+
 void Optimizer::work() {
 	const_fold();
 	build_blocks();
 	graphviz_fun_block();
+	reach_definiton();
+	live_var_analysis();
+	print_reach_definiton();
+	print_live_var_analysis();
 }

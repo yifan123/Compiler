@@ -1,0 +1,60 @@
+reach definiton information
+basic block name: B5
+gen: {<B5,0>, <B5,1>, }
+kill: {}
+rin: {}
+rout: {<B5,0>, <B5,1>, }
+
+basic block name: B6
+gen: {}
+kill: {}
+rin: {<B5,0>, <B5,1>, }
+rout: {<B5,0>, <B5,1>, }
+
+basic block name: B7
+gen: {}
+kill: {}
+rin: {<B5,0>, <B5,1>, }
+rout: {<B5,0>, <B5,1>, }
+
+basic block name: B8
+gen: {}
+kill: {}
+rin: {<B5,0>, <B5,1>, }
+rout: {<B5,0>, <B5,1>, }
+
+basic block name: Lab20
+gen: {}
+kill: {}
+rin: {<B5,0>, <B5,1>, }
+rout: {<B5,0>, <B5,1>, }
+
+basic block name: Lab22
+gen: {}
+kill: {}
+rin: {<B5,0>, <B5,1>, }
+rout: {<B5,0>, <B5,1>, }
+
+basic block name: Lab23
+gen: {}
+kill: {}
+rin: {<B5,0>, <B5,1>, }
+rout: {<B5,0>, <B5,1>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B5,0>, <B5,1>, }
+rout: {<B5,0>, <B5,1>, }
+
+du_chain
+@21: 
+<B5,1>: {}
+ch: 
+<B5,0>: {<Lab20,1>, }

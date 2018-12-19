@@ -13,7 +13,9 @@ using namespace std;
 #define VOID_RETURN_ERROR	45		//void函数中return非空值
 #define NON_REACH_FUNC		107
 #define	MISSING_RETURN		29		//丢失return语句
-
+#define	OUT_OF_ARRAY		35		//数组下标越界
+#define RETURN_TYPE_ERROR   8       //函数返回值类型错误
+#define ASS_TYPE_ERROR      9      //赋值语句前后类型不一样
 
 #define	ID_TOO_LONG			3		//标识符过长
 #define	PROGRAM_ERROR		4		//程序结构错误
@@ -47,7 +49,6 @@ using namespace std;
 //#define	VAR_NOT_INIT		32		//变量使用前未初始化
 
 #define	OUT_OF_TABLE		34		//符号表满了
-#define	OUT_OF_ARRAY		35		//数组溢出
 #define	WRONG_TYPE			36		//声明类型错误
 #define	MISSING_ASSIGN		37		//丢失等号
 #define MISSING_COLON		38		//丢失冒号
