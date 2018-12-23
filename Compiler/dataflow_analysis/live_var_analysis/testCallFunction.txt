@@ -1,0 +1,132 @@
+basic block name: B114
+def: {test_select, }
+use: {@407, }
+ain: {@407, @409, @416, @418, @420, char_global_var, int_global_var, }
+aout: {@409, @416, @418, @420, char_global_var, int_global_var, test_select, }
+
+basic block name: B115
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: B116
+def: {}
+use: {}
+ain: {char_global_var, int_global_var, }
+aout: {char_global_var, int_global_var, }
+
+basic block name: B118
+def: {const_char_a, const_int_postive, }
+use: {}
+ain: {char_global_var, int_global_var, }
+aout: {char_global_var, int_global_var, }
+
+basic block name: B119
+def: {@411, const_int_negtive, }
+use: {}
+ain: {char_global_var, int_global_var, }
+aout: {char_global_var, int_global_var, }
+
+basic block name: B120
+def: {@412, @413, }
+use: {}
+ain: {char_global_var, int_global_var, }
+aout: {char_global_var, int_global_var, }
+
+basic block name: B121
+def: {@414, @415, }
+use: {}
+ain: {char_global_var, int_global_var, }
+aout: {char_global_var, int_global_var, }
+
+basic block name: B122
+def: {}
+use: {}
+ain: {char_global_var, int_global_var, }
+aout: {char_global_var, int_global_var, }
+
+basic block name: B124
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: B125
+def: {}
+use: {}
+ain: {char_global_var, int_global_var, }
+aout: {char_global_var, int_global_var, }
+
+basic block name: B127
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: B128
+def: {}
+use: {}
+ain: {char_global_var, int_global_var, }
+aout: {char_global_var, int_global_var, }
+
+basic block name: B130
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: B131
+def: {}
+use: {}
+ain: {char_global_var, int_global_var, }
+aout: {char_global_var, int_global_var, }
+
+basic block name: Lab406
+def: {}
+use: {char_global_var, int_global_var, }
+ain: {char_global_var, int_global_var, }
+aout: {}
+
+basic block name: Lab408
+def: {}
+use: {@409, test_select, }
+ain: {@409, @416, @418, @420, char_global_var, int_global_var, test_select, }
+aout: {@416, @418, @420, char_global_var, int_global_var, test_select, }
+
+basic block name: Lab410
+def: {}
+use: {@416, test_select, }
+ain: {@416, @418, @420, char_global_var, int_global_var, test_select, }
+aout: {@418, @420, char_global_var, int_global_var, test_select, }
+
+basic block name: Lab417
+def: {}
+use: {@418, test_select, }
+ain: {@418, @420, char_global_var, int_global_var, test_select, }
+aout: {@420, char_global_var, int_global_var, test_select, }
+
+basic block name: Lab419
+def: {}
+use: {@420, test_select, }
+ain: {@420, char_global_var, int_global_var, test_select, }
+aout: {char_global_var, int_global_var, }
+
+basic block name: Lab421
+def: {}
+use: {}
+ain: {char_global_var, int_global_var, }
+aout: {char_global_var, int_global_var, }
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@407, @409, @416, @418, @420, char_global_var, int_global_var, }
+aout: {@407, @409, @416, @418, @420, char_global_var, int_global_var, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

@@ -1,0 +1,46 @@
+graph Qsort{
+label =Qsort
+t362[label="t362", shape=circle, style=filled, fillcolor=White]
+t363[label="t363", shape=circle, style=filled, fillcolor=White]
+t370[label="t370", shape=circle, style=filled, fillcolor=White]
+t371[label="t371", shape=circle, style=filled, fillcolor=White]
+t374[label="t374", shape=circle, style=filled, fillcolor=White]
+t376[label="t376", shape=circle, style=filled, fillcolor=White]
+first[label="first", shape=circle, style=filled, fillcolor=White]
+key[label="key", shape=circle, style=filled, fillcolor=White]
+last[label="last", shape=circle, style=filled, fillcolor=White]
+first--key
+first--last
+first--t362
+first--t363
+first--t370
+first--t371
+first--t374
+first--t376
+key--last
+key--t370
+key--t371
+key--t374
+key--t376
+last--t362
+last--t363
+last--t370
+last--t371
+last--t374
+last--t376
+t362--t363
+t362--t370
+t362--t371
+t362--t374
+t362--t376
+t363--t370
+t363--t371
+t363--t374
+t363--t376
+t370--t371
+t370--t374
+t370--t376
+t371--t374
+t371--t376
+t374--t376
+}

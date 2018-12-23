@@ -1,0 +1,36 @@
+basic block name: B5
+def: {@14, }
+use: {}
+ain: {@16, @17, @18, }
+aout: {@16, @17, @18, }
+
+basic block name: B6
+def: {@15, }
+use: {@16, }
+ain: {@16, @17, @18, }
+aout: {@17, @18, }
+
+basic block name: B7
+def: {}
+use: {@17, }
+ain: {@17, @18, }
+aout: {@18, }
+
+basic block name: Lab13
+def: {}
+use: {@18, }
+ain: {@18, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@16, @17, @18, }
+aout: {@16, @17, @18, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

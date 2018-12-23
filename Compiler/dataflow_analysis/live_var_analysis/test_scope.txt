@@ -1,0 +1,36 @@
+basic block name: B48
+def: {scope_var, tem, }
+use: {@134, }
+ain: {@134, }
+aout: {scope_var, tem, }
+
+basic block name: B49
+def: {}
+use: {scope_var, tem, }
+ain: {scope_var, tem, }
+aout: {}
+
+basic block name: B50
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: Lab135
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@134, }
+aout: {@134, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

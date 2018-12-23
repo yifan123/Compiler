@@ -1,0 +1,54 @@
+basic block name: B0
+def: {}
+use: {@1, n, }
+ain: {@1, @2, @4, @5, @6, @9, n, }
+aout: {@2, @4, @5, @6, @9, n, }
+
+basic block name: B1
+def: {}
+use: {@2, }
+ain: {@2, @4, @5, @6, @9, n, }
+aout: {@4, @5, @6, @9, n, }
+
+basic block name: B2
+def: {}
+use: {@5, }
+ain: {@5, @6, @9, n, }
+aout: {@6, @9, n, }
+
+basic block name: B3
+def: {@10, @8, }
+use: {@9, n, }
+ain: {@9, n, }
+aout: {@8, }
+
+basic block name: B4
+def: {@11, @12, }
+use: {@8, }
+ain: {@8, }
+aout: {}
+
+basic block name: Lab0
+def: {}
+use: {@4, n, }
+ain: {@4, @5, @6, @9, n, }
+aout: {@5, @6, @9, n, }
+
+basic block name: Lab3
+def: {@7, }
+use: {@6, n, }
+ain: {@6, @9, n, }
+aout: {@9, n, }
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@1, @2, @4, @5, @6, @9, n, }
+aout: {@1, @2, @4, @5, @6, @9, n, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

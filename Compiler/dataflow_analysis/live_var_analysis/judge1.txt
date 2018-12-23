@@ -1,0 +1,42 @@
+basic block name: B92
+def: {ret, }
+use: {@346, a, b, }
+ain: {@346, @349, a, b, c, d, }
+aout: {@349, c, d, ret, }
+
+basic block name: B93
+def: {}
+use: {c, d, }
+ain: {@349, c, d, ret, }
+aout: {@349, ret, }
+
+basic block name: B94
+def: {ret, }
+use: {@349, }
+ain: {@349, }
+aout: {ret, }
+
+basic block name: Lab347
+def: {}
+use: {ret, }
+ain: {ret, }
+aout: {}
+
+basic block name: Lab348
+def: {}
+use: {}
+ain: {ret, }
+aout: {ret, }
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@346, @349, a, b, c, d, }
+aout: {@346, @349, a, b, c, d, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

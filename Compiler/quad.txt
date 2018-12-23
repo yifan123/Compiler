@@ -1,29 +1,748 @@
-FUNC   test_while
-ASS @0  sum
-ASS @1  i
-LAB   Lab2
-GEQ i j Lab3
-ARAS i i array
-ADD i @4 @5
-ASS @5  i
-JMP   Lab2
-LAB   Lab3
-ASS @6  i
-LAB   Lab7
-GEQ i j Lab8
-ADD sum i @9
-ASS @9  sum
-ADD i @10 @11
-ASS @11  i
-JMP   Lab7
-LAB   Lab8
-NEQ sum @13 Lab12
-PRF 0 str 1
+FUNC   get_sum
+ADD judge @0 @1
+ASS @1  judge
+ADD count @2 @3
+ASS @3  count
+ASS @4  b
+EQL a @6 Lab5
+SUB a @7 @8
+PARA get_sum 0 @8
+CALL get_sum  
+SW $v0  @9
+ASS @9  b
+ADD judge @10 @11
+ASS @11  judge
+LAB   Lab5
+ADD b a @12
+RET @12  
 RET   
-LAB   Lab12
-PRF 1 str 1
+FUNC   count_to_10
+ADD judge @13 @14
+ASS @14  judge
+PARA get_sum 0 @15
+CALL get_sum  
+SW $v0  @16
+RET @16  
+RET   
+FUNC   higher
+RET @17  
+RET   
+FUNC   prt_message
+ADD judge @18 @19
+ASS @19  judge
+PRF 0 str 1
+RET @20  
+RET   
+FUNC   test_global_variable
+ADD judge @21 @22
+ASS @22  judge
+ASS @23  a
+ASS @24  flag
+ASS @25  count
+ARAS @27 @26 letter
+ARAS @29 @28 letter
+ARAS @31 @30 letter
+ARAS @33 @32 letter
+ARAS @35 @34 letter
+PRF count 0 1
+ASAR @36 letter @37
+PRF @37 1 1
+NEQ count @39 Lab38
+ADD judge @40 @41
+ASS @41  judge
+LAB   Lab38
+NEQ count @43 Lab42
+ADD judge @44 @45
+ASS @45  judge
+ASS @46  flag
+LAB   Lab42
+NEQ flag @48 Lab47
+ADD judge @49 @50
+ASS @50  judge
+LAB   Lab47
+ASS @51  _
+ASS @52  __
+ASS @53  ___
+ASS @54  __a__
+ASS @55  _a_
+ASS @56  flag
+NEQ _ @58 Lab57
+ADD judge @59 @60
+ASS @60  judge
+LAB   Lab57
+NEQ _ @62 Lab61
+ASS @63  flag
+LAB   Lab61
+NEQ flag @65 Lab64
+ADD judge @66 @67
+ASS @67  judge
+LAB   Lab64
+ASS @68  flag
+NEQ __ @70 Lab69
+ADD judge @71 @72
+ASS @72  judge
+LAB   Lab69
+NEQ __ @74 Lab73
+ADD judge @75 @76
+ASS @76  judge
+ASS @77  flag
+LAB   Lab73
+NEQ flag @79 Lab78
+ADD judge @80 @81
+ASS @81  judge
+LAB   Lab78
+ASS @82  flag
+NEQ ___ @84 Lab83
+ADD judge @85 @86
+ASS @86  judge
+LAB   Lab83
+NEQ ___ @88 Lab87
+ADD judge @89 @90
+ASS @90  judge
+ASS @91  flag
+LAB   Lab87
+NEQ flag @93 Lab92
+ADD judge @94 @95
+ASS @95  judge
+LAB   Lab92
+ASS @96  flag
+NEQ __a__ @98 Lab97
+ADD judge @99 @100
+ASS @100  judge
+LAB   Lab97
+NEQ __a__ @102 Lab101
+ADD judge @103 @104
+ASS @104  judge
+ASS @105  flag
+LAB   Lab101
+NEQ flag @107 Lab106
+ADD judge @108 @109
+ASS @109  judge
+LAB   Lab106
+ASS @110  flag
+NEQ _a_ @112 Lab111
+ADD judge @113 @114
+ASS @114  judge
+LAB   Lab111
+NEQ _a_ @116 Lab115
+ADD judge @117 @118
+ASS @118  judge
+ASS @119  flag
+LAB   Lab115
+NEQ flag @121 Lab120
+ADD judge @122 @123
+ASS @123  judge
+LAB   Lab120
+RET   
+RET   
+FUNC   test_global_const
+ASS @124  _
+NEQ _ @126 Lab125
+ADD judge @127 @128
+ASS @128  judge
+LAB   Lab125
+ARAS @130 @129 num
+ARAS @132 @131 num
+ASAR @134 num @135
+NEQ @135 @136 Lab133
+ADD judge @137 @138
+ASS @138  judge
+LAB   Lab133
+ASAR @140 num @141
+NEQ @141 @142 Lab139
+ADD judge @143 @144
+ASS @144  judge
+LAB   Lab139
+ADD judge @145 @146
+ASS @146  judge
+NEQ const_1 @148 Lab147
+ADD judge @149 @150
+ASS @150  judge
+LAB   Lab147
+EQL @152 $0 Lab151
+ADD judge @153 @154
+ASS @154  judge
+LAB   Lab151
+EQL @156 $0 Lab155
+ADD judge @157 @158
+ASS @158  judge
+LAB   Lab155
+ASS const_a  y
+ADD y const_a @159
+ASS @159  x
+NEQ x @161 Lab160
+ADD judge @162 @163
+ASS @163  judge
+LAB   Lab160
+NEQ const_1 @165 Lab166
+ADD judge @167 @168
+ASS @168  judge
+JMP   Lab164
+LAB   Lab166
+LAB   Lab164
+NEQ const_1 @170 Lab171
+ADD judge @172 @173
+ASS @173  judge
+JMP   Lab169
+LAB   Lab171
+LAB   Lab169
+ASS @174  x
+LAB   Lab175
+GEQ x const_2 Lab176
+ADD judge @177 @178
+ASS @178  judge
+ADD x @179 @180
+ASS @180  x
+JMP   Lab175
+LAB   Lab176
+RET   
+FUNC   test_brackets
+ADD judge @181 @182
+ASS @182  judge
+RET   
+RET   
+FUNC   test_compare_operator
+ASS @183  x
+ASS @184  y
+ASS @185  flag
+GEQ x y Lab186
+ADD judge @187 @188
+ASS @188  judge
+LAB   Lab186
+LEQ y x Lab189
+ADD judge @190 @191
+ASS @191  judge
+LAB   Lab189
+NEQ x y Lab192
+ADD judge @193 @194
+ASS @194  judge
+ASS @195  flag
+LAB   Lab192
+NEQ flag @197 Lab196
+ADD judge @198 @199
+ASS @199  judge
+LAB   Lab196
+EQL x y Lab200
+ADD judge @201 @202
+ASS @202  judge
+LAB   Lab200
+ASS @203  x
+LAB   Lab204
+GTR x @206 Lab205
+GTR x y Lab207
+ADD judge @208 @209
+ASS @209  judge
+LAB   Lab207
+ADD x @210 @211
+ASS @211  x
+JMP   Lab204
+LAB   Lab205
+ASS @212  x
+LAB   Lab213
+GTR x @215 Lab214
+LSS y x Lab216
+ADD judge @217 @218
+ASS @218  judge
+LAB   Lab216
+ADD x @219 @220
+ASS @220  x
+JMP   Lab213
+LAB   Lab214
+RET   
+FUNC   test_expression
+ASS @221  a
+ASS @222  b
+ASS @223  c
+ASS @224  d
+ASS @225  e
+ADD judge @226 @227
+ASS @227  judge
+ASS a  a
+NEQ a @229 Lab228
+ADD judge @230 @231
+ASS @231  judge
+LAB   Lab228
+NEG a  @232
+ASS @232  a
+NEQ a @234 Lab233
+ADD judge @235 @236
+ASS @236  judge
+LAB   Lab233
+ASS c  a
+NEQ a @238 Lab237
+ADD judge @239 @240
+ASS @240  judge
+LAB   Lab237
+NEG c  @241
+ASS @241  a
+NEQ a @244 Lab242
+ADD judge @245 @246
+ASS @246  judge
+LAB   Lab242
+ASS const_3  a
+NEQ a @248 Lab247
+ADD judge @249 @250
+ASS @250  judge
+LAB   Lab247
+ASS @251  a
+NEQ a @254 Lab252
+ADD judge @255 @256
+ASS @256  judge
+LAB   Lab252
+ASS @258  a
+NEQ a @260 Lab259
+ADD judge @261 @262
+ASS @262  judge
+LAB   Lab259
+ASS @263  a
+NEQ a @265 Lab264
+ADD judge @266 @267
+ASS @267  judge
+LAB   Lab264
+ASS @269  a
+NEQ a @272 Lab270
+ADD judge @273 @274
+ASS @274  judge
+LAB   Lab270
+ASS @275  a
+NEQ a @277 Lab276
+ADD judge @278 @279
+ASS @279  judge
+LAB   Lab276
+ASS @282  a
+NEQ a @285 Lab283
+ADD judge @286 @287
+ASS @287  judge
+LAB   Lab283
+ASS @288  b
+ASAR b num @289
+ADD b const_1 @290
+ASAR @290 num @291
+ADD @289 @291 @292
+ADD @292 @293 @294
+CALL count_to_10  
+SW $v0  @295
+MUL @294 @295 @296
+DIV @296 const_3 @297
+NEG @297  @298
+ADD @298 @299 @300
+ADD @300 const_a @301
+SUB @301 @306 @307
+ASAR @308 letter @309
+ADD @307 @309 @310
+ASS @310  a
+NEQ a @312 Lab311
+ADD judge @313 @314
+ASS @314  judge
+LAB   Lab311
+ASS @315  a
+ASS @316  b
+ASS @317  f
+ASS @318  g
+MUL f g @319
+ADD e @319 @320
+ADD d @320 @321
+MUL c @321 @322
+ADD b @322 @323
+MUL a @323 @324
+ASS @324  a
+DIV a @325 @326
+ADD judge @326 @327
+ASS @327  judge
+RET   
+RET   
+FUNC   test_while
+ASS @328  b
+LAB   Lab329
+LSS b @331 Lab330
+LSS b @333 Lab332
+ADD judge @334 @335
+ASS @335  judge
+LAB   Lab332
+SUB b @336 @337
+ASS @337  b
+JMP   Lab329
+LAB   Lab330
+ASS @338  b
+LAB   Lab339
+GTR b @341 Lab340
+NEQ b @343 Lab344
+ADD judge @345 @346
+ASS @346  judge
+JMP   Lab342
+LAB   Lab344
+NEQ b @347 Lab348
+ADD judge @349 @350
+ASS @350  judge
+JMP   Lab342
+LAB   Lab348
+ADD judge @351 @352
+ASS @352  judge
+LAB   Lab342
+ADD b @353 @354
+ASS @354  b
+JMP   Lab339
+LAB   Lab340
+ASS @355  b
+ASS @356  a
+LAB   Lab357
+GTR a @359 Lab358
+ASS @360  b
+LAB   Lab361
+GTR b @363 Lab362
+ADD judge @364 @365
+ASS @365  judge
+ADD b @366 @367
+ASS @367  b
+JMP   Lab361
+LAB   Lab362
+ADD a @368 @369
+ASS @369  a
+JMP   Lab357
+LAB   Lab358
+ASS @370  b
+ASS @371  a
+LAB   Lab372
+GEQ b @374 Lab373
+MUL b a @375
+ARAS @375 b num
+ASAR b num @376
+ADD judge @376 @377
+ASS @377  judge
+ADD b @378 @379
+ASS @379  b
+ADD a @380 @381
+ASS @381  a
+JMP   Lab372
+LAB   Lab373
+RET   
+RET   
+FUNC   test_if
+ASS @382  a
+ASS @383  flag
+ADD judge @384 @385
+ASS @385  judge
+NEQ const_1 @387 Lab386
+LAB   Lab386
+NEQ const_1 @389 Lab388
+LAB   Lab388
+NEQ const_1 @391 Lab390
+LAB   Lab390
+ASS @392  a
+LAB   Lab393
+GTR a @395 Lab394
+NEQ const_1 @397 Lab396
+NEQ a @399 Lab398
+ADD judge @400 @401
+ASS @401  judge
+ASS @402  flag
+LAB   Lab398
+NEQ flag @404 Lab403
+ADD judge @405 @406
+ASS @406  judge
+LAB   Lab403
+LAB   Lab396
+ASS @407  flag
+ADD a @408 @409
+ASS @409  a
+JMP   Lab393
+LAB   Lab394
+ASS @410  a
+NEQ const_1 @412 Lab411
+LAB   Lab413
+GEQ a @415 Lab414
+ADD judge @416 @417
+ASS @417  judge
+ADD a @418 @419
+ASS @419  a
+JMP   Lab413
+LAB   Lab414
+LAB   Lab411
+ASS @420  a
+LAB   Lab421
+GTR a @423 Lab422
+NEQ const_1 @425 Lab424
+NEQ a @427 Lab428
+ADD judge @429 @430
+ASS @430  judge
+JMP   Lab426
+LAB   Lab428
+ADD judge @431 @432
+ASS @432  judge
+LAB   Lab426
+LAB   Lab424
+ADD a @433 @434
+ASS @434  a
+JMP   Lab421
+LAB   Lab422
+ASS @435  flag
+ASS @436  c
+EQL @438 $0 Lab437
+ADD judge @439 @440
+ASS @440  judge
+LAB   Lab437
+EQL @442 $0 Lab441
+ADD judge @443 @444
+ASS @444  judge
+ASS @445  flag
+LAB   Lab441
+NEQ flag @447 Lab446
+ADD judge @448 @449
+ASS @449  judge
+LAB   Lab446
+RET   
+RET   
+FUNC   test_switch
+ASS @450  flag
+ASS @451  test
+ASS @452  a
+ASS @453  b
+LAB   Lab454
+GTR a @456 Lab455
+NEQ a @458 Lab459
+NEQ const_1 @461 Lab460
+ADD judge @462 @463
+ASS @463  judge
+ARAS const_3 @464 num
+PARA get_sum 0 const_3
+CALL get_sum  
+SW $v0  @465
+ARAS @465 const_3 num
+LAB   Lab460
+NEQ const_1 @467 Lab466
+ADD judge @468 @469
+ASS @469  judge
+ASS @470  flag
+LAB   Lab466
+NEQ flag @472 Lab471
+ADD judge @473 @474
+ASS @474  judge
+LAB   Lab471
+ASS @475  test
+JMP   Lab457
+LAB   Lab459
+NEQ a @476 Lab477
+ADD judge @478 @479
+ASS @479  judge
+ASS @480  b
+LAB   Lab481
+GTR b @483 Lab482
+ADD judge @484 @485
+ASS @485  judge
+ADD b @486 @487
+ASS @487  b
+JMP   Lab481
+LAB   Lab482
+ASS @488  test
+JMP   Lab457
+LAB   Lab477
+NEQ a @489 Lab490
+JMP   Lab457
+LAB   Lab490
+ADD judge @491 @492
+ASS @492  judge
+DIV a const_3 @494
+NEQ @494 @495 Lab496
+ADD judge @497 @498
+ASS @498  judge
+ASS @499  test
+JMP   Lab493
+LAB   Lab496
+LAB   Lab493
+NEQ test @501 Lab500
+ADD judge @502 @503
+ASS @503  judge
+LAB   Lab500
+ASS @504  test
+LAB   Lab457
+NEQ test @506 Lab505
+ADD judge @507 @508
+ASS @508  judge
+LAB   Lab505
+ASS @509  test
+ADD a @510 @511
+ASS @511  a
+JMP   Lab454
+LAB   Lab455
+ASS @512  a
+LAB   Lab513
+GEQ a @515 Lab514
+NEQ a @517 Lab516
+ASS @518  c
+LAB   Lab516
+NEQ a @520 Lab519
+ASS @521  c
+LAB   Lab519
+NEQ a @523 Lab522
+ASS @524  c
+LAB   Lab522
+NEQ c @526 Lab527
+ADD judge @528 @529
+ASS @529  judge
+JMP   Lab525
+LAB   Lab527
+NEQ c @530 Lab531
+ADD judge @532 @533
+ASS @533  judge
+JMP   Lab525
+LAB   Lab531
+ADD judge @534 @535
+ASS @535  judge
+LAB   Lab525
+ADD a @536 @537
+ASS @537  a
+JMP   Lab513
+LAB   Lab514
+ASS @538  a
+NEQ a @540 Lab541
+JMP   Lab539
+LAB   Lab541
+LAB   Lab539
+RET   
+RET   
+FUNC   test_function
+ASS @542  a
+ASS @543  c
+ADD judge @544 @545
+ASS @545  judge
+PARA higher 0 c
+CALL higher  
+SW $v0  @546
+CALL count_to_10  
+SW $v0  @547
+ADD @546 @547 @548
+PRF @548 0 1
+CALL prt_message  
+SW $v0  @549
+RET   
+RET   
+FUNC   test_printf
+ASS @550  x
+ADD judge @551 @552
+ASS @552  judge
+PRF x 0 1
+ASS @553  x
+ASAR x num @554
+ADD x const_1 @555
+ASAR @555 num @556
+ADD @554 @556 @557
+ADD @557 @558 @559
+CALL count_to_10  
+SW $v0  @560
+MUL @559 @560 @561
+DIV @561 const_3 @562
+NEG @562  @563
+ADD @563 @564 @565
+ADD @565 const_a @566
+SUB @566 @571 @572
+PRF @572 0 1
+RET   
+RET   
+FUNC   test_scanf
+ADD judge @573 @574
+ASS @574  judge
+SCF   x
+SCF   m
+ADD judge x @575
+ADD @575 m @576
+ASS @576  judge
+SCF   m
+ARAS m @577 letter
+ADD judge m @578
+ASS @578  judge
+SCF   x
+ADD judge x @579
+ASS @579  judge
+RET   
+RET   
+FUNC   test_varib2
+ADD judge @580 @581
+ASS @581  judge
+NEQ _ @583 Lab582
+ADD judge @584 @585
+ASS @585  judge
+LAB   Lab582
+RET   
+RET   
+FUNC   test_varib
+ADD judge @586 @587
+ASS @587  judge
+ASS @588  _
+NEQ _ @590 Lab589
+ADD judge @591 @592
+ASS @592  judge
+LAB   Lab589
+CALL test_varib2  
+RET   
+RET   
+FUNC   test_para4
+ADD judge a @593
+ADD @593 b @594
+ADD @594 c @595
+ADD @595 d @596
+ADD @596 e @597
+ADD @597 f @598
+ADD @598 g @599
+ASS @599  judge
+RET   
+FUNC   test_para1
+ADD judge @600 @601
+ASS @601  judge
+RET @602  
+RET   
+FUNC   test_para2
+ADD judge @603 @604
+ASS @604  judge
+RET @605  
+RET   
+FUNC   test_para3
+ADD judge @606 @607
+ASS @607  judge
+RET   
+RET   
+FUNC   test_para
+ADD judge @608 @609
+ASS @609  judge
+PARA test_para1 0 @610
+PARA test_para1 1 @611
+CALL test_para1  
+SW $v0  @612
+PARA test_para2 0 @613
+PARA test_para2 1 @614
+CALL test_para2  
+SW $v0  @615
+PARA test_para3 0 @616
+PARA test_para3 1 @617
+CALL test_para3  
+PARA test_para4 0 @618
+PARA test_para4 1 @619
+PARA test_para4 2 @620
+PARA test_para4 3 @621
+PARA test_para4 4 @622
+PARA test_para4 5 @623
+PARA test_para4 6 @624
+CALL test_para4  
 RET   
 RET   
 FUNC   main
+ASS @625  judge
+ADD judge @626 @627
+ASS @627  judge
+ASS @628  x
+CALL test_global_variable  
+CALL test_global_const  
+CALL test_brackets  
+CALL test_compare_operator  
+CALL test_expression  
 CALL test_while  
+CALL test_if  
+CALL test_switch  
+CALL test_function  
+CALL test_printf  
+CALL test_scanf  
+CALL test_varib  
+CALL test_para  
+PRF 1 str 0
+PRF judge 0 1
+RET   
 RET   

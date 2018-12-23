@@ -1,9 +1,21 @@
 reach definiton information
-basic block name: B6
-gen: {}
+basic block name: B133
+gen: {<B133,0>, <B133,1>, }
 kill: {}
 rin: {}
-rout: {}
+rout: {<B133,0>, <B133,1>, }
+
+basic block name: B134
+gen: {}
+kill: {}
+rin: {<B133,0>, <B133,1>, }
+rout: {<B133,0>, <B133,1>, }
+
+basic block name: B135
+gen: {}
+kill: {}
+rin: {<B133,0>, <B133,1>, }
+rout: {<B133,0>, <B133,1>, }
 
 basic block name: enter
 gen: {}
@@ -14,7 +26,11 @@ rout: {}
 basic block name: exit
 gen: {}
 kill: {}
-rin: {}
-rout: {}
+rin: {<B133,0>, <B133,1>, }
+rout: {<B133,0>, <B133,1>, }
 
 du_chain
+char_global_var: 
+<B133,1>: {}
+int_global_var: 
+<B133,0>: {}

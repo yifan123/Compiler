@@ -8,6 +8,11 @@
 #include<algorithm>
 #include<set>
 #include <iterator>
+
+#define reg_s_num 8
+#define reg_t_num 10
+
+
 using namespace std;
 extern int lab_index;
 extern int cur_fun_symtab;
@@ -16,7 +21,7 @@ extern int find_sym_table(string sym, SymTableItem& item, int &aglobal, int *sym
 int basic_block_count=0;
 string basic_block_name;
 string newtconst_o(int value) {   //在符号表中新建临时常量
-	string a = "%";  //%代表在优化过程中新加的常量或变量
+	string a = "%";  //%代表在优化过程中新加的常量
 	string b = to_string(lab_index++);
 	string name = a + b;
 	symtables[cur_fun_symtab].enter(name, constantobj, inttype, value, 0);
@@ -153,6 +158,14 @@ void Optimizer::build_blocks() {
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].quadtable.push_back(quad);
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].next.insert("exit");
 			}
+			else if (quad.op == "CALL") {
+				basic_block bb;
+				string bb_name = newB();
+				blocks[cur_fun_block].basic_blocks[bb_name] = bb;
+				blocks[cur_fun_block].basic_blocks[cur_basic_block].next.insert(bb_name);
+				cur_basic_block = bb_name;
+				blocks[cur_fun_block].basic_blocks[cur_basic_block].quadtable.push_back(quad);
+			}
 			else {
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].quadtable.push_back(quad);
 			}
@@ -227,8 +240,11 @@ void Optimizer::graphviz_fun_block() {
 
 //C=A union B
 void my_union(set<string> A, set<string> B, set<string>& C) {
-
 	set_union(A.begin(), A.end(), B.begin(), B.end(), inserter(C, C.begin()));
+}
+//C=A intersection B
+void my_intersection(set<string> A, set<string> B, set<string>& C) {
+	set_intersection(A.begin(), A.end(), B.begin(), B.end(), inserter(C, C.begin()));
 }
 //C = A - B
 void my_difference(set<string> A, set<string> B, set<string>& C) {
@@ -420,8 +436,6 @@ void Optimizer::reach_definiton() {
 	}
 }
 
-
-
 //打印
 void print_string_set(set<string> string_set,ofstream &f) {
 	f << "{";
@@ -498,6 +512,7 @@ void compute_bblock_def_use(basic_block &basic_block) {
 			var_set[arg1][1] = 0;
 		}
 	}
+	
 	//计算def,use集合
 	for (int i = 0; i < basic_block.quadtable.size(); i++) {
 		string op = basic_block.quadtable[i].op;
@@ -557,6 +572,14 @@ void compute_bblock_def_use(basic_block &basic_block) {
 			}
 		}
 	}
+	set<string> use_tem = basic_block.use;
+	for (set<string>::iterator iter = basic_block.use.begin(); iter != basic_block.use.end(); iter++) {
+		if ((*iter)[0] == '$') {   //是寄存器
+			use_tem.erase(*iter);
+		}
+	}
+	basic_block.use = use_tem;
+
 }
 void live_var_analysis_fun(fun_blocks &fb) {
 	//计算def,use集合，处理一个函数所有的基本块
@@ -618,13 +641,167 @@ void Optimizer::print_live_var_analysis() {
 	}
 }
 
+int is_var_conflict(string a,string b, fun_blocks &fb) {
+	// Fix 这里简单地定义：活跃范围重合的变量之间冲突
+	// 可以使用du-chain来改进
+	set<string> bblock_a, bblock_b,tem;
+	for (map<string, basic_block>::iterator iter = fb.basic_blocks.begin(); iter != fb.basic_blocks.end(); iter++) {
+		if (iter->second.ain.find(a) != iter->second.ain.end()) {
+			bblock_a.insert(iter->first);
+		}
+		if (iter->second.ain.find(b) != iter->second.ain.end()) {
+			bblock_b.insert(iter->first);
+		}
+	}
+	my_intersection(bblock_a, bblock_b, tem);
+	if (tem.size() == 0) {
+		return 0;
+	}
+	else {
+		return 1;
+	}
+}
+//< <node1,color1,next1>, <node2,color2,next2>... >
+void build_conflict_graph(fun_blocks &fb) {
+	vector<string> conflict_graph_nodes;
+	map<string, basic_block> basic_blocks = fb.basic_blocks;
+	//只有跨越基本块仍活跃的变量才能分配到全局寄存器
+	for (map<string, basic_block>::iterator iter = basic_blocks.begin(); iter != basic_blocks.end(); iter++) {
+		if (iter->first != "enter") {
+			for (set<string>::iterator iter1 = iter->second.ain.begin(); iter1 != iter->second.ain.end(); iter1++) {
+				if (iter->second.aout.find(*iter1) != iter->second.aout.end()) {
+					conflict_graph_node tem;
+					tem.color = -2; //-2代表白色，即未被染色
+					tem.priority = 1;//Fix 这只是初步将所有点进memory的优先级设为相等的值
+					fb.conflict_graph[*iter1] = tem;
+				}
+			}
+		}
+	}
+	for (map<string, conflict_graph_node>::iterator iter = fb.conflict_graph.begin(); iter != fb.conflict_graph.end(); iter++) {
+		conflict_graph_nodes.push_back(iter->first);
+	}
+	for (int i = 0; i < conflict_graph_nodes.size(); i++) {
+		string a = conflict_graph_nodes[i];
+		for (int j = i + 1; j < conflict_graph_nodes.size(); j++) {
+			string b = conflict_graph_nodes[j];
+			if (is_var_conflict(a, b,fb)) {  //两个变量冲突
+				fb.conflict_graph[a].next.insert(b);
+				fb.conflict_graph[b].next.insert(a);
+			}
+		}
+	}
+}
+
+int find_color(set<int> &node_color_num) {
+	int i = 0;
+	for (set<int>::iterator iter = node_color_num.begin(); iter != node_color_num.end(); iter++) {
+		if (*iter != i) {
+			return i;
+		}
+		i++;
+	}
+	return i;
+}
+void find_memory_node(fun_blocks &fb) {
+	//Fix
+	map<string, conflict_graph_node>::iterator max_node_p;
+	int max_node_v = -1;
+	for (map<string, conflict_graph_node>::iterator iter = fb.conflict_graph.begin(); iter != fb.conflict_graph.end(); iter++) {
+		if (iter->second.color == -2&& iter->second.priority>max_node_v) {//-2代表白色，即未被染色
+			max_node_v = iter->second.priority;
+			max_node_p = iter;
+		}
+	}
+	max_node_p->second.color = -1; //-1代表灰色，即该点将放入内存中
+	return;
+}
+void graph_coloring(fun_blocks &fb,int color_num) {
+	int node_num = fb.conflict_graph.size(); //还没染色的点
+	while (node_num>0) {
+		for (map<string, conflict_graph_node>::iterator iter = fb.conflict_graph.begin(); iter != fb.conflict_graph.end(); iter++) {
+			set<int> node_color_num;
+			for (set<string>::iterator iter1 = iter->second.next.begin(); iter1 != iter->second.next.end(); iter1++) {
+				if (fb.conflict_graph[*iter1].color>=0&&node_color_num.find(fb.conflict_graph[*iter1].color) == node_color_num.end()) {
+					node_color_num.insert(fb.conflict_graph[*iter1].color);
+				}
+			}
+			if (node_color_num.size() < reg_s_num) {
+				node_num--;
+				fb.conflict_graph[iter->first].color = find_color(node_color_num);
+			}
+		}
+		if (node_num > 0) {
+			find_memory_node(fb);
+			node_num--;
+		}
+	}
+}
+void Optimizer::global_reg_alloc(fun_blocks &fb) {
+	build_conflict_graph(fb); //首先建立冲突图
+	//开始图染色算法
+	graph_coloring(fb, reg_s_num);
+}
+string convert2ident(string a) {
+	string b = a;
+	if (b[0] == '@'){
+		b = "t" + a.substr(1, a.size());
+	}
+	return b;
+}
+void Optimizer::graphviz_global_reg_alloc(fun_blocks &fb) {
+	ofstream dotfile;
+	dotfile.open("basic_block/conflict_graph/" + fb.func_name + ".dot");
+	map<string, conflict_graph_node> conflict_graph=fb.conflict_graph;
+	dotfile << "graph " << fb.func_name << "{" << endl;
+	dotfile << "label =" << fb.func_name << endl;
+	for (map<string, conflict_graph_node>::iterator iter = conflict_graph.begin(); iter != conflict_graph.end(); iter++) {
+		string color= "White";
+		if (iter->second.color == -1) {
+			color = "Red";
+		}
+		else if (iter->second.color == -1) {
+			color = "Turquoise";
+		}
+		dotfile << convert2ident(iter->first) << "[" << "label=" << "\""<< convert2ident(iter->first) << "\"" << ", shape=circle"<<", style=filled, fillcolor="<<color<<"]\n";
+	}
+	set<string> edge;
+	for (map<string, conflict_graph_node>::iterator iter = conflict_graph.begin(); iter != conflict_graph.end(); iter++) {
+		set<string>::iterator iter1 = iter->second.next.begin();
+		while (iter1 != iter->second.next.end()) {
+			string a, b;
+			if (convert2ident(iter->first) < convert2ident(*iter1)) {
+				a = convert2ident(iter->first);
+				b = convert2ident(*iter1);
+			}
+			else {
+				b = convert2ident(iter->first);
+				a = convert2ident(*iter1);
+			}
+			edge.insert(a + "--" + b);
+			iter1++;
+		}
+	}
+	for (set<string>::iterator iter = edge.begin(); iter != edge.end(); iter++) {
+		dotfile << *iter << endl;
+	}
+	dotfile << "}" << endl;
+	dotfile.close();
+}
 
 void Optimizer::work() {
+	//为了提高测试时的速度，先把优化部分注释掉一部分  Fix
 	const_fold();
-	build_blocks();
+	/*build_blocks();
 	graphviz_fun_block();
 	reach_definiton();
 	live_var_analysis();
 	print_reach_definiton();
 	print_live_var_analysis();
+	//其实前面的这几个函数都没必要单独写一个带fun的，一起处理即可，但为了前面的不出bug，前面的就不改了，从后面开始改
+	for (int i = 0; i < blocks.size(); i++) {
+		global_reg_alloc(blocks[i]);
+		graphviz_global_reg_alloc(blocks[i]);
+	}
+	*/
 }

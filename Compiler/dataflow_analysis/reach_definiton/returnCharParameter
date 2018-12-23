@@ -1,0 +1,74 @@
+reach definiton information
+basic block name: B69
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B70
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B72
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B74
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B76
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab243
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab245
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab247
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab249
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab251
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+du_chain

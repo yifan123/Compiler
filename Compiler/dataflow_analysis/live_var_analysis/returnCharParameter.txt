@@ -1,0 +1,72 @@
+basic block name: B69
+def: {}
+use: {@244, select, }
+ain: {@244, @246, @248, @250, @252, char_parameter_1, char_parameter_2, char_parameter_3, char_parameter_4, select, }
+aout: {@246, @248, @250, @252, char_parameter_1, char_parameter_2, char_parameter_3, char_parameter_4, select, }
+
+basic block name: B70
+def: {}
+use: {char_parameter_1, }
+ain: {char_parameter_1, }
+aout: {}
+
+basic block name: B72
+def: {}
+use: {char_parameter_2, }
+ain: {char_parameter_2, }
+aout: {}
+
+basic block name: B74
+def: {}
+use: {char_parameter_3, }
+ain: {char_parameter_3, }
+aout: {}
+
+basic block name: B76
+def: {}
+use: {char_parameter_4, }
+ain: {char_parameter_4, }
+aout: {}
+
+basic block name: Lab243
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: Lab245
+def: {}
+use: {@246, select, }
+ain: {@246, @248, @250, @252, char_parameter_2, char_parameter_3, char_parameter_4, select, }
+aout: {@248, @250, @252, char_parameter_2, char_parameter_3, char_parameter_4, select, }
+
+basic block name: Lab247
+def: {}
+use: {@248, select, }
+ain: {@248, @250, @252, char_parameter_3, char_parameter_4, select, }
+aout: {@250, @252, char_parameter_3, char_parameter_4, select, }
+
+basic block name: Lab249
+def: {}
+use: {@250, select, }
+ain: {@250, @252, char_parameter_4, select, }
+aout: {@252, char_parameter_4, }
+
+basic block name: Lab251
+def: {}
+use: {@252, }
+ain: {@252, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@244, @246, @248, @250, @252, char_parameter_1, char_parameter_2, char_parameter_3, char_parameter_4, select, }
+aout: {@244, @246, @248, @250, @252, char_parameter_1, char_parameter_2, char_parameter_3, char_parameter_4, select, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

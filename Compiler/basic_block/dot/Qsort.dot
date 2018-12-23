@@ -1,0 +1,42 @@
+digraph Qsort{
+label =Qsort
+B100[label="B100:\n" shape=box]
+B101[label="B101:\nCALL,judge1,,\nSW,$v0,,@361\nNEQ,@361,@362,Lab359\n" shape=box]
+B102[label="B102:\nSUB,last,@363,@364\nASS,@364,,last\nJMP,,,Lab358\n" shape=box]
+B104[label="B104:\nCALL,judge2,,\nSW,$v0,,@369\nNEQ,@369,@370,Lab367\n" shape=box]
+B105[label="B105:\nADD,first,@371,@372\nASS,@372,,first\nJMP,,,Lab366\n" shape=box]
+B108[label="B108:\nCALL,Qsort,,\nADD,first,@376,@377\nPARA,Qsort,0,@377\nPARA,Qsort,1,high\n" shape=box]
+B109[label="B109:\nCALL,Qsort,,\nRET,,,\nRET,,,\n" shape=box]
+B98[label="B98:\nASS,low,,first\nASS,high,,last\nASAR,first,sort,@354\nASS,@354,,key\nLSS,low,high,Lab355\n" shape=box]
+B99[label="B99:\nRET,,,\n" shape=box]
+Lab355[label="Lab355:\nLAB,,,Lab355\n" shape=box]
+Lab356[label="Lab356:\nLAB,,,Lab356\nGEQ,first,last,Lab357\n" shape=box]
+Lab357[label="Lab357:\nLAB,,,Lab357\nARAS,key,first,sort\nSUB,first,@374,@375\nPARA,Qsort,0,low\nPARA,Qsort,1,@375\n" shape=box]
+Lab358[label="Lab358:\nLAB,,,Lab358\nASAR,last,sort,@360\nPARA,judge1,0,first\nPARA,judge1,1,last\nPARA,judge1,2,@360\nPARA,judge1,3,key\n" shape=box]
+Lab359[label="Lab359:\nLAB,,,Lab359\nASAR,last,sort,@365\nARAS,@365,first,sort\n" shape=box]
+Lab366[label="Lab366:\nLAB,,,Lab366\nASAR,first,sort,@368\nPARA,judge2,0,first\nPARA,judge2,1,last\nPARA,judge2,2,@368\nPARA,judge2,3,key\n" shape=box]
+Lab367[label="Lab367:\nLAB,,,Lab367\nASAR,first,sort,@373\nARAS,@373,last,sort\nJMP,,,Lab356\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B101->B102
+B101->Lab359
+B102->Lab358
+B104->B105
+B104->Lab367
+B105->Lab366
+B108->B109
+B109->exit
+B98->B99
+B98->Lab355
+B99->Lab355
+B99->exit
+Lab355->Lab356
+Lab356->B100
+Lab356->Lab357
+Lab357->B108
+Lab358->B101
+Lab359->Lab366
+Lab366->B104
+Lab367->Lab356
+enter->B98
+}

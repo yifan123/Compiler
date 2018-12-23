@@ -1,12 +1,12 @@
 digraph test_symbol{
 label =test_symbol
-B29[label="B29:\nASS,@86,,_a1\nASS,@87,,_a2\nASS,@88,,_a3\nASS,@89,,_a4\nASS,@90,,_a5\nASS,@91,,aa\nASS,@92,,Aa\nNEQ,aa,@94,Lab93\n" shape=box]
-B30[label="B30:\nPRF,18,str,1\n" shape=box]
-B31[label="B31:\nARAS,i,i,array\nADD,i,@103,@104\nASS,@104,,i\nJMP,,,Lab100\n" shape=box]
-B33[label="B33:\nADD,@108,i,@109\nSUB,@109,@110,@111\nARAS,@111,i,array\nADD,i,@112,@113\nASS,@113,,i\nJMP,,,Lab105\n" shape=box]
-B35[label="B35:\nADD,@117,i,@118\nSUB,@118,@119,@120\nARAS,@120,i,array\nADD,i,@121,@122\nASS,@122,,i\nJMP,,,Lab114\n" shape=box]
-B37[label="B37:\nASAR,i,array,@127\nADD,sum,@127,@128\nASS,@128,,sum\nADD,i,@129,@130\nASS,@130,,i\nJMP,,,Lab124\n" shape=box]
-B39[label="B39:\nPRF,19,str,1\nRET,,,\n" shape=box]
+B36[label="B36:\nASS,@86,,_a1\nASS,@87,,_a2\nASS,@88,,_a3\nASS,@89,,_a4\nASS,@90,,_a5\nASS,@91,,aa\nASS,@92,,Aa\nNEQ,aa,@94,Lab93\n" shape=box]
+B37[label="B37:\nPRF,18,str,1\n" shape=box]
+B38[label="B38:\nARAS,i,i,array\nADD,i,@103,@104\nASS,@104,,i\nJMP,,,Lab100\n" shape=box]
+B40[label="B40:\nADD,@108,i,@109\nSUB,@109,@110,@111\nARAS,@111,i,array\nADD,i,@112,@113\nASS,@113,,i\nJMP,,,Lab105\n" shape=box]
+B42[label="B42:\nADD,@117,i,@118\nSUB,@118,@119,@120\nARAS,@120,i,array\nADD,i,@121,@122\nASS,@122,,i\nJMP,,,Lab114\n" shape=box]
+B44[label="B44:\nASAR,i,array,@127\nADD,sum,@127,@128\nASS,@128,,sum\nADD,i,@129,@130\nASS,@130,,i\nJMP,,,Lab124\n" shape=box]
+B46[label="B46:\nPRF,19,str,1\nRET,,,\n" shape=box]
 Lab100[label="Lab100:\nLAB,,,Lab100\nGEQ,i,@102,Lab101\n" shape=box]
 Lab101[label="Lab101:\nLAB,,,Lab101\n" shape=box]
 Lab105[label="Lab105:\nLAB,,,Lab105\nGEQ,i,@107,Lab106\n" shape=box]
@@ -19,29 +19,29 @@ Lab131[label="Lab131:\nLAB,,,Lab131\nPRF,20,str,1\nRET,,,\nRET,,,\n" shape=box]
 Lab93[label="Lab93:\nLAB,,,Lab93\nASS,@95,,i\nADD,_a1,_a2,@96\nADD,@96,_a3,@97\nADD,@97,_a4,@98\nADD,@98,_a5,@99\nASS,@99,,sum\n" shape=box]
 enter[label="enter:\n" shape=box]
 exit[label="exit:\n" shape=box]
-B29->B30
-B29->Lab93
-B30->Lab93
-B31->Lab100
-B33->Lab105
-B35->Lab114
-B37->Lab124
-B39->Lab131
-B39->exit
-Lab100->B31
+B36->B37
+B36->Lab93
+B37->Lab93
+B38->Lab100
+B40->Lab105
+B42->Lab114
+B44->Lab124
+B46->Lab131
+B46->exit
+Lab100->B38
 Lab100->Lab101
 Lab101->Lab105
-Lab105->B33
+Lab105->B40
 Lab105->Lab106
 Lab106->Lab114
-Lab114->B35
+Lab114->B42
 Lab114->Lab115
 Lab115->Lab124
-Lab124->B37
+Lab124->B44
 Lab124->Lab125
-Lab125->B39
+Lab125->B46
 Lab125->Lab131
 Lab131->exit
 Lab93->Lab100
-enter->B29
+enter->B36
 }

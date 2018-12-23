@@ -1,0 +1,36 @@
+basic block name: B33
+def: {@64, @66, @67, @68, @69, @70, @72, @73, @75, @76, @78, x, y, }
+use: {@57, @58, @61, @62, @63, @65, @71, @74, }
+ain: {@57, @58, @61, @62, @63, @65, @71, @74, @81, @85, }
+aout: {@75, @81, @85, x, }
+
+basic block name: B34
+def: {@79, @80, @82, @83, z, }
+use: {@75, @81, @85, x, }
+ain: {@75, @81, @85, x, }
+aout: {}
+
+basic block name: B35
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: Lab84
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@57, @58, @61, @62, @63, @65, @71, @74, @81, @85, }
+aout: {@57, @58, @61, @62, @63, @65, @71, @74, @81, @85, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

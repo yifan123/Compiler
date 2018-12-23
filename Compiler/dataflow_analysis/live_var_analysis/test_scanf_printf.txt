@@ -1,0 +1,36 @@
+basic block name: B22
+def: {@45, a, b, c, }
+use: {}
+ain: {}
+aout: {}
+
+basic block name: B23
+def: {@46, @47, b, }
+use: {}
+ain: {}
+aout: {}
+
+basic block name: B24
+def: {@48, @49, c, }
+use: {}
+ain: {}
+aout: {}
+
+basic block name: B25
+def: {@50, }
+use: {}
+ain: {}
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

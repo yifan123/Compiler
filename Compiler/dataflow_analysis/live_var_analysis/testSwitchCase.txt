@@ -1,0 +1,216 @@
+basic block name: B31
+def: {}
+use: {@177, test_switch_int, }
+ain: {@177, @192, @195, @197, @205, @208, @209, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@192, @195, @197, @205, @208, @209, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: B32
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: B33
+def: {}
+use: {@189, test_switch_int, }
+ain: {@181, @185, @187, @189, @190, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@181, @185, @187, @189, @190, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: B34
+def: {@191, }
+use: {@190, test_switch_int, }
+ain: {@181, @185, @187, @189, @190, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@181, @185, @187, @189, @190, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: B37
+def: {@196, }
+use: {@195, @197, test_switch_int, }
+ain: {@195, @197, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: B38
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: B39
+def: {@202, @204, }
+use: {@201, @203, test_switch_int, }
+ain: {@200, @201, @203, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@200, @201, @203, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: B42
+def: {test_switch_int, }
+use: {@208, }
+ain: {@208, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, }
+aout: {@211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: B44
+def: {test_switch_char, }
+use: {const_char_a, }
+ain: {@225, @226, @229, @230, const_char_a, test_switch_int, }
+aout: {@225, @226, @229, @230, test_switch_char, test_switch_int, }
+
+basic block name: B46
+def: {test_switch_char, }
+use: {const_char_A, }
+ain: {@225, @226, @229, @230, const_char_A, test_switch_int, }
+aout: {@225, @226, @229, @230, test_switch_char, test_switch_int, }
+
+basic block name: B48
+def: {test_switch_char, }
+use: {const_char_num, }
+ain: {@225, @226, @229, @230, const_char_num, test_switch_int, }
+aout: {@225, @226, @229, @230, test_switch_char, test_switch_int, }
+
+basic block name: B50
+def: {test_switch_char, }
+use: {const_char_underline, }
+ain: {@225, @226, @229, @230, const_char_underline, test_switch_int, }
+aout: {@225, @226, @229, @230, test_switch_char, test_switch_int, }
+
+basic block name: B52
+def: {test_switch_char, }
+use: {const_char_add, }
+ain: {@225, @226, @229, @230, const_char_add, test_switch_int, }
+aout: {@225, @226, @229, @230, test_switch_char, test_switch_int, }
+
+basic block name: B54
+def: {test_switch_char, }
+use: {const_char_mul, }
+ain: {@225, @226, @229, @230, const_char_mul, test_switch_int, }
+aout: {@225, @226, @229, @230, test_switch_char, test_switch_int, }
+
+basic block name: B56
+def: {}
+use: {}
+ain: {@229, @230, test_switch_char, test_switch_int, }
+aout: {@229, @230, test_switch_char, test_switch_int, }
+
+basic block name: Lab176
+def: {}
+use: {@211, test_switch_char, }
+ain: {@211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: Lab178
+def: {}
+use: {@192, test_switch_int, }
+ain: {@192, @195, @197, @205, @208, @209, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@195, @197, @205, @208, @209, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: Lab179
+def: {@182, @186, }
+use: {@181, @185, @187, test_switch_int, }
+ain: {@181, @185, @187, @189, @190, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@181, @185, @187, @189, @190, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: Lab180
+def: {}
+use: {}
+ain: {@211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: Lab188
+def: {}
+use: {}
+ain: {@181, @185, @187, @189, @190, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@181, @185, @187, @189, @190, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: Lab193
+def: {}
+use: {@205, test_switch_int, }
+ain: {@205, @208, @209, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@208, @209, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, }
+
+basic block name: Lab194
+def: {}
+use: {}
+ain: {@211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: Lab198
+def: {}
+use: {@200, test_switch_int, }
+ain: {@200, @201, @203, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@200, @201, @203, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: Lab199
+def: {}
+use: {}
+ain: {@211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: Lab206
+def: {test_switch_int, }
+use: {@209, }
+ain: {@209, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, }
+aout: {@211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: Lab210
+def: {}
+use: {@225, @226, }
+ain: {@225, @226, @229, @230, test_switch_char, test_switch_int, }
+aout: {@229, @230, test_switch_char, test_switch_int, }
+
+basic block name: Lab212
+def: {}
+use: {@213, test_switch_char, }
+ain: {@213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: Lab214
+def: {}
+use: {@215, test_switch_char, }
+ain: {@215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@217, @219, @221, @223, @225, @226, @229, @230, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: Lab216
+def: {}
+use: {@217, test_switch_char, }
+ain: {@217, @219, @221, @223, @225, @226, @229, @230, const_char_add, const_char_mul, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@219, @221, @223, @225, @226, @229, @230, const_char_add, const_char_mul, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: Lab218
+def: {}
+use: {@219, test_switch_char, }
+ain: {@219, @221, @223, @225, @226, @229, @230, const_char_add, const_char_mul, test_switch_char, test_switch_int, }
+aout: {@221, @223, @225, @226, @229, @230, const_char_add, const_char_mul, test_switch_char, test_switch_int, }
+
+basic block name: Lab220
+def: {}
+use: {@221, test_switch_char, }
+ain: {@221, @223, @225, @226, @229, @230, const_char_mul, test_switch_char, test_switch_int, }
+aout: {@223, @225, @226, @229, @230, const_char_mul, test_switch_int, }
+
+basic block name: Lab222
+def: {test_switch_char, }
+use: {@223, }
+ain: {@223, @225, @226, @229, @230, test_switch_int, }
+aout: {@225, @226, @229, @230, test_switch_char, test_switch_int, }
+
+basic block name: Lab224
+def: {char_global_var, int_global_var, }
+use: {@229, @230, test_switch_char, test_switch_int, }
+ain: {@229, @230, test_switch_char, test_switch_int, }
+aout: {}
+
+basic block name: Lab227
+def: {}
+use: {}
+ain: {@229, @230, test_switch_char, test_switch_int, }
+aout: {@229, @230, test_switch_char, test_switch_int, }
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@177, @192, @195, @197, @205, @208, @209, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+aout: {@177, @192, @195, @197, @205, @208, @209, @211, @213, @215, @217, @219, @221, @223, @225, @226, @229, @230, const_char_A, const_char_a, const_char_add, const_char_mul, const_char_num, const_char_underline, test_switch_char, test_switch_int, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

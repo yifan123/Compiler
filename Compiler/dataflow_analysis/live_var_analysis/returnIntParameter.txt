@@ -1,0 +1,72 @@
+basic block name: B60
+def: {}
+use: {@234, select, }
+ain: {@234, @236, @238, @240, @242, int_parameter_1, int_parameter_2, int_parameter_3, int_parameter_4, select, }
+aout: {@236, @238, @240, @242, int_parameter_1, int_parameter_2, int_parameter_3, int_parameter_4, select, }
+
+basic block name: B61
+def: {_tmp, }
+use: {int_parameter_1, }
+ain: {int_parameter_1, }
+aout: {_tmp, }
+
+basic block name: B63
+def: {_tmp, }
+use: {int_parameter_2, }
+ain: {int_parameter_2, }
+aout: {_tmp, }
+
+basic block name: B65
+def: {_tmp, }
+use: {int_parameter_3, }
+ain: {int_parameter_3, }
+aout: {_tmp, }
+
+basic block name: B67
+def: {_tmp, }
+use: {int_parameter_4, }
+ain: {int_parameter_4, }
+aout: {_tmp, }
+
+basic block name: Lab233
+def: {}
+use: {_tmp, }
+ain: {_tmp, }
+aout: {}
+
+basic block name: Lab235
+def: {}
+use: {@236, select, }
+ain: {@236, @238, @240, @242, int_parameter_2, int_parameter_3, int_parameter_4, select, }
+aout: {@238, @240, @242, int_parameter_2, int_parameter_3, int_parameter_4, select, }
+
+basic block name: Lab237
+def: {}
+use: {@238, select, }
+ain: {@238, @240, @242, int_parameter_3, int_parameter_4, select, }
+aout: {@240, @242, int_parameter_3, int_parameter_4, select, }
+
+basic block name: Lab239
+def: {}
+use: {@240, select, }
+ain: {@240, @242, int_parameter_4, select, }
+aout: {@242, int_parameter_4, }
+
+basic block name: Lab241
+def: {_tmp, }
+use: {@242, }
+ain: {@242, }
+aout: {_tmp, }
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@234, @236, @238, @240, @242, int_parameter_1, int_parameter_2, int_parameter_3, int_parameter_4, select, }
+aout: {@234, @236, @238, @240, @242, int_parameter_1, int_parameter_2, int_parameter_3, int_parameter_4, select, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

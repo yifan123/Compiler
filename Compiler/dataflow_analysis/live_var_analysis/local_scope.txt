@@ -1,0 +1,18 @@
+basic block name: B47
+def: {scope_var, }
+use: {@133, }
+ain: {@133, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@133, }
+aout: {@133, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

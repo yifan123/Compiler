@@ -1,8 +1,12 @@
 digraph main{
 label =main
-B6[label="B6:\nCALL,test_while,,\nRET,,,\n" shape=box]
+B133[label="B133:\nASS,@422,,int_global_var\nASS,@423,,char_global_var\n" shape=box]
+B134[label="B134:\nCALL,testCallFunction,,\n" shape=box]
+B135[label="B135:\nCALL,testTrick,,\nRET,,,\n" shape=box]
 enter[label="enter:\n" shape=box]
 exit[label="exit:\n" shape=box]
-B6->exit
-enter->B6
+B133->B134
+B134->B135
+B135->exit
+enter->B133
 }

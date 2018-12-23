@@ -1,0 +1,38 @@
+2
+a
+120
+ !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+1
+-4318
+12
+a
+x
+123
+all test:2668
+
+
+2
+a
+120
+ !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+1
+-4318
+0
+p
+q
+-1
+all test:2540
+
+
+OUTPUT:
+2
+a
+120
+ !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+1
+-4318
+-100
+_
++
+3
+all test:2357

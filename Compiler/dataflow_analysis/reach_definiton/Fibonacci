@@ -17,6 +17,18 @@ kill: {}
 rin: {}
 rout: {}
 
+basic block name: B3
+gen: {<B3,1>, <B3,2>, }
+kill: {}
+rin: {<Lab3,1>, }
+rout: {<B3,1>, <B3,2>, <Lab3,1>, }
+
+basic block name: B4
+gen: {<B4,1>, <B4,2>, }
+kill: {}
+rin: {<B3,1>, <B3,2>, <Lab3,1>, }
+rout: {<B3,1>, <B3,2>, <B4,1>, <B4,2>, <Lab3,1>, }
+
 basic block name: Lab0
 gen: {}
 kill: {}
@@ -24,10 +36,10 @@ rin: {}
 rout: {}
 
 basic block name: Lab3
-gen: {<Lab3,1>, <Lab3,4>, <Lab3,5>, <Lab3,8>, <Lab3,9>, }
+gen: {<Lab3,1>, }
 kill: {}
 rin: {}
-rout: {<Lab3,1>, <Lab3,4>, <Lab3,5>, <Lab3,8>, <Lab3,9>, }
+rout: {<Lab3,1>, }
 
 basic block name: enter
 gen: {}
@@ -38,17 +50,17 @@ rout: {}
 basic block name: exit
 gen: {}
 kill: {}
-rin: {<Lab3,1>, <Lab3,4>, <Lab3,5>, <Lab3,8>, <Lab3,9>, }
-rout: {<Lab3,1>, <Lab3,4>, <Lab3,5>, <Lab3,8>, <Lab3,9>, }
+rin: {<B3,1>, <B3,2>, <B4,1>, <B4,2>, <Lab3,1>, }
+rout: {<B3,1>, <B3,2>, <B4,1>, <B4,2>, <Lab3,1>, }
 
 du_chain
 @10: 
-<Lab3,5>: {}
+<B3,2>: {}
 @11: 
-<Lab3,8>: {}
+<B4,1>: {}
 @12: 
-<Lab3,9>: {}
+<B4,2>: {}
 @7: 
 <Lab3,1>: {}
 @8: 
-<Lab3,4>: {}
+<B3,1>: {<B4,2>, }

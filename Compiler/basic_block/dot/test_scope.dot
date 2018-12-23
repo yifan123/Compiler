@@ -1,14 +1,16 @@
 digraph test_scope{
 label =test_scope
-B41[label="B41:\nASS,@134,,scope_var\nASS,scope_var,,tem\nPRF,22,str,0\nPRF,scope_var,0,1\nCALL,local_scope,,\nPRF,23,str,0\nPRF,scope_var,0,1\nNEQ,tem,scope_var,Lab135\n" shape=box]
-B42[label="B42:\nPRF,24,str,1\nRET,,,\n" shape=box]
+B48[label="B48:\nASS,@134,,scope_var\nASS,scope_var,,tem\nPRF,22,str,0\nPRF,scope_var,0,1\n" shape=box]
+B49[label="B49:\nCALL,local_scope,,\nPRF,23,str,0\nPRF,scope_var,0,1\nNEQ,tem,scope_var,Lab135\n" shape=box]
+B50[label="B50:\nPRF,24,str,1\nRET,,,\n" shape=box]
 Lab135[label="Lab135:\nLAB,,,Lab135\nPRF,25,str,1\nRET,,,\nRET,,,\n" shape=box]
 enter[label="enter:\n" shape=box]
 exit[label="exit:\n" shape=box]
-B41->B42
-B41->Lab135
-B42->Lab135
-B42->exit
+B48->B49
+B49->B50
+B49->Lab135
+B50->Lab135
+B50->exit
 Lab135->exit
-enter->B41
+enter->B48
 }

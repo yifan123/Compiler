@@ -1,21 +1,27 @@
 reach definiton information
-basic block name: B3
-gen: {<B3,2>, }
-kill: {}
-rin: {}
-rout: {<B3,2>, }
-
-basic block name: B4
+basic block name: B5
 gen: {}
 kill: {}
-rin: {<B3,2>, }
-rout: {<B3,2>, }
+rin: {}
+rout: {}
+
+basic block name: B6
+gen: {<B6,1>, }
+kill: {}
+rin: {}
+rout: {<B6,1>, }
+
+basic block name: B7
+gen: {}
+kill: {}
+rin: {<B6,1>, }
+rout: {<B6,1>, }
 
 basic block name: Lab13
 gen: {}
 kill: {}
-rin: {<B3,2>, }
-rout: {<B3,2>, }
+rin: {<B6,1>, }
+rout: {<B6,1>, }
 
 basic block name: enter
 gen: {}
@@ -26,9 +32,9 @@ rout: {}
 basic block name: exit
 gen: {}
 kill: {}
-rin: {<B3,2>, }
-rout: {<B3,2>, }
+rin: {<B6,1>, }
+rout: {<B6,1>, }
 
 du_chain
 @15: 
-<B3,2>: {}
+<B6,1>: {}

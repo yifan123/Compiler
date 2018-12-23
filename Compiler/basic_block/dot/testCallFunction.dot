@@ -1,0 +1,47 @@
+digraph testCallFunction{
+label =testCallFunction
+B114[label="B114:\nSCF,,,test_select\nNEQ,test_select,@407,Lab408\n" shape=box]
+B115[label="B115:\n" shape=box]
+B116[label="B116:\nCALL,testIfWhile,,\nJMP,,,Lab406\n" shape=box]
+B118[label="B118:\nPARA,testSwitchCase,0,const_int_postive\nPARA,testSwitchCase,1,const_char_a\n" shape=box]
+B119[label="B119:\nCALL,testSwitchCase,,\nPARA,testSwitchCase,0,const_int_negtive\nPARA,testSwitchCase,1,@411\n" shape=box]
+B120[label="B120:\nCALL,testSwitchCase,,\nPARA,testSwitchCase,0,@412\nPARA,testSwitchCase,1,@413\n" shape=box]
+B121[label="B121:\nCALL,testSwitchCase,,\nPARA,testSwitchCase,0,@414\nPARA,testSwitchCase,1,@415\n" shape=box]
+B122[label="B122:\nCALL,testSwitchCase,,\nJMP,,,Lab406\n" shape=box]
+B124[label="B124:\n" shape=box]
+B125[label="B125:\nCALL,testAssign,,\nJMP,,,Lab406\n" shape=box]
+B127[label="B127:\n" shape=box]
+B128[label="B128:\nCALL,testInputOutput,,\nJMP,,,Lab406\n" shape=box]
+B130[label="B130:\n" shape=box]
+B131[label="B131:\nCALL,testRecursion,,\nJMP,,,Lab406\n" shape=box]
+Lab406[label="Lab406:\nLAB,,,Lab406\nPRF,int_global_var,0,1\nPRF,char_global_var,1,1\nRET,,,\n" shape=box]
+Lab408[label="Lab408:\nLAB,,,Lab408\nNEQ,test_select,@409,Lab410\n" shape=box]
+Lab410[label="Lab410:\nLAB,,,Lab410\nNEQ,test_select,@416,Lab417\n" shape=box]
+Lab417[label="Lab417:\nLAB,,,Lab417\nNEQ,test_select,@418,Lab419\n" shape=box]
+Lab419[label="Lab419:\nLAB,,,Lab419\nNEQ,test_select,@420,Lab421\n" shape=box]
+Lab421[label="Lab421:\nLAB,,,Lab421\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B114->B115
+B114->Lab408
+B116->Lab406
+B118->B119
+B119->B120
+B120->B121
+B121->B122
+B122->Lab406
+B125->Lab406
+B128->Lab406
+B131->Lab406
+Lab406->exit
+Lab408->B118
+Lab408->Lab410
+Lab410->B124
+Lab410->Lab417
+Lab417->B127
+Lab417->Lab419
+Lab419->B130
+Lab419->Lab421
+Lab421->Lab406
+enter->B114
+}

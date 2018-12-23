@@ -1,0 +1,54 @@
+basic block name: B10
+def: {}
+use: {}
+ain: {@24, @25, }
+aout: {@24, @25, }
+
+basic block name: B11
+def: {}
+use: {}
+ain: {@25, }
+aout: {@25, }
+
+basic block name: B8
+def: {@21, ch, }
+use: {@19, flag, plus, }
+ain: {@19, @24, @25, flag, plus, }
+aout: {@24, @25, ch, }
+
+basic block name: B9
+def: {}
+use: {}
+ain: {@24, @25, ch, }
+aout: {@24, @25, ch, }
+
+basic block name: Lab20
+def: {}
+use: {ch, }
+ain: {@24, @25, ch, }
+aout: {@24, @25, }
+
+basic block name: Lab22
+def: {}
+use: {@24, }
+ain: {@24, @25, }
+aout: {@25, }
+
+basic block name: Lab23
+def: {}
+use: {@25, }
+ain: {@25, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@19, @24, @25, flag, plus, }
+aout: {@19, @24, @25, flag, plus, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

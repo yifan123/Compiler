@@ -1,0 +1,55 @@
+reach definiton information
+basic block name: B110
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B111
+gen: {<B111,1>, }
+kill: {<B112,3>, }
+rin: {}
+rout: {<B111,1>, }
+
+basic block name: B112
+gen: {<B112,0>, <B112,2>, <B112,3>, }
+kill: {<B111,1>, }
+rin: {<B111,1>, <B112,0>, <B112,2>, <B112,3>, }
+rout: {<B112,0>, <B112,2>, <B112,3>, }
+
+basic block name: Lab397
+gen: {}
+kill: {}
+rin: {<B111,1>, <B112,0>, <B112,2>, <B112,3>, }
+rout: {<B111,1>, <B112,0>, <B112,2>, <B112,3>, }
+
+basic block name: Lab398
+gen: {<Lab398,1>, <Lab398,2>, }
+kill: {}
+rin: {<B111,1>, <B112,0>, <B112,2>, <B112,3>, }
+rout: {<B111,1>, <B112,0>, <B112,2>, <B112,3>, <Lab398,1>, <Lab398,2>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B111,1>, <B112,0>, <B112,2>, <B112,3>, <Lab398,1>, <Lab398,2>, }
+rout: {<B111,1>, <B112,0>, <B112,2>, <B112,3>, <Lab398,1>, <Lab398,2>, }
+
+du_chain
+@400: 
+<B112,0>: {<B112,1>, }
+@402: 
+<B112,2>: {<B112,3>, }
+char_global_var: 
+<Lab398,2>: {}
+i: 
+<B111,1>: {<B112,0>, <B112,2>, <Lab397,1>, }
+<B112,3>: {<B112,0>, <B112,2>, <Lab397,1>, }
+int_global_var: 
+<Lab398,1>: {}

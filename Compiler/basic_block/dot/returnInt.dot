@@ -1,0 +1,8 @@
+digraph returnInt{
+label =returnInt
+B58[label="B58:\nRET,@231,,\nRET,,,\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B58->exit
+enter->B58
+}

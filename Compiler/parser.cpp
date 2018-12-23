@@ -22,19 +22,19 @@ extern int global;
 int runstack_index = 0;
 //int quadtable_index = 0;
 typedef set<Symbol> symset;
-symset relation_operation={ LSS, LEQ, GTR, GEQ, NEQ, EQL, BECOMES };
-symset exprbegsys = {PLUS,MINUS,IDENT,LPARENT,UINTEGERT,CHARACTER};
+symset relation_operation = { LSS, LEQ, GTR, GEQ, NEQ, EQL, BECOMES };
+symset exprbegsys = { PLUS,MINUS,IDENT,LPARENT,UINTEGERT,CHARACTER };
 symset statbegsys = { IF,WHILE,IDENT,SCANF,PRINTF,SWITCH,RETURN,SEMICOLON,LBRACE };
 string cur_fucname;  //当前函数名
 int cur_fun_symtab = 0;//0代表主函数
-
+int return_flag = 0;
 //int value=0;
 
 TabType type;
 int number;
-int tem_symbol_index = 0,lab_index=0,tvar_count=0;
+int tem_symbol_index = 0, lab_index = 0, tvar_count = 0;
 //可以在符号表里加一项当前函数符号表在symtbles中的index，就没必要在这里补个symtbles_index了
-int find_sym_table(string sym, SymTableItem& item,int &aglobal,int *symtbles_index=NULL) {  
+int find_sym_table(string sym, SymTableItem& item, int &aglobal, int *symtbles_index = NULL) {
 	//找不到，返回-1
 	vector<SymTableItem> items = symtables[cur_fun_symtab].items;
 	for (int i = 0; i < items.size(); i++) {
@@ -149,7 +149,7 @@ void Parser::program() {
 			lexer.retrive_scene();
 		}
 		fun_def();
-		tem_debug ++ ;
+		tem_debug++;
 	}
 	//处理主函数
 	if (lexer.token.sym != VOID) {
@@ -221,15 +221,22 @@ void Parser::main_def() {
 		error(lexer.line, 3);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	if (lexer.token.sym != RPARENT) {
 		error(lexer.line, 4);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	if (lexer.token.sym != LBRACE) {
 		error(lexer.line, 5);
 		skip();
+	}
+	else {
+		lexer.getsym();
 	}
 	cur_fun_symtab++;//为当前函数创建新的符号表,将main函数也看成子函数
 	SymTable symtab;
@@ -243,7 +250,6 @@ void Parser::main_def() {
 		skip();
 	}
 	quadtable.push_back(QuadRuple("FUNC", "", "", cur_fucname));//与pascal-s不一样，C0不需要保存函数的入口
-	lexer.getsym();
 	compound_statement();
 	symtables[0].items[tem_symbol_index].func_size = runstack_index;
 	if (lexer.token.sym != RBRACE) {
@@ -263,6 +269,7 @@ void Parser::const_declare() {
 		else {
 			error(lexer.line, 8);
 			skip();
+			const_def();
 		}
 		if (lexer.token.sym == SEMICOLON) {
 			lexer.getsym();
@@ -333,9 +340,9 @@ void Parser::const_def() {
 	DEBUG("This is a const_def！\n");
 
 }
-void Parser::var_declare(){
+void Parser::var_declare() {
 	test();
-	do{
+	do {
 		lexer.save_scene();
 		var_def();
 		if (lexer.token.sym == LPARENT) {
@@ -349,7 +356,7 @@ void Parser::var_declare(){
 			error(lexer.line, 7);
 			skip();
 		}
-	} while (lexer.token.sym == INT|| lexer.token.sym == CHAR);
+	} while (lexer.token.sym == INT || lexer.token.sym == CHAR);
 	test();
 	DEBUG("This is a var_declare！\n");
 }
@@ -365,7 +372,7 @@ void Parser::var_def() {
 	do {
 		lexer.getsym();
 		if (lexer.token.sym != IDENT) {
-			error(lexer.line,9 );
+			error(lexer.line, 9);
 			skip();
 		}
 		name = lexer.token.id;
@@ -400,7 +407,7 @@ void Parser::var_def() {
 			}
 			runstack_index += 4;
 		}
-		
+
 	} while (lexer.token.sym == COMMA);
 	test();
 	DEBUG("This is a var_def！\n");
@@ -408,7 +415,7 @@ void Parser::var_def() {
 void Parser::fun_def() {
 	test();
 	string name;
-	if (lexer.token.sym != INT && lexer.token.sym != CHAR&& lexer.token.sym != VOID) {
+	if (lexer.token.sym != INT && lexer.token.sym != CHAR && lexer.token.sym != VOID) {
 		error(lexer.line, 15);
 		skip();
 	}
@@ -418,48 +425,62 @@ void Parser::fun_def() {
 	if (lexer.token.sym == INT) type = inttype;
 	else if (lexer.token.sym == CHAR) type = chartype;
 	else type = voidtype;
+	TabType fun_type = type;
+	return_flag = 0;
 	lexer.getsym();
 	if (lexer.token.sym != IDENT) {
-		error(lexer.line,9 );
+		error(lexer.line, 9);
 		skip();
 	}
 	name = lexer.token.id;
 	cur_fucname = name;
 	lexer.getsym();
-	if (lexer.token.sym !=LPARENT) {
+	if (lexer.token.sym != LPARENT) {
 		error(lexer.line, 3);
 		skip();
+	}
+	else {
+		lexer.getsym();
 	}
 	int tem_symbol_index = symtables[0].offset;
 	if (symtables[0].enter(name, funcobj, type, cur_fun_symtab, 0) < 0) {
 		error(lexer.line, MULTI_ID_DEF);
 		skip();
 	}
-	lexer.getsym();
 	runstack_index = 0;//运行栈归零，相当于为子函数开辟新的运行栈
 	runstack_index += 36;//为$ra，寄存器保护区分配地址
-	number=parmeter_list(cur_fun_symtab);
+	number = parmeter_list(cur_fun_symtab);
 	symtables[0].items[tem_symbol_index].number = number;
-	
+
 	if (lexer.token.sym != RPARENT) {
 		error(lexer.line, 4);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	if (lexer.token.sym != LBRACE) {
 		error(lexer.line, 5);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	quadtable.push_back(QuadRuple("FUNC", "", "", name));//与pascal-s不一样，C0不需要保存函数的入口
 	compound_statement();
+	if (return_flag == 0 && (fun_type == inttype || fun_type == chartype)) {
+		error(lexer.line, MISSING_RETURN);
+		skip();
+	}
 	symtables[0].items[tem_symbol_index].func_size = runstack_index;
 	if (lexer.token.sym != RBRACE) {
 		error(lexer.line, 6);
 		skip();
 	}
 	//subsymtables_index++;
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	test();
 	DEBUG("This is a fun_def！\n");
 }
@@ -467,7 +488,7 @@ int Parser::parmeter_list(int subsymtable_index) {
 	test();
 	string name;
 	int number = 0;
-	if(lexer.token.sym == INT || lexer.token.sym == CHAR) {
+	if (lexer.token.sym == INT || lexer.token.sym == CHAR) {
 		do {
 			if (lexer.token.sym == COMMA) {
 				lexer.getsym();
@@ -506,9 +527,9 @@ void Parser::compound_statement() {
 	if (lexer.token.sym == INT || lexer.token.sym == CHAR) {
 		var_declare();
 	}
-	int has_return=statement_list();
+	int has_return = statement_list();
 	SymTableItem symitem;
-	if (find_sym_table(cur_fucname, symitem,global) < 0) {   //在符号表中查不到标识符
+	if (find_sym_table(cur_fucname, symitem, global) < 0) {   //在符号表中查不到标识符
 		error(lexer.line, NON_REACH_FUNC);
 		skip();
 	}
@@ -525,7 +546,7 @@ void Parser::compound_statement() {
 	DEBUG("This is a compound_statement！\n");
 }
 int Parser::statement_list() {
-	int has_return = HAS_RETURN-1;
+	int has_return = HAS_RETURN - 1;
 	test();
 	symset::iterator iter = statbegsys.find(lexer.token.sym);
 	while (iter != statbegsys.end()) {
@@ -543,14 +564,14 @@ int Parser::statement() {
 	int has_return = HAS_RETURN - 1;
 	string fun_name = "";
 	TabType fun_type;
-	switch (lexer.token.sym){
+	switch (lexer.token.sym) {
 	case IF: {
 		if_statement();
-		break; 
+		break;
 	}
 	case WHILE: {
 		while_statement();
-		break; 
+		break;
 	}
 	case LBRACE: {
 		lexer.getsym();
@@ -559,13 +580,15 @@ int Parser::statement() {
 			error(lexer.line, 6);
 			skip();
 		}
-		lexer.getsym();
+		else {
+			lexer.getsym();
+		}
 		break;
 	}
-	/*＜标识符＞'('＜值参数表＞')'
-	  ＜标识符＞＝＜表达式＞
-	  ＜标识符＞'['＜表达式＞']'=＜表达式＞
-	*/
+				 /*＜标识符＞'('＜值参数表＞')'
+				   ＜标识符＞＝＜表达式＞
+				   ＜标识符＞'['＜表达式＞']'=＜表达式＞
+				 */
 	case IDENT: {
 		lexer.save_scene();
 		//int tem_symbol_index = symtable.find_sym_table(name);
@@ -591,12 +614,14 @@ int Parser::statement() {
 			}
 			lexer.getsym();*/
 			lexer.retrive_scene();
-			callfun_statement(fun_name,fun_type);
+			callfun_statement(fun_name, fun_type);
 			if (lexer.token.sym != SEMICOLON) {
 				error(lexer.line, 7);
 				skip();
 			}
-			lexer.getsym();
+			else {
+				lexer.getsym();
+			}
 			break;
 		}
 		case BECOMES:
@@ -616,7 +641,9 @@ int Parser::statement() {
 				error(lexer.line, 7);
 				skip();
 			}
-			lexer.getsym();
+			else {
+				lexer.getsym();
+			}
 			break;
 		}
 		/*case LBRACK: {
@@ -653,7 +680,9 @@ int Parser::statement() {
 			error(lexer.line, 7);
 			skip();
 		}
-		lexer.getsym();
+		else {
+			lexer.getsym();
+		}
 		break;
 	}
 	case PRINTF: {
@@ -662,12 +691,14 @@ int Parser::statement() {
 			error(lexer.line, 7);
 			skip();
 		}
-		lexer.getsym();
+		else {
+			lexer.getsym();
+		}
 		break;
 	}
 	case SWITCH: {
 		switch_statement();
-		break; 
+		break;
 	}
 	case RETURN: {
 		return_statement();
@@ -675,15 +706,17 @@ int Parser::statement() {
 			error(lexer.line, 7);
 			skip();
 		}
+		else {
+			lexer.getsym();
+		}
 		has_return = HAS_RETURN;
-		lexer.getsym();
 		break;
 	}
 	case SEMICOLON: {
 		lexer.getsym();
 		break;
 	}
-	default:{
+	default: {
 		error(lexer.line, 16);
 		skip();
 	}
@@ -701,14 +734,18 @@ void Parser::if_statement() {
 		error(lexer.line, 3);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	string label = newlab();
 	condition(label);
 	if (lexer.token.sym != RPARENT) {
 		error(lexer.line, 4);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	statement();
 	quadtable.push_back(QuadRuple("LAB", "", "", label));
 	DEBUG("This is a if_statement！\n");
@@ -716,12 +753,20 @@ void Parser::if_statement() {
 void Parser::condition(string label) {
 	TabType ctype;
 	string exp1_name = "", exp2_name = "";
-	expression(exp1_name,ctype);
+	expression(exp1_name, ctype);
+	if (ctype != inttype) {
+		error(lexer.line, CONDITION_TYPE_ERROR);
+		skip();
+	}
 	Symbol tem = lexer.token.sym;
 	symset::iterator iter = relation_operation.find(tem);
-	if (iter!=relation_operation.end()) {
+	if (iter != relation_operation.end()) {
 		lexer.getsym();
 		expression(exp2_name, ctype);
+		if (ctype != inttype) {
+			error(lexer.line, CONDITION_TYPE_ERROR);
+			skip();
+		}
 		switch (tem) {
 		case LSS:quadtable.push_back(QuadRuple("GEQ", exp1_name, exp2_name, label)); break;
 		case LEQ:quadtable.push_back(QuadRuple("GTR", exp1_name, exp2_name, label)); break;
@@ -747,7 +792,9 @@ void Parser::while_statement() {
 		error(lexer.line, 3);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	string label1 = newlab();
 	string label2 = newlab();
 	quadtable.push_back(QuadRuple("LAB", "", "", label1));
@@ -756,7 +803,9 @@ void Parser::while_statement() {
 		error(lexer.line, 4);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	statement();
 	quadtable.push_back(QuadRuple("JMP", "", "", label1));
 	quadtable.push_back(QuadRuple("LAB", "", "", label2));
@@ -764,13 +813,13 @@ void Parser::while_statement() {
 }
 //＜标识符＞'('＜值参数表＞')'
 void Parser::callfun_statement(string &fun_value, TabType &fun_type) {
-	string func_name = "", para_name = "",exp_name="";
+	string func_name = "", para_name = "", exp_name = "";
 	TabType ptype;
 	int form_para_num = 0, real_para_num = 0;
 	SymTableItem symitem;
 	vector<string> save_para;
 	func_name = lexer.token.id;
-	if (find_sym_table(func_name, symitem,global)<0) {   //在符号表中查不到标识符
+	if (find_sym_table(func_name, symitem, global) < 0) {   //在符号表中查不到标识符
 		error(lexer.line, UNDEF_ID);
 		skip();
 	}
@@ -781,14 +830,16 @@ void Parser::callfun_statement(string &fun_value, TabType &fun_type) {
 		error(lexer.line, 3);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	symset::iterator iter = exprbegsys.find(lexer.token.sym);
 	if (iter != exprbegsys.end()) {
 		do {
 			if (lexer.token.sym == COMMA) {
 				lexer.getsym();
 			}
-			expression(exp_name,ptype);
+			expression(exp_name, ptype);
 			//if (ptype != symtables[symtable.items[tem_symbol_index].adr].items[0].type) {
 			if (ptype != symtables[symitem.adr].items[real_para_num].type) {
 				error(lexer.line, FUNC_RPARA_TYPE_ERROR);
@@ -805,27 +856,29 @@ void Parser::callfun_statement(string &fun_value, TabType &fun_type) {
 	else {
 		for (int i = 0; i < save_para.size(); i++) {
 			quadtable.push_back(QuadRuple("PARA", func_name, to_string(i), save_para[i]));
-		}	
+		}
 	}
 	quadtable.push_back(QuadRuple("CALL", func_name, "", ""));
 	if (fun_type != voidtype) {
-		fun_value=newtvar();
-		quadtable.push_back(QuadRuple("SW", "$v0","", fun_value));
+		fun_value = newtvar();
+		quadtable.push_back(QuadRuple("SW", "$v0", "", fun_value));
 	}
 	if (lexer.token.sym != RPARENT) {
 		error(lexer.line, 3);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 }
 //＜标识符＞＝＜表达式＞
 //＜标识符＞'['＜表达式＞']' = ＜表达式＞
 void Parser::assign_statement() {
-	string offset_name = "", exp_name = "",arg2="",op_name="ASS";
+	string offset_name = "", exp_name = "", arg2 = "", op_name = "ASS";
 	TabType offset_type, exp_type;
 	string name = lexer.token.id;
 	SymTableItem symitem;
-	if (find_sym_table(name,symitem,global) <0) {   //在符号表中查不到标识符
+	if (find_sym_table(name, symitem, global) < 0) {   //在符号表中查不到标识符
 		error(lexer.line, UNDEF_ID);
 		skip();
 	}
@@ -839,6 +892,10 @@ void Parser::assign_statement() {
 	if (lexer.token.sym == LBRACK) {
 		lexer.getsym();
 		expression(offset_name, offset_type); //得到数组索引
+		if (offset_type != inttype) {
+			error(lexer.line, ARRAY_INDEX_TYPE_ERROR);
+			skip();
+		}
 		//数组下标类型和是否越界检查
 		SymTableItem symitem1;
 		int g1;
@@ -853,9 +910,11 @@ void Parser::assign_statement() {
 			error(lexer.line, 14);
 			skip();
 		}
+		else {
+			lexer.getsym();
+		}
 		arg2 = offset_name;
 		op_name = "ARAS";
-		lexer.getsym();
 	}
 	if (lexer.token.sym != BECOMES) {
 		error(lexer.line, 10);
@@ -867,7 +926,7 @@ void Parser::assign_statement() {
 		error(lexer.line, ASS_TYPE_ERROR);
 		skip();
 	}
-	quadtable.push_back(QuadRuple(op_name,exp_name,arg2,name));
+	quadtable.push_back(QuadRuple(op_name, exp_name, arg2, name));
 }
 
 void Parser::read_statement() {
@@ -888,7 +947,7 @@ void Parser::read_statement() {
 			skip();
 		}
 		string name = lexer.token.id;
-		if (find_sym_table(name,sym,global) <0) {   //在符号表中查不到标识符
+		if (find_sym_table(name, sym, global) < 0) {   //在符号表中查不到标识符
 			error(lexer.line, UNDEF_ID);
 			skip();
 		}
@@ -897,14 +956,16 @@ void Parser::read_statement() {
 			error(lexer.line, ASSIGN_ERROR);	//只能是变量类型，连数组也不行
 			skip();
 		}
-		quadtable.push_back(QuadRuple("SCF", "","" , name));
+		quadtable.push_back(QuadRuple("SCF", "", "", name));
 		lexer.getsym();
 	} while (lexer.token.sym == COMMA);
 	if (lexer.token.sym != RPARENT) {
 		error(lexer.line, 4);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	DEBUG("This is a read_statement！\n");
 }
 void Parser::write_statement() {
@@ -919,10 +980,12 @@ void Parser::write_statement() {
 		error(lexer.line, 3);
 		skip();
 	}
+	else {
+		lexer.getsym();
+	}
 	/*＜写语句＞ ::= printf '(' ＜字符串＞,＜表达式＞ ')'|
-					printf '('＜字符串＞ ')'| 
+					printf '('＜字符串＞ ')'|
 					printf '('＜表达式＞')'*/
-	lexer.getsym();
 	symset::iterator iter = exprbegsys.find(lexer.token.sym);
 	if (iter != exprbegsys.end()) {
 		expression(exp_name, exp_type);
@@ -932,7 +995,7 @@ void Parser::write_statement() {
 		stringtab[string_index++] = lexer.token.id;
 		lexer.getsym();
 		if (lexer.token.sym == COMMA) {
-			quadtable.push_back(QuadRuple("PRF", to_string(string_index-1), "str", "0")); //不换行输出
+			quadtable.push_back(QuadRuple("PRF", to_string(string_index - 1), "str", "0")); //不换行输出
 			lexer.getsym();
 			expression(exp_name, exp_type);
 			quadtable.push_back(QuadRuple("PRF", exp_name, TabType2str(exp_type), "1")); //换行输出
@@ -949,7 +1012,9 @@ void Parser::write_statement() {
 		error(lexer.line, 4);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	DEBUG("This is a write_statement！\n");
 }
 /*
@@ -971,9 +1036,11 @@ void Parser::switch_statement() {
 		error(lexer.line, 3);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	expression(exp_name, exp_type);
-	if(exp_type!=inttype&& exp_type != chartype) {
+	if (exp_type != inttype && exp_type != chartype) {
 		error(lexer.line, VAR_TYPE_ERROR);
 		skip();
 	}
@@ -981,27 +1048,33 @@ void Parser::switch_statement() {
 		error(lexer.line, 4);
 		skip();
 	}
-	lexer.getsym();
+	else {
+		lexer.getsym();
+	}
 	if (lexer.token.sym != LBRACE) {
 		error(lexer.line, 5);
 		skip();
 	}
-	lexer.getsym();
-	case_list(exp_name,labout);
+	else {
+		lexer.getsym();
+	}
+	case_list(exp_name, labout, exp_type);
 	default_list();
-	if (lexer.token.sym != RBRACE) { 
+	if (lexer.token.sym != RBRACE) {
 		error(lexer.line, 6);
 		skip();
 	}
+	else {
+		lexer.getsym();
+	}
 	quadtable.push_back(QuadRuple("LAB", "", "", labout));
-	lexer.getsym();
 	DEBUG("This is a switch_statement！\n");
 }
 /*
 ＜情况表＞   ::=  ＜情况子语句＞{＜情况子语句＞}
 ＜情况子语句＞  ::=  case＜常量＞：＜语句＞
 */
-void Parser::case_list(string exp_name, string labout) {
+void Parser::case_list(string exp_name, string labout, TabType exp_type) {
 	string caselab = "", convalue = "", con_name = "", label = "";
 	TabType con_type;
 	do {
@@ -1011,13 +1084,19 @@ void Parser::case_list(string exp_name, string labout) {
 		}
 		lexer.getsym();
 		constant(con_name, con_type);
+		if (exp_type != con_type) {
+			error(lexer.line, SWITCH_TYPE_ERROR);
+			skip();
+		}
 		if (lexer.token.sym != COLON) {
 			error(lexer.line, 23);
 			skip();
 		}
+		else {
+			lexer.getsym();
+		}
 		label = newlab();
 		quadtable.push_back(QuadRuple("NEQ", exp_name, con_name, label));
-		lexer.getsym();
 		statement();
 		quadtable.push_back(QuadRuple("JMP", "", "", labout));
 		quadtable.push_back(QuadRuple("LAB", "", "", label));
@@ -1032,7 +1111,9 @@ void Parser::default_list() {
 			error(lexer.line, 23);
 			skip();
 		}
-		lexer.getsym();
+		else {
+			lexer.getsym();
+		}
 		statement();
 	}
 	DEBUG("This is a default_list！\n");
@@ -1046,6 +1127,7 @@ void Parser::return_statement() {
 		error(lexer.line, 24);
 		skip();
 	}
+	return_flag = 1;
 	lexer.getsym();
 	if (lexer.token.sym == LPARENT) {
 		lexer.getsym();
@@ -1055,7 +1137,7 @@ void Parser::return_statement() {
 			skip();
 		}
 		//对return的参数类型是否匹配进行检查
-		find_sym_table(cur_fucname, symitem,global);
+		find_sym_table(cur_fucname, symitem, global);
 		if (symitem.type == voidtype) {
 			error(lexer.line, VOID_RETURN_ERROR);//void 函数不能带返回值
 			skip();
@@ -1091,7 +1173,7 @@ void Parser::expression(string &exp_name, TabType &exp_type) {
 		error(lexer.line, OPRAND_TYPE_ERROR);
 		skip();
 	}
-	else{
+	else {
 		dst_name = item_name;
 		if (tem_sym == MINUS) {
 			type_flag = 1;
@@ -1122,7 +1204,7 @@ void Parser::expression(string &exp_name, TabType &exp_type) {
 		int g1;
 		int g2;
 		int g3;
-		int result=0;
+		int result = 0;
 		find_sym_table(tem_name, symitem1, g1);
 		find_sym_table(item_name, symitem2, g2);
 		if (symitem1.obj == constantobj && symitem2.obj == constantobj) {
@@ -1158,7 +1240,7 @@ void Parser::item(string &item_name, TabType &item_type) {
 	SymTableItem symitem2;
 	int g1;
 	int g2;
-	int result=0;
+	int result = 0;
 	while (lexer.token.sym == MULT || lexer.token.sym == DIV)
 	{
 		type_flag = 1;
@@ -1210,19 +1292,21 @@ void Parser::factor(string &fac_name, TabType &fac_type) {
 			error(lexer.line, 4);
 			skip();
 		}
+		else {
+			lexer.getsym();
+		}
 		fac_name = exp_name;
 		fac_type = inttype;
-		lexer.getsym();
 		break;
 	}
-				 /*＜标识符＞'('＜值参数表＞')'
-				   ＜标识符＞
-				   ＜标识符＞'['＜表达式＞']'
-				 */
+				  /*＜标识符＞'('＜值参数表＞')'
+					＜标识符＞
+					＜标识符＞'['＜表达式＞']'
+				  */
 	case IDENT: {
 		lexer.save_scene();
 		ident_name = lexer.token.id;
-		if (find_sym_table(ident_name, symitem,global) < 0) {
+		if (find_sym_table(ident_name, symitem, global) < 0) {
 			error(lexer.line, UNDEF_ID);
 			skip();
 		}
@@ -1239,7 +1323,7 @@ void Parser::factor(string &fac_name, TabType &fac_type) {
 				error(lexer.line, FUNC_NO_RET);
 				skip();
 			}
-			else{
+			else {
 				fac_name = tem_name;
 				fac_type = tem_type;
 			}
@@ -1275,12 +1359,12 @@ void Parser::factor(string &fac_name, TabType &fac_type) {
 		}
 		break;
 	}
-	/*＜整数＞
-	  ＜字符＞*/
+				/*＜整数＞
+				  ＜字符＞*/
 	case PLUS:
 	case MINUS:
 	case UINTEGERT:
-	case CHARACTER:{	
+	case CHARACTER: {
 		constant(fac_name, fac_type);
 		break;
 	}
@@ -1307,14 +1391,14 @@ void Parser::integer(int &value) {
 }
 //＜常量＞   ::=  ＜整数＞|＜字符＞
 //＜字符＞ ::=  '＜加法运算符＞'｜'＜乘法运算符＞'｜'＜字母＞'｜'＜数字＞'
-void Parser::constant(string &con_name,TabType &con_type) {
+void Parser::constant(string &con_name, TabType &con_type) {
 	int value = 0;
-	if (lexer.token.sym == PLUS || lexer.token.sym == MINUS|| lexer.token.sym == UINTEGERT) {
+	if (lexer.token.sym == PLUS || lexer.token.sym == MINUS || lexer.token.sym == UINTEGERT) {
 		integer(value);
 		con_name = newtconst(value);
 		con_type = inttype;
 	}
-	else if(lexer.token.sym == CHARACTER) {
+	else if (lexer.token.sym == CHARACTER) {
 		value = int(lexer.token.id[0]);//对于字符，直接加载其asc码；在用到字符类型时，直接判断其类型即可。
 		con_name = newtconst(value);
 		con_type = chartype;

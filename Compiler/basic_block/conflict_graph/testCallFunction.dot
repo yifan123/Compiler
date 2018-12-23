@@ -1,0 +1,31 @@
+graph testCallFunction{
+label =testCallFunction
+t409[label="t409", shape=circle, style=filled, fillcolor=White]
+t416[label="t416", shape=circle, style=filled, fillcolor=White]
+t418[label="t418", shape=circle, style=filled, fillcolor=White]
+t420[label="t420", shape=circle, style=filled, fillcolor=White]
+char_global_var[label="char_global_var", shape=circle, style=filled, fillcolor=White]
+int_global_var[label="int_global_var", shape=circle, style=filled, fillcolor=White]
+test_select[label="test_select", shape=circle, style=filled, fillcolor=White]
+char_global_var--int_global_var
+char_global_var--t409
+char_global_var--t416
+char_global_var--t418
+char_global_var--t420
+char_global_var--test_select
+int_global_var--t409
+int_global_var--t416
+int_global_var--t418
+int_global_var--t420
+int_global_var--test_select
+t409--t416
+t409--t418
+t409--t420
+t409--test_select
+t416--t418
+t416--t420
+t416--test_select
+t418--t420
+t418--test_select
+t420--test_select
+}

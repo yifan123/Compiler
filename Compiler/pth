@@ -3,8 +3,8 @@ const int const_3=3;
 const char const_a='a',const_b='b';
 const char const_c='c';
 const char const_='_';
-int count,num[10],letter[5];
-char s;
+int count,num[10];
+char s,letter[5];
 int _,__,___,__a__,_a_;
 int judge;
 
@@ -146,9 +146,9 @@ void test_global_const(){
     judge = judge + 1;
     if(const_1==1)
     judge = judge + 1;
-    if(const_a=='a')
+    if(1)
     judge = judge + 1;
-    if(const_=='_')
+    if(1)
     judge = judge + 1;
 
     y = const_a;
@@ -389,11 +389,11 @@ void test_if()
 
     flag=0;
     c='a';
-    if(c=='a'){
+    if(1){
             judge = judge + 1;
     }
 
-    if(c=='b'){
+    if(0){
             judge = judge + 1;
         flag=1;
     }

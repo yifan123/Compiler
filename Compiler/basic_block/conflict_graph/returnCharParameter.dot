@@ -1,0 +1,48 @@
+graph returnCharParameter{
+label =returnCharParameter
+t246[label="t246", shape=circle, style=filled, fillcolor=White]
+t248[label="t248", shape=circle, style=filled, fillcolor=White]
+t250[label="t250", shape=circle, style=filled, fillcolor=White]
+t252[label="t252", shape=circle, style=filled, fillcolor=White]
+char_parameter_1[label="char_parameter_1", shape=circle, style=filled, fillcolor=White]
+char_parameter_2[label="char_parameter_2", shape=circle, style=filled, fillcolor=White]
+char_parameter_3[label="char_parameter_3", shape=circle, style=filled, fillcolor=White]
+char_parameter_4[label="char_parameter_4", shape=circle, style=filled, fillcolor=White]
+select[label="select", shape=circle, style=filled, fillcolor=Red]
+char_parameter_1--char_parameter_2
+char_parameter_1--char_parameter_3
+char_parameter_1--char_parameter_4
+char_parameter_1--select
+char_parameter_1--t246
+char_parameter_1--t248
+char_parameter_1--t250
+char_parameter_1--t252
+char_parameter_2--char_parameter_3
+char_parameter_2--char_parameter_4
+char_parameter_2--select
+char_parameter_2--t246
+char_parameter_2--t248
+char_parameter_2--t250
+char_parameter_2--t252
+char_parameter_3--char_parameter_4
+char_parameter_3--select
+char_parameter_3--t246
+char_parameter_3--t248
+char_parameter_3--t250
+char_parameter_3--t252
+char_parameter_4--select
+char_parameter_4--t246
+char_parameter_4--t248
+char_parameter_4--t250
+char_parameter_4--t252
+select--t246
+select--t248
+select--t250
+select--t252
+t246--t248
+t246--t250
+t246--t252
+t248--t250
+t248--t252
+t250--t252
+}

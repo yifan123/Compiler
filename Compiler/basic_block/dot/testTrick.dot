@@ -1,0 +1,8 @@
+digraph testTrick{
+label =testTrick
+B91[label="B91:\nRET,,,\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B91->exit
+enter->B91
+}

@@ -36,8 +36,8 @@ private:
 	void return_statement();//处理返回语句
 	void condition(string);       //处理条件
 	//void value_parmeterlist();  //处理值参数表
-	void case_list(string exp_name, string labout);    //处理case,建立casetab
-	void expression(string &,TabType&);//处理表达式
+	void case_list(string exp_name, string labout, TabType exp_type);    //处理case,建立casetab
+	void expression(string &, TabType&);//处理表达式
 	void item(string &, TabType&);//处理项
 	void factor(string &, TabType&);
 	//处理因子
@@ -46,7 +46,7 @@ private:
 	void constant(string &con_name, TabType &con_type);
 
 public:
-	Parser(string filename):lexer(filename) {}
+	Parser(string filename) :lexer(filename) {}
 	Lexer lexer;
 	void program();      //处理整个程序,语法分析的入口
 };

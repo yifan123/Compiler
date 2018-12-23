@@ -1,0 +1,36 @@
+basic block name: B18
+def: {flag, }
+use: {@40, @42, }
+ain: {@40, @42, }
+aout: {}
+
+basic block name: B19
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: Lab41
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: Lab43
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@40, @42, }
+aout: {@40, @42, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+
