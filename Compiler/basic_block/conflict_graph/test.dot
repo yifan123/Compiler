@@ -1,0 +1,18 @@
+graph test{
+label =test
+con1[label="con1-0", shape=circle, style=filled, fillcolor=White]
+con2[label="con2-1", shape=circle, style=filled, fillcolor=White]
+i[label="i-2", shape=circle, style=filled, fillcolor=White]
+j[label="j-3", shape=circle, style=filled, fillcolor=White]
+k[label="k-4", shape=circle, style=filled, fillcolor=White]
+con1--con2
+con1--i
+con1--j
+con1--k
+con2--i
+con2--j
+con2--k
+i--j
+i--k
+j--k
+}

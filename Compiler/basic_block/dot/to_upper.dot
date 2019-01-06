@@ -1,8 +1,0 @@
-digraph to_upper{
-label =to_upper
-B21[label="B21:\nSUB,a,b,@44\nRET,@44,,\nRET,,,\n" shape=box]
-enter[label="enter:\n" shape=box]
-exit[label="exit:\n" shape=box]
-B21->exit
-enter->B21
-}

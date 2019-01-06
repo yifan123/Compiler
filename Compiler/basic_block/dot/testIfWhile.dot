@@ -1,120 +1,120 @@
 digraph testIfWhile{
 label =testIfWhile
-B0[label="B0:\nASS,@0,,test_if_result\nASS,@1,,loop_num\nLEQ,@4,@6,Lab2\n" shape=box]
+B0[label="B0:\nASS,@0,,test_if_result\nASS,@1,,loop_num\nLEQ,@4,@6,Lab_lj_2\n" shape=box]
 B1[label="B1:\n" shape=box]
 B11[label="B11:\n" shape=box]
-B12[label="B12:\nDIV,test_if_result,@95,@96\nMUL,@96,@97,@98\nSUB,test_if_result,@98,@99\nNEQ,@99,@100,Lab101\n" shape=box]
-B13[label="B13:\nADD,test_if_result,@102,@103\nASS,@103,,test_if_result\nJMP,,,Lab94\n" shape=box]
-B15[label="B15:\nADD,test_if_result,loop_num,@106\nASS,@106,,test_if_result\nJMP,,,Lab94\n" shape=box]
-B18[label="B18:\nMUL,test_if_result,@114,@115\nMUL,@116,loop_num,@117\nADD,@115,@117,@118\nADD,@118,@119,@120\nSUB,@120,const_char_b,@121\nADD,@121,@122,@123\nASS,@123,,test_if_result\nNEG,loop_num,,@124\nADD,@124,test_if_result,@125\nADD,@125,@127,@128\nSUB,@128,@129,@130\nADD,@130,@131,@132\nADD,@132,@133,@134\nMUL,@135,test_if_result,@136\nSUB,@134,@136,@137\nASS,@137,,loop_num\n" shape=box]
+B12[label="B12:\nDIV,test_if_result,@95,@96\nMUL,@96,@97,@98\nSUB,test_if_result,@98,@99\nNEQ,@99,@100,Lab_lj_101\n" shape=box]
+B13[label="B13:\nADD,test_if_result,@102,test_if_result\nJMP,,,Lab_lj_94\n" shape=box]
+B15[label="B15:\nADD,test_if_result,loop_num,test_if_result\nJMP,,,Lab_lj_94\n" shape=box]
+B18[label="B18:\nMUL,test_if_result,@114,@115\nMUL,@116,loop_num,@117\nADD,@115,@117,@118\nADD,@118,@119,@120\nSUB,@120,const_char_b,@121\nADD,@121,@122,test_if_result\nNEG,loop_num,,@124\nADD,@124,test_if_result,@125\nADD,@125,@127,@128\nSUB,@128,@129,@130\nADD,@130,@131,@132\nADD,@132,@133,@134\nMUL,@135,test_if_result,@136\nSUB,@134,@136,loop_num\n" shape=box]
 B19[label="B19:\nPRF,0,str,1\n" shape=box]
-B2[label="B2:\nADD,test_if_result,loop_num,@10\nASS,@10,,test_if_result\nADD,loop_num,@11,@12\nASS,@12,,loop_num\nJMP,,,Lab7\n" shape=box]
+B2[label="B2:\nADD,test_if_result,loop_num,test_if_result\nADD,loop_num,@11,loop_num\nJMP,,,Lab_lj_7\n" shape=box]
 B20[label="B20:\nPRF,1,str,1\n" shape=box]
-B21[label="B21:\nMUL,loop_num,@144,@145\nSUB,test_if_result,@145,@146\nNEQ,@146,@147,Lab148\n" shape=box]
+B21[label="B21:\nMUL,loop_num,@144,@145\nSUB,test_if_result,@145,@146\nNEQ,@146,@147,Lab_lj_148\n" shape=box]
 B22[label="B22:\n" shape=box]
-B23[label="B23:\nDIV,test_if_result,@153,@154\nMUL,@154,@155,@156\nSUB,@156,test_if_result,@157\nNEQ,@157,@158,Lab159\n" shape=box]
-B24[label="B24:\nADD,test_if_result,@160,@161\nASS,@161,,test_if_result\nJMP,,,Lab152\n" shape=box]
-B26[label="B26:\nADD,test_if_result,loop_num,@164\nASS,@164,,test_if_result\nJMP,,,Lab152\n" shape=box]
+B23[label="B23:\nDIV,test_if_result,@153,@154\nMUL,@154,@155,@156\nSUB,@156,test_if_result,@157\nNEQ,@157,@158,Lab_lj_159\n" shape=box]
+B24[label="B24:\nADD,test_if_result,@160,test_if_result\nJMP,,,Lab_lj_152\n" shape=box]
+B26[label="B26:\nADD,test_if_result,loop_num,test_if_result\nJMP,,,Lab_lj_152\n" shape=box]
 B30[label="B30:\nPRF,2,str,1\n" shape=box]
-B4[label="B4:\nMUL,test_if_result,@20,@21\nNEG,@21,,@22\nMUL,@23,loop_num,@24\nADD,@22,@24,@25\nADD,@25,@26,@27\nSUB,@27,const_char_a,@28\nASS,@28,,test_if_result\nSUB,loop_num,test_if_result,@29\nADD,@29,@31,@32\nSUB,@32,@33,@34\nADD,@34,@35,@36\nADD,@36,@37,@38\nMUL,@39,test_if_result,@40\nADD,@38,@40,@41\nASS,@41,,loop_num\nJMP,,,Lab13\n" shape=box]
+B4[label="B4:\nMUL,test_if_result,@20,@21\nNEG,@21,,@22\nMUL,@23,loop_num,@24\nADD,@22,@24,@25\nADD,@25,@26,@27\nSUB,@27,const_char_a,test_if_result\nSUB,loop_num,test_if_result,@29\nADD,@29,@31,@32\nSUB,@32,@33,@34\nADD,@34,@35,@36\nADD,@36,@37,@38\nMUL,@39,test_if_result,@40\nADD,@38,@40,loop_num\nJMP,,,Lab_lj_13\n" shape=box]
 B6[label="B6:\n" shape=box]
-B7[label="B7:\nLEQ,loop_num,@77,Lab76\n" shape=box]
-B8[label="B8:\nADD,test_if_result,loop_num,@78\nASS,@78,,test_if_result\n" shape=box]
-B9[label="B9:\nADD,loop_num,@86,@87\nASS,@87,,loop_num\n" shape=box]
-Lab101[label="Lab101:\nLAB,,,Lab101\nNEQ,@99,@104,Lab105\n" shape=box]
-Lab105[label="Lab105:\nLAB,,,Lab105\n" shape=box]
-Lab109[label="Lab109:\nLAB,,,Lab109\n" shape=box]
-Lab13[label="Lab13:\nLAB,,,Lab13\n" shape=box]
-Lab138[label="Lab138:\nLAB,,,Lab138\nNEQ,test_if_1,test_if_2,Lab139\n" shape=box]
-Lab139[label="Lab139:\nLAB,,,Lab139\nASS,@140,,test_if_result\nASS,@141,,loop_num\nEQL,test_if_1,test_if_2,Lab142\n" shape=box]
-Lab142[label="Lab142:\nLAB,,,Lab142\nPRF,test_if_result,0,1\nPRF,loop_num,0,1\nEQL,@172,$0,Lab171\n" shape=box]
-Lab143[label="Lab143:\nLAB,,,Lab143\n" shape=box]
-Lab148[label="Lab148:\nLAB,,,Lab148\nASS,@168,,test_if_result\nASS,@170,,loop_num\n" shape=box]
-Lab149[label="Lab149:\nLAB,,,Lab149\nGEQ,test_if_result,@151,Lab150\n" shape=box]
-Lab150[label="Lab150:\nLAB,,,Lab150\nJMP,,,Lab143\n" shape=box]
-Lab152[label="Lab152:\nLAB,,,Lab152\nADD,loop_num,@165,@166\nASS,@166,,loop_num\nJMP,,,Lab149\n" shape=box]
-Lab159[label="Lab159:\nLAB,,,Lab159\nNEQ,@157,@162,Lab163\n" shape=box]
-Lab163[label="Lab163:\nLAB,,,Lab163\n" shape=box]
-Lab171[label="Lab171:\nLAB,,,Lab171\nASS,@174,,int_global_var\nASS,@175,,char_global_var\nRET,,,\n" shape=box]
-Lab19[label="Lab19:\nLAB,,,Lab19\nMUL,test_if_result,@42,@43\nMUL,@44,loop_num,@45\nADD,@43,@45,@46\nADD,@46,@47,@48\nSUB,@48,const_char_b,@49\nADD,@49,@50,@51\nASS,@51,,test_if_result\nNEG,loop_num,,@52\nADD,@52,test_if_result,@53\nADD,@53,@55,@56\nSUB,@56,@57,@58\nADD,@58,@59,@60\nADD,@60,@61,@62\nMUL,@63,test_if_result,@64\nSUB,@62,@64,@65\nASS,@65,,loop_num\n" shape=box]
-Lab2[label="Lab2:\nLAB,,,Lab2\nPRF,test_if_result,0,1\nPRF,loop_num,0,1\nASS,@66,,test_if_result\nASS,@67,,loop_num\nLSS,@70,@72,Lab68\n" shape=box]
-Lab68[label="Lab68:\nLAB,,,Lab68\nPRF,test_if_result,0,1\nPRF,loop_num,0,1\nASS,@88,,test_if_result\nASS,@89,,loop_num\nGEQ,test_if_1,test_if_2,Lab90\n" shape=box]
-Lab7[label="Lab7:\nLAB,,,Lab7\nGEQ,test_if_result,@9,Lab8\n" shape=box]
-Lab73[label="Lab73:\nLAB,,,Lab73\nGEQ,test_if_result,@75,Lab74\n" shape=box]
-Lab74[label="Lab74:\nLAB,,,Lab74\n" shape=box]
-Lab76[label="Lab76:\nLAB,,,Lab76\nADD,loop_num,@79,@80\nASS,@80,,loop_num\nDIV,test_if_result,@82,@83\nMUL,@83,@84,@85\nNEQ,@85,test_if_result,Lab81\n" shape=box]
-Lab8[label="Lab8:\nLAB,,,Lab8\nSUB,test_if_result,@14,@15\nMUL,@15,@16,@17\nNEQ,@17,@18,Lab19\n" shape=box]
-Lab81[label="Lab81:\nLAB,,,Lab81\nJMP,,,Lab73\n" shape=box]
-Lab90[label="Lab90:\nLAB,,,Lab90\nPRF,test_if_result,0,1\nPRF,loop_num,0,1\nGTR,test_if_2,test_if_1,Lab138\n" shape=box]
-Lab91[label="Lab91:\nLAB,,,Lab91\nGEQ,test_if_result,@93,Lab92\n" shape=box]
-Lab92[label="Lab92:\nLAB,,,Lab92\nDIV,test_if_result,@110,@111\nMUL,@111,@112,@113\nNEQ,test_if_result,@113,Lab109\n" shape=box]
-Lab94[label="Lab94:\nLAB,,,Lab94\nADD,loop_num,@107,@108\nASS,@108,,loop_num\nJMP,,,Lab91\n" shape=box]
+B7[label="B7:\nLEQ,loop_num,@77,Lab_lj_76\n" shape=box]
+B8[label="B8:\nADD,test_if_result,loop_num,test_if_result\n" shape=box]
+B9[label="B9:\nADD,loop_num,@86,loop_num\n" shape=box]
+Lab_lj_101[label="Lab_lj_101:\nLAB,,,Lab_lj_101\nNEQ,@99,@104,Lab_lj_105\n" shape=box]
+Lab_lj_105[label="Lab_lj_105:\nLAB,,,Lab_lj_105\n" shape=box]
+Lab_lj_109[label="Lab_lj_109:\nLAB,,,Lab_lj_109\n" shape=box]
+Lab_lj_13[label="Lab_lj_13:\nLAB,,,Lab_lj_13\n" shape=box]
+Lab_lj_138[label="Lab_lj_138:\nLAB,,,Lab_lj_138\nNEQ,test_if_1,test_if_2,Lab_lj_139\n" shape=box]
+Lab_lj_139[label="Lab_lj_139:\nLAB,,,Lab_lj_139\nASS,@140,,test_if_result\nASS,@141,,loop_num\nEQL,test_if_1,test_if_2,Lab_lj_142\n" shape=box]
+Lab_lj_142[label="Lab_lj_142:\nLAB,,,Lab_lj_142\nPRF,test_if_result,0,1\nPRF,loop_num,0,1\nEQL,@172,$0,Lab_lj_171\n" shape=box]
+Lab_lj_143[label="Lab_lj_143:\nLAB,,,Lab_lj_143\n" shape=box]
+Lab_lj_148[label="Lab_lj_148:\nLAB,,,Lab_lj_148\nASS,@168,,test_if_result\nASS,@170,,loop_num\n" shape=box]
+Lab_lj_149[label="Lab_lj_149:\nLAB,,,Lab_lj_149\nGEQ,test_if_result,@151,Lab_lj_150\n" shape=box]
+Lab_lj_150[label="Lab_lj_150:\nLAB,,,Lab_lj_150\nJMP,,,Lab_lj_143\n" shape=box]
+Lab_lj_152[label="Lab_lj_152:\nLAB,,,Lab_lj_152\nADD,loop_num,@165,loop_num\nJMP,,,Lab_lj_149\n" shape=box]
+Lab_lj_159[label="Lab_lj_159:\nLAB,,,Lab_lj_159\nNEQ,@157,@162,Lab_lj_163\n" shape=box]
+Lab_lj_163[label="Lab_lj_163:\nLAB,,,Lab_lj_163\n" shape=box]
+Lab_lj_171[label="Lab_lj_171:\nLAB,,,Lab_lj_171\nASS,@174,,int_global_var\nASS,@175,,char_global_var\nRET,,,\n" shape=box]
+Lab_lj_19[label="Lab_lj_19:\nLAB,,,Lab_lj_19\nMUL,test_if_result,@42,@43\nMUL,@44,loop_num,@45\nADD,@43,@45,@46\nADD,@46,@47,@48\nSUB,@48,const_char_b,@49\nADD,@49,@50,test_if_result\nNEG,loop_num,,@52\nADD,@52,test_if_result,@53\nADD,@53,@55,@56\nSUB,@56,@57,@58\nADD,@58,@59,@60\nADD,@60,@61,@62\nMUL,@63,test_if_result,@64\nSUB,@62,@64,loop_num\n" shape=box]
+Lab_lj_2[label="Lab_lj_2:\nLAB,,,Lab_lj_2\nPRF,test_if_result,0,1\nPRF,loop_num,0,1\nASS,@66,,test_if_result\nASS,@67,,loop_num\nLSS,@70,@72,Lab_lj_68\n" shape=box]
+Lab_lj_68[label="Lab_lj_68:\nLAB,,,Lab_lj_68\nPRF,test_if_result,0,1\nPRF,loop_num,0,1\nASS,@88,,test_if_result\nASS,@89,,loop_num\nGEQ,test_if_1,test_if_2,Lab_lj_90\n" shape=box]
+Lab_lj_7[label="Lab_lj_7:\nLAB,,,Lab_lj_7\nGEQ,test_if_result,@9,Lab_lj_8\n" shape=box]
+Lab_lj_73[label="Lab_lj_73:\nLAB,,,Lab_lj_73\nGEQ,test_if_result,@75,Lab_lj_74\n" shape=box]
+Lab_lj_74[label="Lab_lj_74:\nLAB,,,Lab_lj_74\n" shape=box]
+Lab_lj_76[label="Lab_lj_76:\nLAB,,,Lab_lj_76\nADD,loop_num,@79,loop_num\nDIV,test_if_result,@82,@83\nMUL,@83,@84,@85\nNEQ,@85,test_if_result,Lab_lj_81\n" shape=box]
+Lab_lj_8[label="Lab_lj_8:\nLAB,,,Lab_lj_8\nSUB,test_if_result,@14,@15\nMUL,@15,@16,@17\nNEQ,@17,@18,Lab_lj_19\n" shape=box]
+Lab_lj_81[label="Lab_lj_81:\nLAB,,,Lab_lj_81\nJMP,,,Lab_lj_73\n" shape=box]
+Lab_lj_90[label="Lab_lj_90:\nLAB,,,Lab_lj_90\nPRF,test_if_result,0,1\nPRF,loop_num,0,1\nGTR,test_if_2,test_if_1,Lab_lj_138\n" shape=box]
+Lab_lj_91[label="Lab_lj_91:\nLAB,,,Lab_lj_91\nGEQ,test_if_result,@93,Lab_lj_92\n" shape=box]
+Lab_lj_92[label="Lab_lj_92:\nLAB,,,Lab_lj_92\nDIV,test_if_result,@110,@111\nMUL,@111,@112,@113\nNEQ,test_if_result,@113,Lab_lj_109\n" shape=box]
+Lab_lj_94[label="Lab_lj_94:\nLAB,,,Lab_lj_94\nADD,loop_num,@107,loop_num\nJMP,,,Lab_lj_91\n" shape=box]
 enter[label="enter:\n" shape=box]
 exit[label="exit:\n" shape=box]
 B0->B1
-B0->Lab2
+B0->Lab_lj_2
 B12->B13
-B12->Lab101
-B13->Lab94
-B15->Lab94
-B18->Lab109
-B19->Lab138
-B2->Lab7
-B20->Lab139
+B12->Lab_lj_101
+B13->Lab_lj_94
+B15->Lab_lj_94
+B18->Lab_lj_109
+B19->Lab_lj_138
+B2->Lab_lj_7
+B20->Lab_lj_139
 B21->B22
-B21->Lab148
+B21->Lab_lj_148
 B23->B24
-B23->Lab159
-B24->Lab152
-B26->Lab152
-B30->Lab171
-B4->Lab13
+B23->Lab_lj_159
+B24->Lab_lj_152
+B26->Lab_lj_152
+B30->Lab_lj_171
+B4->Lab_lj_13
 B7->B8
-B7->Lab76
-B8->Lab76
-B9->Lab81
-Lab101->B15
-Lab101->Lab105
-Lab105->Lab94
-Lab109->Lab90
-Lab13->Lab2
-Lab138->B20
-Lab138->Lab139
-Lab139->B21
-Lab139->Lab142
-Lab142->B30
-Lab142->Lab171
-Lab143->Lab142
-Lab148->Lab143
-Lab149->B23
-Lab149->Lab150
-Lab150->Lab143
-Lab152->Lab149
-Lab159->B26
-Lab159->Lab163
-Lab163->Lab152
-Lab171->exit
-Lab19->Lab13
-Lab2->B6
-Lab2->Lab68
-Lab68->B11
-Lab68->Lab90
-Lab7->B2
-Lab7->Lab8
-Lab73->B7
-Lab73->Lab74
-Lab74->Lab68
-Lab76->B9
-Lab76->Lab81
-Lab8->B4
-Lab8->Lab19
-Lab81->Lab73
-Lab90->B19
-Lab90->Lab138
-Lab91->B12
-Lab91->Lab92
-Lab92->B18
-Lab92->Lab109
-Lab94->Lab91
+B7->Lab_lj_76
+B8->Lab_lj_76
+B9->Lab_lj_81
+Lab_lj_101->B15
+Lab_lj_101->Lab_lj_105
+Lab_lj_105->Lab_lj_94
+Lab_lj_109->Lab_lj_90
+Lab_lj_13->Lab_lj_2
+Lab_lj_138->B20
+Lab_lj_138->Lab_lj_139
+Lab_lj_139->B21
+Lab_lj_139->Lab_lj_142
+Lab_lj_142->B30
+Lab_lj_142->Lab_lj_171
+Lab_lj_143->Lab_lj_142
+Lab_lj_148->Lab_lj_143
+Lab_lj_149->B23
+Lab_lj_149->Lab_lj_150
+Lab_lj_150->Lab_lj_143
+Lab_lj_152->Lab_lj_149
+Lab_lj_159->B26
+Lab_lj_159->Lab_lj_163
+Lab_lj_163->Lab_lj_152
+Lab_lj_171->exit
+Lab_lj_19->Lab_lj_13
+Lab_lj_2->B6
+Lab_lj_2->Lab_lj_68
+Lab_lj_68->B11
+Lab_lj_68->Lab_lj_90
+Lab_lj_7->B2
+Lab_lj_7->Lab_lj_8
+Lab_lj_73->B7
+Lab_lj_73->Lab_lj_74
+Lab_lj_74->Lab_lj_68
+Lab_lj_76->B9
+Lab_lj_76->Lab_lj_81
+Lab_lj_8->B4
+Lab_lj_8->Lab_lj_19
+Lab_lj_81->Lab_lj_73
+Lab_lj_90->B19
+Lab_lj_90->Lab_lj_138
+Lab_lj_91->B12
+Lab_lj_91->Lab_lj_92
+Lab_lj_92->B18
+Lab_lj_92->Lab_lj_109
+Lab_lj_94->Lab_lj_91
 enter->B0
 }

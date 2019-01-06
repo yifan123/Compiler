@@ -1,22 +1,28 @@
-basic block name: B48
+basic block name: B55
 def: {scope_var, tem, }
-use: {@134, }
-ain: {@134, }
+use: {@141, }
+ain: {@141, }
 aout: {scope_var, tem, }
 
-basic block name: B49
+basic block name: B56
+def: {}
+use: {}
+ain: {scope_var, tem, }
+aout: {scope_var, tem, }
+
+basic block name: B57
 def: {}
 use: {scope_var, tem, }
 ain: {scope_var, tem, }
 aout: {}
 
-basic block name: B50
+basic block name: B58
 def: {}
 use: {}
 ain: {}
 aout: {}
 
-basic block name: Lab135
+basic block name: Lab_lj_145
 def: {}
 use: {}
 ain: {}
@@ -25,8 +31,8 @@ aout: {}
 basic block name: enter
 def: {}
 use: {}
-ain: {@134, }
-aout: {@134, }
+ain: {@141, }
+aout: {@141, }
 
 basic block name: exit
 def: {}

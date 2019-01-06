@@ -1,0 +1,59 @@
+reach definiton information
+basic block name: B125
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B126
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B127
+gen: {<B127,0>, }
+kill: {<B128,2>, }
+rin: {}
+rout: {<B127,0>, }
+
+basic block name: B128
+gen: {<B128,0>, <B128,2>, }
+kill: {<B127,0>, }
+rin: {<B127,0>, <B128,0>, <B128,2>, }
+rout: {<B128,0>, <B128,2>, }
+
+basic block name: Lab_lj_409
+gen: {}
+kill: {}
+rin: {<B127,0>, <B128,0>, <B128,2>, }
+rout: {<B127,0>, <B128,0>, <B128,2>, }
+
+basic block name: Lab_lj_410
+gen: {<Lab_lj_410,1>, <Lab_lj_410,2>, }
+kill: {}
+rin: {<B127,0>, <B128,0>, <B128,2>, }
+rout: {<B127,0>, <B128,0>, <B128,2>, <Lab_lj_410,1>, <Lab_lj_410,2>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B127,0>, <B128,0>, <B128,2>, <Lab_lj_410,1>, <Lab_lj_410,2>, }
+rout: {<B127,0>, <B128,0>, <B128,2>, <Lab_lj_410,1>, <Lab_lj_410,2>, }
+
+du_chain
+@412: 
+<B128,0>: {<B128,1>, }
+char_global_var: 
+<Lab_lj_410,2>: {}
+i: 
+<B127,0>: {<B128,0>, <B128,2>, <Lab_lj_409,1>, }
+<B128,2>: {<B128,0>, <B128,2>, <Lab_lj_409,1>, }
+int_global_var: 
+<Lab_lj_410,1>: {}

@@ -1,0 +1,92 @@
+reach definiton information
+basic block name: B32
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B33
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B34
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B35
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B36
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B37
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B38
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab_lj_58
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab_lj_59
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab_lj_60
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab_lj_61
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab_lj_62
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab_lj_63
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+du_chain

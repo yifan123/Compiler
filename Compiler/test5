@@ -1,0 +1,16 @@
+void main(){
+	int a[2048];
+	int i,sum;
+	i=0;
+	sum=0;
+	while(i<2048){
+		a[i]=i;
+		i=i+1;
+	}
+	i=0;
+	while(i<2048){
+		sum=sum+a[i];
+		i=i+1;
+	}
+	printf(sum);
+}

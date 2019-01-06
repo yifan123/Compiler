@@ -1,0 +1,42 @@
+basic block name: B0
+def: {b, }
+use: {@1, @4, @6, @8, a, count, judge, }
+ain: {@1, @13, @4, @6, @8, @9, a, count, judge, }
+aout: {@13, @9, a, b, judge, }
+
+basic block name: B1
+def: {@10, }
+use: {@9, a, }
+ain: {@13, @9, a, judge, }
+aout: {@13, a, judge, }
+
+basic block name: B2
+def: {}
+use: {}
+ain: {@13, a, judge, }
+aout: {@13, a, judge, }
+
+basic block name: B3
+def: {b, }
+use: {@13, judge, }
+ain: {@13, a, judge, }
+aout: {a, b, }
+
+basic block name: Lab_lj_7
+def: {@15, }
+use: {a, b, }
+ain: {a, b, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@1, @13, @4, @6, @8, @9, a, count, judge, }
+aout: {@1, @13, @4, @6, @8, @9, a, count, judge, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

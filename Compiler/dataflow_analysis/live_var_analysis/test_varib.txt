@@ -1,0 +1,42 @@
+basic block name: B150
+def: {_, }
+use: {@714, @716, @718, judge, }
+ain: {@714, @716, @718, @720, judge, }
+aout: {@720, judge, }
+
+basic block name: B151
+def: {}
+use: {@720, judge, }
+ain: {@720, judge, }
+aout: {}
+
+basic block name: B152
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: B153
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: Lab_lj_717
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@714, @716, @718, @720, judge, }
+aout: {@714, @716, @718, @720, judge, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

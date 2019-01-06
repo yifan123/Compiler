@@ -1,0 +1,18 @@
+basic block name: B154
+def: {@723, @724, @725, @726, @727, @728, }
+use: {a, b, c, d, e, f, g, judge, }
+ain: {a, b, c, d, e, f, g, judge, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {a, b, c, d, e, f, g, judge, }
+aout: {a, b, c, d, e, f, g, judge, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

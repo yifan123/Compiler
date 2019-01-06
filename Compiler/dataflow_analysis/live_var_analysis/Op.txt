@@ -1,0 +1,312 @@
+basic block name: B0
+def: {}
+use: {@1, op, }
+ain: {@1, @11, @14, @17, @19, @21, @23, @29, @37, @39, @4, @47, @57, @59, op, x, y, }
+aout: {@11, @14, @17, @19, @21, @23, @29, @37, @39, @4, @47, @57, @59, op, x, y, }
+
+basic block name: B1
+def: {@3, }
+use: {x, y, }
+ain: {x, y, }
+aout: {}
+
+basic block name: B10
+def: {}
+use: {@19, y, }
+ain: {@19, @21, @23, @29, @37, @39, @47, @57, @59, x, y, }
+aout: {@21, @23, @29, @37, @39, @47, @57, @59, x, y, }
+
+basic block name: B11
+def: {}
+use: {@21, x, }
+ain: {@21, @23, @29, @37, @39, @47, @57, @59, x, y, }
+aout: {@23, @29, @37, @39, @47, @57, @59, x, y, }
+
+basic block name: B12
+def: {}
+use: {@23, y, }
+ain: {@23, @29, @37, @39, @47, @57, @59, x, y, }
+aout: {@29, @37, @39, @47, @57, @59, x, y, }
+
+basic block name: B13
+def: {}
+use: {x, y, }
+ain: {@29, @37, @39, @47, @57, @59, x, y, }
+aout: {@29, @37, @39, @47, @57, @59, x, y, }
+
+basic block name: B14
+def: {@25, }
+use: {x, y, }
+ain: {@29, @37, @39, @47, @57, @59, x, y, }
+aout: {@29, @37, @39, @47, @57, @59, x, y, }
+
+basic block name: B15
+def: {@27, }
+use: {x, y, }
+ain: {@29, @37, @39, @47, @57, @59, x, y, }
+aout: {@29, @37, @39, @47, @57, @59, x, y, }
+
+basic block name: B16
+def: {@31, }
+use: {x, y, }
+ain: {@37, @39, @47, @57, @59, x, y, }
+aout: {@37, @39, @47, @57, @59, x, y, }
+
+basic block name: B17
+def: {@32, }
+use: {x, y, }
+ain: {@37, @39, @47, @57, @59, x, y, }
+aout: {@37, @39, @47, @57, @59, x, y, }
+
+basic block name: B18
+def: {@35, }
+use: {x, y, }
+ain: {@37, @39, @47, @57, @59, x, y, }
+aout: {@37, @39, @47, @57, @59, x, y, }
+
+basic block name: B19
+def: {}
+use: {@39, y, }
+ain: {@39, @47, @57, @59, x, y, }
+aout: {@47, @57, @59, x, y, }
+
+basic block name: B20
+def: {@41, }
+use: {x, y, }
+ain: {@47, @57, @59, x, y, }
+aout: {@47, @57, @59, x, y, }
+
+basic block name: B21
+def: {@42, }
+use: {x, y, }
+ain: {@47, @57, @59, x, y, }
+aout: {@47, @57, @59, x, y, }
+
+basic block name: B22
+def: {@45, }
+use: {x, y, }
+ain: {@47, @57, @59, x, y, }
+aout: {@47, @57, @59, x, y, }
+
+basic block name: B23
+def: {@49, @50, }
+use: {x, y, }
+ain: {@57, @59, x, y, }
+aout: {@57, @59, x, y, }
+
+basic block name: B24
+def: {@51, }
+use: {x, y, }
+ain: {@57, @59, x, y, }
+aout: {@57, @59, x, y, }
+
+basic block name: B25
+def: {@55, }
+use: {x, y, }
+ain: {@57, @59, x, y, }
+aout: {@57, @59, x, y, }
+
+basic block name: B26
+def: {}
+use: {}
+ain: {@59, x, }
+aout: {@59, x, }
+
+basic block name: B27
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: B3
+def: {}
+use: {x, y, }
+ain: {x, y, }
+aout: {x, y, }
+
+basic block name: B4
+def: {@7, }
+use: {x, y, }
+ain: {x, y, }
+aout: {x, y, }
+
+basic block name: B5
+def: {@10, @9, }
+use: {x, y, }
+ain: {x, y, }
+aout: {}
+
+basic block name: B7
+def: {@13, }
+use: {x, y, }
+ain: {x, y, }
+aout: {}
+
+basic block name: B9
+def: {}
+use: {@17, x, }
+ain: {@17, @19, @21, @23, @29, @37, @39, @47, @57, @59, x, y, }
+aout: {@19, @21, @23, @29, @37, @39, @47, @57, @59, x, y, }
+
+basic block name: Lab_lj_0
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: Lab_lj_12
+def: {}
+use: {@14, op, }
+ain: {@14, @17, @19, @21, @23, @29, @37, @39, @47, @57, @59, op, x, y, }
+aout: {@17, @19, @21, @23, @29, @37, @39, @47, @57, @59, x, y, }
+
+basic block name: Lab_lj_15
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: Lab_lj_16
+def: {}
+use: {@59, x, }
+ain: {@59, x, }
+aout: {}
+
+basic block name: Lab_lj_18
+def: {}
+use: {@57, y, }
+ain: {@57, @59, x, y, }
+aout: {@59, x, }
+
+basic block name: Lab_lj_2
+def: {}
+use: {@4, op, }
+ain: {@11, @14, @17, @19, @21, @23, @29, @37, @39, @4, @47, @57, @59, op, x, y, }
+aout: {@11, @14, @17, @19, @21, @23, @29, @37, @39, @47, @57, @59, op, x, y, }
+
+basic block name: Lab_lj_20
+def: {}
+use: {@37, x, }
+ain: {@37, @39, @47, @57, @59, x, y, }
+aout: {@39, @47, @57, @59, x, y, }
+
+basic block name: Lab_lj_22
+def: {}
+use: {@29, y, }
+ain: {@29, @37, @39, @47, @57, @59, x, y, }
+aout: {@37, @39, @47, @57, @59, x, y, }
+
+basic block name: Lab_lj_24
+def: {}
+use: {x, y, }
+ain: {@29, @37, @39, @47, @57, @59, x, y, }
+aout: {@29, @37, @39, @47, @57, @59, x, y, }
+
+basic block name: Lab_lj_26
+def: {}
+use: {}
+ain: {@29, @37, @39, @47, @57, @59, x, y, }
+aout: {@29, @37, @39, @47, @57, @59, x, y, }
+
+basic block name: Lab_lj_28
+def: {}
+use: {}
+ain: {@37, @39, @47, @57, @59, x, y, }
+aout: {@37, @39, @47, @57, @59, x, y, }
+
+basic block name: Lab_lj_30
+def: {@34, }
+use: {x, y, }
+ain: {@37, @39, @47, @57, @59, x, y, }
+aout: {@37, @39, @47, @57, @59, x, y, }
+
+basic block name: Lab_lj_33
+def: {}
+use: {}
+ain: {@37, @39, @47, @57, @59, x, y, }
+aout: {@37, @39, @47, @57, @59, x, y, }
+
+basic block name: Lab_lj_36
+def: {}
+use: {}
+ain: {@57, @59, x, y, }
+aout: {@57, @59, x, y, }
+
+basic block name: Lab_lj_38
+def: {}
+use: {@47, y, }
+ain: {@47, @57, @59, x, y, }
+aout: {@57, @59, x, y, }
+
+basic block name: Lab_lj_40
+def: {@44, }
+use: {x, y, }
+ain: {@47, @57, @59, x, y, }
+aout: {@47, @57, @59, x, y, }
+
+basic block name: Lab_lj_43
+def: {}
+use: {}
+ain: {@47, @57, @59, x, y, }
+aout: {@47, @57, @59, x, y, }
+
+basic block name: Lab_lj_46
+def: {}
+use: {}
+ain: {@57, @59, x, y, }
+aout: {@57, @59, x, y, }
+
+basic block name: Lab_lj_48
+def: {@53, @54, }
+use: {x, y, }
+ain: {@57, @59, x, y, }
+aout: {@57, @59, x, y, }
+
+basic block name: Lab_lj_5
+def: {}
+use: {@11, op, }
+ain: {@11, @14, @17, @19, @21, @23, @29, @37, @39, @47, @57, @59, op, x, y, }
+aout: {@14, @17, @19, @21, @23, @29, @37, @39, @47, @57, @59, op, x, y, }
+
+basic block name: Lab_lj_52
+def: {}
+use: {}
+ain: {@57, @59, x, y, }
+aout: {@57, @59, x, y, }
+
+basic block name: Lab_lj_56
+def: {}
+use: {}
+ain: {@59, x, }
+aout: {@59, x, }
+
+basic block name: Lab_lj_58
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: Lab_lj_6
+def: {}
+use: {x, y, }
+ain: {x, y, }
+aout: {x, y, }
+
+basic block name: Lab_lj_8
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@1, @11, @14, @17, @19, @21, @23, @29, @37, @39, @4, @47, @57, @59, op, x, y, }
+aout: {@1, @11, @14, @17, @19, @21, @23, @29, @37, @39, @4, @47, @57, @59, op, x, y, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

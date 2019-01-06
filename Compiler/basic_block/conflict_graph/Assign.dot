@@ -1,0 +1,11 @@
+graph Assign{
+label =Assign
+ch[label="ch-0", shape=circle, style=filled, fillcolor=White]
+i[label="i-0", shape=circle, style=filled, fillcolor=White]
+x2[label="x2-1", shape=circle, style=filled, fillcolor=White]
+y2[label="y2-2", shape=circle, style=filled, fillcolor=White]
+ch--x2
+ch--y2
+i--x2
+x2--y2
+}

@@ -28,6 +28,7 @@ vector<SymTable> symtables;
 map<int, string> stringtab;
 int string_index = 0;
 int global = 0;
+int coiunt = 0;  //统计因为溢出而导致的保存指令条数
 //词法分析使用的main函数
 /*
 int main() {
@@ -88,13 +89,13 @@ int main()
 		Optimizer optimizer(&quadtable);
 		optimizer.work();
 		quadfile.open("quad_after_optimize.txt");
-		for (int i = 0; i < optimizer.quadtable.size(); i++)   //输出优化前中间代码到文件
+		for (int i = 0; i < optimizer.quadtable.size(); i++)   //输出优化后中间代码到文件
 		{
 			QuadRuple q = optimizer.quadtable[i];
 			quadfile << q.op << " " << q.arg1 << " " << q.arg2 << " " << q.result << endl;
 		}
 		Generator generator2("mips_after_optimize.txt");
-		generator2.quad2mips(optimizer.quadtable);
+		generator2.o_quad2mips(optimizer.blocks);
 		generator2.close();
 		quadfile.close();
 	}
@@ -104,6 +105,7 @@ int main()
 		cout << "Found some errors! Syntax Analyze abort!" << endl;
 	}
 	parser.lexer.close();
+	cout << "spill sw instr num= "<<coiunt << endl;
 	system("pause");
 	return 0;
 }

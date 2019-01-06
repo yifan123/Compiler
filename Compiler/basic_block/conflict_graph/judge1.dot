@@ -1,13 +1,18 @@
 graph judge1{
 label =judge1
-t349[label="t349", shape=circle, style=filled, fillcolor=White]
-c[label="c", shape=circle, style=filled, fillcolor=White]
-d[label="d", shape=circle, style=filled, fillcolor=White]
-ret[label="ret", shape=circle, style=filled, fillcolor=White]
+a[label="a-0", shape=circle, style=filled, fillcolor=White]
+b[label="b-1", shape=circle, style=filled, fillcolor=White]
+c[label="c-2", shape=circle, style=filled, fillcolor=White]
+d[label="d-3", shape=circle, style=filled, fillcolor=White]
+ret[label="ret-4", shape=circle, style=filled, fillcolor=White]
+a--b
+a--c
+a--d
+a--ret
+b--c
+b--d
+b--ret
 c--d
 c--ret
-c--t349
 d--ret
-d--t349
-ret--t349
 }

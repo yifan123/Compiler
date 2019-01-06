@@ -1,0 +1,9 @@
+graph test_global_const{
+label =test_global_const
+const_1[label="const_1-0", shape=circle, style=filled, fillcolor=White]
+judge[label="judge-1", shape=circle, style=filled, fillcolor=White]
+x[label="x-2", shape=circle, style=filled, fillcolor=White]
+const_1--judge
+const_1--x
+judge--x
+}

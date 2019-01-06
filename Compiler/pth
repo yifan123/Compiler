@@ -598,33 +598,30 @@ void main()
     judge = judge + 1;
     x=0;
     test_global_variable();
-
+printf("all test0:",judge);
     test_global_const();
-
+printf("all test1:",judge);
     test_brackets();
-
+printf("all test2:",judge);
     test_compare_operator();
-
+printf("all test3:",judge);
     test_expression();
-
+printf("all test4:",judge);
     test_while();
-
+printf("all test5:",judge);
     test_if();
-
+printf("all test6:",judge);
     test_switch();
-
+printf("all test7:",judge);
     test_function();
-
+printf("all test8:",judge);
     test_printf();
-
+printf("all test9:",judge);
     test_scanf();
-
+printf("all test10:",judge);
     test_varib();
-
+printf("all test11:",judge);
     test_para();
-
-    printf("all test:",judge);
-
-
+printf("all test12:",judge);
     return ;
 }

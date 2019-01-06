@@ -1,0 +1,28 @@
+reach definiton information
+basic block name: B101
+gen: {<B101,0>, <B101,1>, <B101,7>, <B101,8>, }
+kill: {}
+rin: {}
+rout: {<B101,0>, <B101,1>, <B101,7>, <B101,8>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B101,0>, <B101,1>, <B101,7>, <B101,8>, }
+rout: {<B101,0>, <B101,1>, <B101,7>, <B101,8>, }
+
+du_chain
+char_global_var: 
+<B101,8>: {}
+char_test_input: 
+<B101,1>: {}
+int_global_var: 
+<B101,7>: {}
+int_test_input: 
+<B101,0>: {}

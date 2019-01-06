@@ -1,0 +1,8 @@
+digraph add{
+label =add
+B0[label="B0:\nADD,x,a,@1\nADD,@1,b,@2\nADD,@2,c,x\nRET,x,,\nRET,,,\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B0->exit
+enter->B0
+}

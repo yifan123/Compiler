@@ -1,0 +1,80 @@
+reach definiton information
+basic block name: B60
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B61
+gen: {<B61,0>, }
+kill: {<B63,0>, <B65,0>, <B67,0>, <Lab_lj_248,1>, }
+rin: {}
+rout: {<B61,0>, }
+
+basic block name: B63
+gen: {<B63,0>, }
+kill: {<B61,0>, <B65,0>, <B67,0>, <Lab_lj_248,1>, }
+rin: {}
+rout: {<B63,0>, }
+
+basic block name: B65
+gen: {<B65,0>, }
+kill: {<B61,0>, <B63,0>, <B67,0>, <Lab_lj_248,1>, }
+rin: {}
+rout: {<B65,0>, }
+
+basic block name: B67
+gen: {<B67,0>, }
+kill: {<B61,0>, <B63,0>, <B65,0>, <Lab_lj_248,1>, }
+rin: {}
+rout: {<B67,0>, }
+
+basic block name: Lab_lj_240
+gen: {}
+kill: {}
+rin: {<B61,0>, <B63,0>, <B65,0>, <B67,0>, <Lab_lj_248,1>, }
+rout: {<B61,0>, <B63,0>, <B65,0>, <B67,0>, <Lab_lj_248,1>, }
+
+basic block name: Lab_lj_242
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab_lj_244
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab_lj_246
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab_lj_248
+gen: {<Lab_lj_248,1>, }
+kill: {<B61,0>, <B63,0>, <B65,0>, <B67,0>, }
+rin: {}
+rout: {<Lab_lj_248,1>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B61,0>, <B63,0>, <B65,0>, <B67,0>, <Lab_lj_248,1>, }
+rout: {<B61,0>, <B63,0>, <B65,0>, <B67,0>, <Lab_lj_248,1>, }
+
+du_chain
+_tmp: 
+<B61,0>: {<Lab_lj_240,1>, }
+<B63,0>: {<Lab_lj_240,1>, }
+<B65,0>: {<Lab_lj_240,1>, }
+<B67,0>: {<Lab_lj_240,1>, }
+<Lab_lj_248,1>: {<Lab_lj_240,1>, }

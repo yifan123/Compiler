@@ -8,10 +8,7 @@
 #include<algorithm>
 #include<set>
 #include <iterator>
-
-#define reg_s_num 8
-#define reg_t_num 10
-
+#include"error.h"
 
 using namespace std;
 extern int lab_index;
@@ -91,7 +88,63 @@ void Optimizer::const_fold() {
 		quadtable.push_back(const_fold_quad(quad));
 	}
 }
+void Optimizer::look_hole() {
+	vector<QuadRuple> new_quadtable;
+	for (int i = 1; i < quadtable.size();i++) {
+		QuadRuple last = quadtable[i - 1];
+		QuadRuple now = quadtable[i];
+		/*if (last.op == "SUB"&&last.result[0] == '@'&&now.op=="NEG"&&now.arg1) {
 
+		}*/
+		if (now.op == "ASS"&&now.arg1[0]=='@'&&last.result[0]=='@') {
+			if (last.op == "ADD" ||last.op == "SUB" ||last.op == "MUL" ||
+				last.op == "DIV" ||last.op == "NEG" ||last.op == "ASAR" ||
+				last.op == "SW") {
+				quadtable[i - 1].result = quadtable[i].result;
+				quadtable[i].op = "";
+			}
+		}
+	}
+	for (int i = 0; i < quadtable.size(); i++) {
+		if (quadtable[i].op != "") {
+			new_quadtable.push_back(quadtable[i]);
+		}
+	}
+	quadtable = new_quadtable;
+	//不确定是否正确的一段，错误时可以注释掉
+	for (int k = 0; k < 2; k++) {
+		vector<QuadRuple> new_quadtable1;
+		for (int i = 1; i < quadtable.size(); i++) {
+			QuadRuple last = quadtable[i - 1];
+			QuadRuple now = quadtable[i];
+			if (last.op == "ASS"&&last.result[0] == '@') {
+				string arg1 = now.arg1;
+				string arg2 = now.arg2;
+				int flag = 0;
+				if (now.arg1 == last.result) {
+					arg1 = last.arg1;
+					flag = 1;
+				}
+				if (now.arg2 == last.result) {
+					arg2 = last.arg1;
+					flag = 1;
+				}
+				quadtable[i].arg1 = arg1;
+				quadtable[i].arg2 = arg2;
+				if (flag) {
+					quadtable[i - 1].op = "";
+				}
+			}
+		}
+		for (int i = 0; i < quadtable.size(); i++) {
+			if (quadtable[i].op != "") {
+				new_quadtable1.push_back(quadtable[i]);
+			}
+		}
+		quadtable = new_quadtable1;
+	}
+	//不确定是否正确的一段，错误时可以注释掉_end
+}
 /*
 入口：LAB
 出口：LSS,LEQ,GTR,GEQ,NEQ,EQL,JMP
@@ -108,6 +161,7 @@ void Optimizer::build_blocks() {
 			if (cur_fun_block != -1) {
 				basic_block bb;
 				blocks[cur_fun_block].basic_blocks["exit"] = bb;
+				blocks[cur_fun_block].block_sequence.push_back("exit");
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].next.insert("exit");
 			}
 			cur_fun_block++;
@@ -123,16 +177,21 @@ void Optimizer::build_blocks() {
 			string bb_name = newB();
 			blocks[cur_fun_block].basic_blocks[bb_name] = bb1;
 			blocks[cur_fun_block].basic_blocks["enter"].next.insert(bb_name);
+			blocks[cur_fun_block].block_sequence.push_back("enter");
+			blocks[cur_fun_block].block_sequence.push_back(bb_name);
 			cur_basic_block = bb_name;
 		}
 		else {
 			if (quad.op == "LAB") {
 				if (lst_basic_block == "enter") {
 					blocks[cur_fun_block].basic_blocks.erase(cur_basic_block);
+					blocks[cur_fun_block].block_sequence.pop_back();
+					blocks[cur_fun_block].basic_blocks["enter"].next.erase(cur_basic_block);
 					cur_basic_block = "enter";
 				}
 				basic_block bb;
 				blocks[cur_fun_block].basic_blocks[quad.result] = bb;  //新建基本块
+				blocks[cur_fun_block].block_sequence.push_back(quad.result);
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].next.insert(quad.result);
 				cur_basic_block = quad.result;
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].quadtable.push_back(quad);
@@ -142,6 +201,7 @@ void Optimizer::build_blocks() {
 				string bb_name = newB();
 				blocks[cur_fun_block].basic_blocks[bb_name] = bb;
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].next.insert(bb_name);
+				blocks[cur_fun_block].block_sequence.push_back(bb_name);
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].next.insert(quad.result);
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].quadtable.push_back(quad);
 				cur_basic_block = bb_name;
@@ -150,6 +210,7 @@ void Optimizer::build_blocks() {
 				basic_block bb;
 				string bb_name = newB();
 				blocks[cur_fun_block].basic_blocks[bb_name] = bb;
+				blocks[cur_fun_block].block_sequence.push_back(bb_name);
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].next.insert(quad.result);
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].quadtable.push_back(quad);
 				cur_basic_block = bb_name;
@@ -159,12 +220,25 @@ void Optimizer::build_blocks() {
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].next.insert("exit");
 			}
 			else if (quad.op == "CALL") {
+				if (lst_basic_block == "enter") {
+					blocks[cur_fun_block].basic_blocks.erase(cur_basic_block);
+					blocks[cur_fun_block].block_sequence.pop_back();
+					blocks[cur_fun_block].basic_blocks["enter"].next.erase(cur_basic_block);
+					cur_basic_block = "enter";
+				}
 				basic_block bb;
 				string bb_name = newB();
 				blocks[cur_fun_block].basic_blocks[bb_name] = bb;
+				blocks[cur_fun_block].block_sequence.push_back(bb_name);
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].next.insert(bb_name);
 				cur_basic_block = bb_name;
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].quadtable.push_back(quad);
+				basic_block bb1;
+				string bb_name1 = newB();
+				blocks[cur_fun_block].basic_blocks[bb_name1] = bb1;
+				blocks[cur_fun_block].block_sequence.push_back(bb_name1);
+				blocks[cur_fun_block].basic_blocks[cur_basic_block].next.insert(bb_name1);
+				cur_basic_block = bb_name1;
 			}
 			else {
 				blocks[cur_fun_block].basic_blocks[cur_basic_block].quadtable.push_back(quad);
@@ -174,6 +248,7 @@ void Optimizer::build_blocks() {
 	}
 	basic_block bb;
 	blocks[cur_fun_block].basic_blocks["exit"] = bb;
+	blocks[cur_fun_block].block_sequence.push_back("exit");
 	blocks[cur_fun_block].basic_blocks[cur_basic_block].next.insert("exit");
 	//去除空白块
 	for (int i = 0; i < blocks.size(); i++) {
@@ -186,6 +261,13 @@ void Optimizer::build_blocks() {
 		for (int j = 0; j < del_blocks.size(); j++) {
 			 blocks[i].basic_blocks.erase(del_blocks[j]);
 		}
+		vector<string> block_sequence_tem;
+		for (int j = 0; j < blocks[i].block_sequence.size(); j++) {
+			if (find(del_blocks.begin(), del_blocks.end(), blocks[i].block_sequence[j]) == del_blocks.end()) {
+				block_sequence_tem.push_back(blocks[i].block_sequence[j]);
+			}
+		}
+		blocks[i].block_sequence = block_sequence_tem;
 	}
 
 	//补填succ
@@ -288,7 +370,8 @@ void reach_definiton_fun(fun_blocks &fb) {
 				iter->second.quadtable[i].op == "NEG" ||
 				iter->second.quadtable[i].op == "ASS" ||
 				iter->second.quadtable[i].op == "ASAR" ||
-				iter->second.quadtable[i].op == "SW") {
+				iter->second.quadtable[i].op == "SW" ||
+				iter->second.quadtable[i].op == "SCF") {
 				var_def_position[iter->second.quadtable[i].result].insert("<" + iter->first + "," + to_string(i) + ">");
 				fb.du_chain[iter->second.quadtable[i].result]["<" + iter->first + "," + to_string(i) + ">"] = {};
 			}
@@ -297,6 +380,9 @@ void reach_definiton_fun(fun_blocks &fb) {
 			}
 			if (iter->second.quadtable[i].arg2 != "") {
 				var_use_position[iter->second.quadtable[i].arg2].insert("<" + iter->first + "," + to_string(i) + ">");
+			}
+			if (iter->second.quadtable[i].op == "PARA") {
+				var_use_position[iter->second.quadtable[i].result].insert("<" + iter->first + "," + to_string(i) + ">");
 			}
 		}
 	}
@@ -456,7 +542,7 @@ void print_du_chain_fun(fun_blocks &fb, ofstream &f) {
 void Optimizer::print_reach_definiton() {
 	for (int i = 0; i < blocks.size(); i++) {
 		ofstream reach_definiton_file;
-		reach_definiton_file.open("dataflow_analysis/reach_definiton/"+ blocks[i].func_name);
+		reach_definiton_file.open("dataflow_analysis/reach_definiton/"+ blocks[i].func_name+".txt");
 		reach_definiton_file << "reach definiton information" << endl;
 		for (map<string, basic_block>::iterator iter = blocks[i].basic_blocks.begin(); iter != blocks[i].basic_blocks.end(); iter++) {
 			reach_definiton_file << "basic block name: " << iter->first << endl;
@@ -553,10 +639,16 @@ void compute_bblock_def_use(basic_block &basic_block) {
 				var_set[arg2][1] = 1; //
 			}
 		}
-		else if (op == "PARA" || op == "SCF" || op == "SW") {
+		else if (op == "SCF" || op == "SW") {
 			if (var_set[result][1] == 0) {//还没被使用
 				basic_block.def.insert(result);
 				var_set[result][0] = 1; //
+			}
+		}
+		else if (op == "PARA") {
+			if (var_set[result][0] == 0) {//还没被定义
+				basic_block.use.insert(result);
+				var_set[result][1] = 1; //
 			}
 		}
 		else if (op == "RET"&& arg1 !="" ) {
@@ -641,43 +733,165 @@ void Optimizer::print_live_var_analysis() {
 	}
 }
 
+//<B1,1> -> B1
+string position2block(string a) {
+	string b="";
+	for (int i = 1; i < a.size(); i++) {
+		if (a[i] != ',') {
+			b = b + a[i];
+		}
+		else{
+			return b;
+		}
+	}
+	return b;
+}
 int is_var_conflict(string a,string b, fun_blocks &fb) {
 	// Fix 这里简单地定义：活跃范围重合的变量之间冲突
-	// 可以使用du-chain来改进
-	set<string> bblock_a, bblock_b,tem;
+	set<string> act_bblock_a, act_bblock_b, tem;  //变量a活跃的基本块
+	set<string> def_bblock_a, def_bblock_b;  //变量a定义的基本块
+	int conflict_flag = 0; //初始化为不冲突
 	for (map<string, basic_block>::iterator iter = fb.basic_blocks.begin(); iter != fb.basic_blocks.end(); iter++) {
 		if (iter->second.ain.find(a) != iter->second.ain.end()) {
-			bblock_a.insert(iter->first);
+			act_bblock_a.insert(iter->first);
 		}
 		if (iter->second.ain.find(b) != iter->second.ain.end()) {
-			bblock_b.insert(iter->first);
+			act_bblock_b.insert(iter->first);
+		}
+		if (iter->second.aout.find(a) != iter->second.aout.end()) {
+			act_bblock_a.insert(iter->first);
+		}
+		if (iter->second.aout.find(b) != iter->second.aout.end()) {
+			act_bblock_b.insert(iter->first);
 		}
 	}
-	my_intersection(bblock_a, bblock_b, tem);
-	if (tem.size() == 0) {
-		return 0;
-	}
-	else {
+	my_intersection(act_bblock_a, act_bblock_b, tem);
+	if (tem.size() > 0) {
 		return 1;
 	}
+	/*else {
+		return 1;
+	}*/
+	//使用du-chain来改进
+	map<string, map< string, set<string> > >::iterator iter;
+	//检查变量a定义的基本块与变量b活跃的基本块是否有交集,变量b活跃的基本块：只要变量b出现在基本块的ain或aout中，就说其在该基本块活跃
+	iter = fb.du_chain.find(a);
+	if (iter != fb.du_chain.end()) {
+		for (map<string, set<string>>::iterator iter1 = iter->second.begin(); iter1 != iter->second.end(); iter1++) {
+			def_bblock_a.insert(position2block(iter1->first));
+		}
+		my_intersection(act_bblock_b, def_bblock_a, tem);
+		if (tem.size() != 0) {
+			conflict_flag = 1;
+		}
+	}
+	//检查变量b定义的基本块与变量a活跃的基本块是否有交集
+	iter = fb.du_chain.find(b);
+	if (iter != fb.du_chain.end()) {
+		for (map<string, set<string>>::iterator iter1 = iter->second.begin(); iter1 != iter->second.end(); iter1++) {
+			def_bblock_b.insert(position2block(iter1->first));
+		}
+		my_intersection(act_bblock_a, def_bblock_b, tem);
+		if (tem.size() != 0) {
+			conflict_flag = 1;
+		}
+	}
+	//全局变量一定和其他所有变量冲突
+	SymTableItem symitem;
+	int g;
+	cur_fun_symtab = 0;
+	find_sym_table(fb.func_name, symitem, g);
+	cur_fun_symtab = symitem.adr;
+	SymTableItem symitem1,symitem2;
+	int g1,g2;
+	find_sym_table(a, symitem1, g1);
+	find_sym_table(b, symitem2, g2);
+	if (g1 == 1 || g2 == 1) {
+		return 1;
+	}
+	//局部常量一定和其他所有变量冲突
+	if(symitem1.obj==constantobj|| symitem2.obj == constantobj) {
+		return 1;
+	}
+	//活跃的参数一定和其他所有变量冲突
+	int max_para_addr = symitem.number * 4 + (4 + 4 * reg_s_num);
+	if (symitem1.adr < max_para_addr|| symitem2.adr < max_para_addr) {
+		return 1;
+	}
+	return conflict_flag;
 }
 //< <node1,color1,next1>, <node2,color2,next2>... >
 void build_conflict_graph(fun_blocks &fb) {
 	vector<string> conflict_graph_nodes;
 	map<string, basic_block> basic_blocks = fb.basic_blocks;
+	map<string, int> var_used_times;
 	//只有跨越基本块仍活跃的变量才能分配到全局寄存器
 	for (map<string, basic_block>::iterator iter = basic_blocks.begin(); iter != basic_blocks.end(); iter++) {
 		if (iter->first != "enter") {
-			for (set<string>::iterator iter1 = iter->second.ain.begin(); iter1 != iter->second.ain.end(); iter1++) {
-				if (iter->second.aout.find(*iter1) != iter->second.aout.end()) {
-					conflict_graph_node tem;
-					tem.color = -2; //-2代表白色，即未被染色
-					tem.priority = 1;//Fix 这只是初步将所有点进memory的优先级设为相等的值
-					fb.conflict_graph[*iter1] = tem;
+			//for (set<string>::iterator iter1 = iter->second.ain.begin(); iter1 != iter->second.ain.end(); iter1++) {
+			//	if (iter->second.aout.find(*iter1) != iter->second.aout.end()) {
+			//		conflict_graph_node tem;
+			//		tem.color = -2; //-2代表白色，即未被染色
+			//		tem.priority = 1;//Fix 这只是初步将所有点进memory的优先级设为相等的值
+			//		fb.conflict_graph[*iter1] = tem;
+			//		var_used_times[*iter1] = 0;
+			//	}
+			//}
+			for (set<string>::iterator iter1 = iter->second.aout.begin(); iter1 != iter->second.aout.end(); iter1++) {
+				for (set<string>::iterator iter2 = iter->second.next.begin(); iter2 != iter->second.next.end(); iter2++) {
+					if (basic_blocks[*iter2].ain.find(*iter1) != basic_blocks[*iter2].ain.end()) {
+						conflict_graph_node tem;
+						tem.color = -2; //-2代表白色，即未被染色
+						tem.priority = 1;//Fix 这只是初步将所有点进memory的优先级设为相等的值
+						fb.conflict_graph[*iter1] = tem;
+						var_used_times[*iter1] = 0;
+					}
 				}
 			}
 		}
 	}
+	map<string, conflict_graph_node> conflict_graph1= fb.conflict_graph;
+	//那些只在一个基本块里出现过的全局变量也分不到全局寄存器
+	for (map<string, conflict_graph_node>::iterator iter = fb.conflict_graph.begin(); iter != fb.conflict_graph.end(); iter++) {
+		int times = 0;
+		for (map<string, basic_block>::iterator iter1 = basic_blocks.begin(); iter1 != basic_blocks.end(); iter1++) {
+			if (iter1->second.use.find(iter->first) != iter1->second.use.end()|| iter1->second.def.find(iter->first) != iter1->second.def.end()) {
+				times++;
+			}
+		}
+		if (times == 1) {
+			conflict_graph1.erase(iter->first);
+		}
+	}
+	//常量不参与全局寄存器分配
+	if (CONST_GLOBAL_REG) {
+		for (map<string, conflict_graph_node>::iterator iter = fb.conflict_graph.begin(); iter != fb.conflict_graph.end(); iter++) {
+			SymTableItem symitem_const;
+			int g_const;
+			find_sym_table(iter->first, symitem_const, g_const);
+			if (symitem_const.obj == constantobj) {
+				conflict_graph1.erase(iter->first);
+			}
+		}
+	}
+	//常量不参与全局寄存器分配_end
+	fb.conflict_graph = conflict_graph1;
+	//把寄存器传参的4个参数全放进全局寄存器
+	SymTableItem func_name;
+	int global_tem;
+	find_sym_table(fb.func_name, func_name, global_tem);
+	int func_para_num = func_name.number;
+	for (int i = 0; i < 4; i++) {
+		if (i < func_para_num) {
+			conflict_graph_node tem;
+			tem.color = -2; //-2代表白色，即未被染色
+			tem.priority = 1;//Fix 这只是初步将所有点进memory的优先级设为相等的值
+			string name = symtables[func_name.adr].items[i].name;
+			fb.conflict_graph[name] = tem;
+			var_used_times[name] = 0;
+		}
+	}
+
 	for (map<string, conflict_graph_node>::iterator iter = fb.conflict_graph.begin(); iter != fb.conflict_graph.end(); iter++) {
 		conflict_graph_nodes.push_back(iter->first);
 	}
@@ -721,14 +935,16 @@ void graph_coloring(fun_blocks &fb,int color_num) {
 	while (node_num>0) {
 		for (map<string, conflict_graph_node>::iterator iter = fb.conflict_graph.begin(); iter != fb.conflict_graph.end(); iter++) {
 			set<int> node_color_num;
-			for (set<string>::iterator iter1 = iter->second.next.begin(); iter1 != iter->second.next.end(); iter1++) {
-				if (fb.conflict_graph[*iter1].color>=0&&node_color_num.find(fb.conflict_graph[*iter1].color) == node_color_num.end()) {
-					node_color_num.insert(fb.conflict_graph[*iter1].color);
+			if (fb.conflict_graph[iter->first].color == -2) {   //处理还没染色的点
+				for (set<string>::iterator iter1 = iter->second.next.begin(); iter1 != iter->second.next.end(); iter1++) {
+					if (fb.conflict_graph[*iter1].color >= 0 && node_color_num.find(fb.conflict_graph[*iter1].color) == node_color_num.end()) {
+						node_color_num.insert(fb.conflict_graph[*iter1].color);
+					}
 				}
-			}
-			if (node_color_num.size() < reg_s_num) {
-				node_num--;
-				fb.conflict_graph[iter->first].color = find_color(node_color_num);
+				if (node_color_num.size() < reg_s_num) {
+					node_num--;
+					fb.conflict_graph[iter->first].color = find_color(node_color_num);
+				}
 			}
 		}
 		if (node_num > 0) {
@@ -758,12 +974,12 @@ void Optimizer::graphviz_global_reg_alloc(fun_blocks &fb) {
 	for (map<string, conflict_graph_node>::iterator iter = conflict_graph.begin(); iter != conflict_graph.end(); iter++) {
 		string color= "White";
 		if (iter->second.color == -1) {
-			color = "Red";
+			color = "Red";    //红色代表溢出到内存的点
 		}
-		else if (iter->second.color == -1) {
-			color = "Turquoise";
+		else if (iter->second.color == -2) {
+			color = "Turquoise";  //蓝绿色代表没有分配到寄存器，也没有溢出到内存的点，即全局寄存器分配出现了错误
 		}
-		dotfile << convert2ident(iter->first) << "[" << "label=" << "\""<< convert2ident(iter->first) << "\"" << ", shape=circle"<<", style=filled, fillcolor="<<color<<"]\n";
+		dotfile << convert2ident(iter->first) << "[" << "label=" << "\""<< convert2ident(iter->first) +"-"+to_string(iter->second.color)<< "\"" << ", shape=circle"<<", style=filled, fillcolor="<<color<<"]\n";
 	}
 	set<string> edge;
 	for (map<string, conflict_graph_node>::iterator iter = conflict_graph.begin(); iter != conflict_graph.end(); iter++) {
@@ -792,7 +1008,8 @@ void Optimizer::graphviz_global_reg_alloc(fun_blocks &fb) {
 void Optimizer::work() {
 	//为了提高测试时的速度，先把优化部分注释掉一部分  Fix
 	const_fold();
-	/*build_blocks();
+	look_hole();
+	build_blocks();
 	graphviz_fun_block();
 	reach_definiton();
 	live_var_analysis();
@@ -803,5 +1020,5 @@ void Optimizer::work() {
 		global_reg_alloc(blocks[i]);
 		graphviz_global_reg_alloc(blocks[i]);
 	}
-	*/
+	
 }

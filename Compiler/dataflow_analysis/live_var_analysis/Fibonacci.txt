@@ -17,24 +17,36 @@ ain: {@5, @6, @9, n, }
 aout: {@6, @9, n, }
 
 basic block name: B3
+def: {}
+use: {}
+ain: {@9, n, }
+aout: {@9, n, }
+
+basic block name: B4
 def: {@10, @8, }
 use: {@9, n, }
 ain: {@9, n, }
 aout: {@8, }
 
-basic block name: B4
+basic block name: B5
+def: {}
+use: {}
+ain: {@8, }
+aout: {@8, }
+
+basic block name: B6
 def: {@11, @12, }
 use: {@8, }
 ain: {@8, }
 aout: {}
 
-basic block name: Lab0
+basic block name: Lab_lj_0
 def: {}
 use: {@4, n, }
 ain: {@4, @5, @6, @9, n, }
 aout: {@5, @6, @9, n, }
 
-basic block name: Lab3
+basic block name: Lab_lj_3
 def: {@7, }
 use: {@6, n, }
 ain: {@6, @9, n, }

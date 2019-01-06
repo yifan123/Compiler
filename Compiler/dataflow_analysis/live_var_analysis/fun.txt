@@ -1,0 +1,18 @@
+basic block name: B0
+def: {b, }
+use: {@0, }
+ain: {@0, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@0, }
+aout: {@0, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

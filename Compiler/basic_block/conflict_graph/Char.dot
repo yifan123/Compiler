@@ -1,0 +1,4 @@
+graph Char{
+label =Char
+ch1[label="ch1-0", shape=circle, style=filled, fillcolor=White]
+}

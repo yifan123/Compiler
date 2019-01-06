@@ -1,0 +1,9 @@
+graph test_while{
+label =test_while
+i[label="i-0", shape=circle, style=filled, fillcolor=White]
+j[label="j-1", shape=circle, style=filled, fillcolor=White]
+sum[label="sum-2", shape=circle, style=filled, fillcolor=White]
+i--j
+i--sum
+j--sum
+}

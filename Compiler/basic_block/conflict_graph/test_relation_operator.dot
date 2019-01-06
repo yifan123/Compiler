@@ -1,0 +1,6 @@
+graph test_relation_operator{
+label =test_relation_operator
+x[label="x-0", shape=circle, style=filled, fillcolor=White]
+y[label="y-1", shape=circle, style=filled, fillcolor=White]
+x--y
+}

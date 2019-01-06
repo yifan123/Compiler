@@ -1,0 +1,13 @@
+graph Label{
+label =Label
+t265[label="t265-0", shape=circle, style=filled, fillcolor=White]
+c1[label="c1-1", shape=circle, style=filled, fillcolor=White]
+ret[label="ret-2", shape=circle, style=filled, fillcolor=White]
+x[label="x-3", shape=circle, style=filled, fillcolor=White]
+c1--ret
+c1--t265
+c1--x
+ret--t265
+ret--x
+t265--x
+}

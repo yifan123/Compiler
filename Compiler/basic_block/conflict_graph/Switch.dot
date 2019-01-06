@@ -1,0 +1,7 @@
+graph Switch{
+label =Switch
+t279[label="t279-0", shape=circle, style=filled, fillcolor=White]
+t289[label="t289-0", shape=circle, style=filled, fillcolor=White]
+x[label="x-1", shape=circle, style=filled, fillcolor=White]
+t279--x
+}

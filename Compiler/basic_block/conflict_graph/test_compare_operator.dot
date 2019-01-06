@@ -1,0 +1,13 @@
+graph test_compare_operator{
+label =test_compare_operator
+flag[label="flag-0", shape=circle, style=filled, fillcolor=White]
+judge[label="judge-1", shape=circle, style=filled, fillcolor=White]
+x[label="x-2", shape=circle, style=filled, fillcolor=White]
+y[label="y-3", shape=circle, style=filled, fillcolor=White]
+flag--judge
+flag--x
+flag--y
+judge--x
+judge--y
+x--y
+}

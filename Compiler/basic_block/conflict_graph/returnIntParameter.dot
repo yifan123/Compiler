@@ -1,48 +1,18 @@
 graph returnIntParameter{
 label =returnIntParameter
-t236[label="t236", shape=circle, style=filled, fillcolor=White]
-t238[label="t238", shape=circle, style=filled, fillcolor=White]
-t240[label="t240", shape=circle, style=filled, fillcolor=White]
-t242[label="t242", shape=circle, style=filled, fillcolor=White]
-int_parameter_1[label="int_parameter_1", shape=circle, style=filled, fillcolor=White]
-int_parameter_2[label="int_parameter_2", shape=circle, style=filled, fillcolor=White]
-int_parameter_3[label="int_parameter_3", shape=circle, style=filled, fillcolor=White]
-int_parameter_4[label="int_parameter_4", shape=circle, style=filled, fillcolor=White]
-select[label="select", shape=circle, style=filled, fillcolor=Red]
+_tmp[label="_tmp-0", shape=circle, style=filled, fillcolor=White]
+int_parameter_1[label="int_parameter_1-1", shape=circle, style=filled, fillcolor=White]
+int_parameter_2[label="int_parameter_2-2", shape=circle, style=filled, fillcolor=White]
+int_parameter_3[label="int_parameter_3-3", shape=circle, style=filled, fillcolor=White]
+select[label="select-4", shape=circle, style=filled, fillcolor=White]
+_tmp--int_parameter_1
+_tmp--int_parameter_2
+_tmp--int_parameter_3
+_tmp--select
 int_parameter_1--int_parameter_2
 int_parameter_1--int_parameter_3
-int_parameter_1--int_parameter_4
 int_parameter_1--select
-int_parameter_1--t236
-int_parameter_1--t238
-int_parameter_1--t240
-int_parameter_1--t242
 int_parameter_2--int_parameter_3
-int_parameter_2--int_parameter_4
 int_parameter_2--select
-int_parameter_2--t236
-int_parameter_2--t238
-int_parameter_2--t240
-int_parameter_2--t242
-int_parameter_3--int_parameter_4
 int_parameter_3--select
-int_parameter_3--t236
-int_parameter_3--t238
-int_parameter_3--t240
-int_parameter_3--t242
-int_parameter_4--select
-int_parameter_4--t236
-int_parameter_4--t238
-int_parameter_4--t240
-int_parameter_4--t242
-select--t236
-select--t238
-select--t240
-select--t242
-t236--t238
-t236--t240
-t236--t242
-t238--t240
-t238--t242
-t240--t242
 }

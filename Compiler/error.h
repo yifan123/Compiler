@@ -1,6 +1,34 @@
 #pragma once
 #include<iostream>
 using namespace std;
+
+/*
+把error.h文件当作了define全局宏的头文件
+寄存器用途：
+1. t,s寄存器合在一起，先分配s，s用完再用t
+2. fp寄存器用来算数组下标，比如sll $gp, $t0, 2
+*/
+// s 8, t 10, a 3  v1 1   a0不能用，用于系统调用
+#define reg_s_num 5
+#define reg_st_num 18
+
+//输出this ia statement等信息
+#ifdef __DEBUG  
+//#define DEBUG(info)    printf(info)
+//#define DEBUG (printf("(%d)-<%s>: ",__LINE__, __FUNCTION__), printf)
+#define DEBUG printf("(%d)---: ",lexer.line);printf
+#else
+#define DEBUG(info)
+#endif
+#define HAS_RETURN 1
+
+//#在mips代码中输出注释
+#define COMMENT(info) mipsfile<<info<<endl
+//是否换行：为了清晰要换行，为了优化效果不换行
+#define IS_ENTER 1
+//常量是否参与全局寄存器分配
+#define CONST_GLOBAL_REG 0
+
 //添加error_code的定义
 //语义错误
 #define	UNDEF_ID			    28		//未声明标识符

@@ -1,47 +1,63 @@
 digraph testCallFunction{
 label =testCallFunction
-B114[label="B114:\nSCF,,,test_select\nNEQ,test_select,@407,Lab408\n" shape=box]
-B115[label="B115:\n" shape=box]
-B116[label="B116:\nCALL,testIfWhile,,\nJMP,,,Lab406\n" shape=box]
-B118[label="B118:\nPARA,testSwitchCase,0,const_int_postive\nPARA,testSwitchCase,1,const_char_a\n" shape=box]
-B119[label="B119:\nCALL,testSwitchCase,,\nPARA,testSwitchCase,0,const_int_negtive\nPARA,testSwitchCase,1,@411\n" shape=box]
-B120[label="B120:\nCALL,testSwitchCase,,\nPARA,testSwitchCase,0,@412\nPARA,testSwitchCase,1,@413\n" shape=box]
-B121[label="B121:\nCALL,testSwitchCase,,\nPARA,testSwitchCase,0,@414\nPARA,testSwitchCase,1,@415\n" shape=box]
-B122[label="B122:\nCALL,testSwitchCase,,\nJMP,,,Lab406\n" shape=box]
-B124[label="B124:\n" shape=box]
-B125[label="B125:\nCALL,testAssign,,\nJMP,,,Lab406\n" shape=box]
-B127[label="B127:\n" shape=box]
-B128[label="B128:\nCALL,testInputOutput,,\nJMP,,,Lab406\n" shape=box]
-B130[label="B130:\n" shape=box]
-B131[label="B131:\nCALL,testRecursion,,\nJMP,,,Lab406\n" shape=box]
-Lab406[label="Lab406:\nLAB,,,Lab406\nPRF,int_global_var,0,1\nPRF,char_global_var,1,1\nRET,,,\n" shape=box]
-Lab408[label="Lab408:\nLAB,,,Lab408\nNEQ,test_select,@409,Lab410\n" shape=box]
-Lab410[label="Lab410:\nLAB,,,Lab410\nNEQ,test_select,@416,Lab417\n" shape=box]
-Lab417[label="Lab417:\nLAB,,,Lab417\nNEQ,test_select,@418,Lab419\n" shape=box]
-Lab419[label="Lab419:\nLAB,,,Lab419\nNEQ,test_select,@420,Lab421\n" shape=box]
-Lab421[label="Lab421:\nLAB,,,Lab421\n" shape=box]
+B130[label="B130:\nSCF,,,test_select\nNEQ,test_select,@419,Lab_lj_420\n" shape=box]
+B131[label="B131:\n" shape=box]
+B132[label="B132:\nCALL,testIfWhile,,\n" shape=box]
+B133[label="B133:\nJMP,,,Lab_lj_418\n" shape=box]
+B135[label="B135:\nASS,const_int_postive,,@423\nASS,const_char_a,,@424\nPARA,testSwitchCase,0,@423\nPARA,testSwitchCase,1,@424\n" shape=box]
+B136[label="B136:\nCALL,testSwitchCase,,\n" shape=box]
+B137[label="B137:\nASS,const_int_negtive,,@425\nPARA,testSwitchCase,0,@425\nPARA,testSwitchCase,1,@426\n" shape=box]
+B138[label="B138:\nCALL,testSwitchCase,,\n" shape=box]
+B139[label="B139:\nPARA,testSwitchCase,0,@427\nPARA,testSwitchCase,1,@428\n" shape=box]
+B140[label="B140:\nCALL,testSwitchCase,,\n" shape=box]
+B141[label="B141:\nPARA,testSwitchCase,0,@429\nPARA,testSwitchCase,1,@430\n" shape=box]
+B142[label="B142:\nCALL,testSwitchCase,,\n" shape=box]
+B143[label="B143:\nJMP,,,Lab_lj_418\n" shape=box]
+B145[label="B145:\n" shape=box]
+B146[label="B146:\nCALL,testAssign,,\n" shape=box]
+B147[label="B147:\nJMP,,,Lab_lj_418\n" shape=box]
+B149[label="B149:\n" shape=box]
+B150[label="B150:\nCALL,testInputOutput,,\n" shape=box]
+B151[label="B151:\nJMP,,,Lab_lj_418\n" shape=box]
+B153[label="B153:\n" shape=box]
+B154[label="B154:\nCALL,testRecursion,,\n" shape=box]
+B155[label="B155:\nJMP,,,Lab_lj_418\n" shape=box]
+Lab_lj_418[label="Lab_lj_418:\nLAB,,,Lab_lj_418\nPRF,int_global_var,0,1\nPRF,char_global_var,1,1\nRET,,,\n" shape=box]
+Lab_lj_420[label="Lab_lj_420:\nLAB,,,Lab_lj_420\nNEQ,test_select,@421,Lab_lj_422\n" shape=box]
+Lab_lj_422[label="Lab_lj_422:\nLAB,,,Lab_lj_422\nNEQ,test_select,@431,Lab_lj_432\n" shape=box]
+Lab_lj_432[label="Lab_lj_432:\nLAB,,,Lab_lj_432\nNEQ,test_select,@433,Lab_lj_434\n" shape=box]
+Lab_lj_434[label="Lab_lj_434:\nLAB,,,Lab_lj_434\nNEQ,test_select,@435,Lab_lj_436\n" shape=box]
+Lab_lj_436[label="Lab_lj_436:\nLAB,,,Lab_lj_436\n" shape=box]
 enter[label="enter:\n" shape=box]
 exit[label="exit:\n" shape=box]
-B114->B115
-B114->Lab408
-B116->Lab406
-B118->B119
-B119->B120
-B120->B121
-B121->B122
-B122->Lab406
-B125->Lab406
-B128->Lab406
-B131->Lab406
-Lab406->exit
-Lab408->B118
-Lab408->Lab410
-Lab410->B124
-Lab410->Lab417
-Lab417->B127
-Lab417->Lab419
-Lab419->B130
-Lab419->Lab421
-Lab421->Lab406
-enter->B114
+B130->B131
+B130->Lab_lj_420
+B132->B133
+B133->Lab_lj_418
+B135->B136
+B136->B137
+B137->B138
+B138->B139
+B139->B140
+B140->B141
+B141->B142
+B142->B143
+B143->Lab_lj_418
+B146->B147
+B147->Lab_lj_418
+B150->B151
+B151->Lab_lj_418
+B154->B155
+B155->Lab_lj_418
+Lab_lj_418->exit
+Lab_lj_420->B135
+Lab_lj_420->Lab_lj_422
+Lab_lj_422->B145
+Lab_lj_422->Lab_lj_432
+Lab_lj_432->B149
+Lab_lj_432->Lab_lj_434
+Lab_lj_434->B153
+Lab_lj_434->Lab_lj_436
+Lab_lj_436->Lab_lj_418
+enter->B130
 }

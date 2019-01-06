@@ -1,0 +1,49 @@
+reach definiton information
+basic block name: B150
+gen: {<B150,0>, <B150,1>, }
+kill: {<B151,0>, }
+rin: {}
+rout: {<B150,0>, <B150,1>, }
+
+basic block name: B151
+gen: {<B151,0>, }
+kill: {<B150,0>, }
+rin: {<B150,0>, <B150,1>, }
+rout: {<B150,1>, <B151,0>, }
+
+basic block name: B152
+gen: {}
+kill: {}
+rin: {<B150,0>, <B150,1>, <B151,0>, }
+rout: {<B150,0>, <B150,1>, <B151,0>, }
+
+basic block name: B153
+gen: {}
+kill: {}
+rin: {<B150,0>, <B150,1>, <B151,0>, }
+rout: {<B150,0>, <B150,1>, <B151,0>, }
+
+basic block name: Lab_lj_717
+gen: {}
+kill: {}
+rin: {<B150,0>, <B150,1>, <B151,0>, }
+rout: {<B150,0>, <B150,1>, <B151,0>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B150,0>, <B150,1>, <B151,0>, }
+rout: {<B150,0>, <B150,1>, <B151,0>, }
+
+du_chain
+_: 
+<B150,1>: {}
+judge: 
+<B150,0>: {<B151,0>, }
+<B151,0>: {}

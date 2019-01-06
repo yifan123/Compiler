@@ -1,52 +1,52 @@
-basic block name: B12
+basic block name: B15
 def: {i, sum, }
 use: {@26, @27, }
-ain: {@26, @27, @30, @32, @36, @39, j, }
-aout: {@30, @32, @36, @39, i, j, sum, }
+ain: {@26, @27, @34, @36, @43, @46, j, }
+aout: {@34, @36, @43, @46, i, j, sum, }
 
-basic block name: B13
-def: {@31, }
-use: {@30, i, }
-ain: {@30, @32, @36, @39, i, j, sum, }
-aout: {@30, @32, @36, @39, i, j, sum, }
+basic block name: B16
+def: {}
+use: {@34, i, }
+ain: {@34, @36, @43, @46, i, j, sum, }
+aout: {@34, @36, @43, @46, i, j, sum, }
 
-basic block name: B15
-def: {@35, @37, }
-use: {@36, i, sum, }
-ain: {@36, @39, i, j, sum, }
-aout: {@36, @39, i, j, sum, }
+basic block name: B18
+def: {}
+use: {@43, i, sum, }
+ain: {@43, @46, i, j, sum, }
+aout: {@43, @46, i, j, sum, }
 
-basic block name: B17
+basic block name: B20
 def: {}
 use: {}
 ain: {}
 aout: {}
 
-basic block name: Lab28
+basic block name: Lab_lj_28
 def: {}
 use: {i, j, }
-ain: {@30, @32, @36, @39, i, j, sum, }
-aout: {@30, @32, @36, @39, i, j, sum, }
+ain: {@34, @36, @43, @46, i, j, sum, }
+aout: {@34, @36, @43, @46, i, j, sum, }
 
-basic block name: Lab29
+basic block name: Lab_lj_29
 def: {i, }
-use: {@32, }
-ain: {@32, @36, @39, j, sum, }
-aout: {@36, @39, i, j, sum, }
+use: {@36, }
+ain: {@36, @43, @46, j, sum, }
+aout: {@43, @46, i, j, sum, }
 
-basic block name: Lab33
+basic block name: Lab_lj_37
 def: {}
 use: {i, j, }
-ain: {@36, @39, i, j, sum, }
-aout: {@36, @39, i, j, sum, }
+ain: {@43, @46, i, j, sum, }
+aout: {@43, @46, i, j, sum, }
 
-basic block name: Lab34
+basic block name: Lab_lj_38
 def: {}
-use: {@39, sum, }
-ain: {@39, sum, }
+use: {@46, sum, }
+ain: {@46, sum, }
 aout: {}
 
-basic block name: Lab38
+basic block name: Lab_lj_45
 def: {}
 use: {}
 ain: {}
@@ -55,8 +55,8 @@ aout: {}
 basic block name: enter
 def: {}
 use: {}
-ain: {@26, @27, @30, @32, @36, @39, j, }
-aout: {@26, @27, @30, @32, @36, @39, j, }
+ain: {@26, @27, @34, @36, @43, @46, j, }
+aout: {@26, @27, @34, @36, @43, @46, j, }
 
 basic block name: exit
 def: {}

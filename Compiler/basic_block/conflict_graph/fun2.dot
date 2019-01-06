@@ -1,0 +1,9 @@
+graph fun2{
+label =fun2
+a[label="a-0", shape=circle, style=filled, fillcolor=White]
+b[label="b-1", shape=circle, style=filled, fillcolor=White]
+c[label="c-2", shape=circle, style=filled, fillcolor=White]
+a--b
+a--c
+b--c
+}

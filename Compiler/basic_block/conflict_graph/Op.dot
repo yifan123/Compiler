@@ -1,0 +1,9 @@
+graph Op{
+label =Op
+op[label="op-0", shape=circle, style=filled, fillcolor=White]
+x[label="x-1", shape=circle, style=filled, fillcolor=White]
+y[label="y-2", shape=circle, style=filled, fillcolor=White]
+op--x
+op--y
+x--y
+}

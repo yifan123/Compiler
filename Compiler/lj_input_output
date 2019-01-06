@@ -1,0 +1,56 @@
+0
+test_recursion begin:
+success!
+*********************
+1
+test_if begin:
+success1!
+success2!
+*********************
+2
+test_while begin:
+success!
+*********************
+3
+test_switch begin:
+success!
+*********************
+4
+test_scanf_printf begin:
+yesInput is:
+y
+e
+s
+89
+69
+83
+*********************
+5
+test_expression begin:
+success!
+*********************
+6
+test_symbol begin:
+success!
+*********************
+7
+test_relation_operator begin:
+ x<y:true
+ x<=y:true
+ x!=y:true
+ x>y:true
+ x>=y:true
+ x!=y:true
+ x==y:true
+ x>=y:true
+ x<=y:true
+*********************
+8
+test_scope begin:
+the global scope_var = 20
+the local scope_var = 10
+the global scope_var = 20
+success!
+*********************
+ch=_
+@#$$&*^^^^test end

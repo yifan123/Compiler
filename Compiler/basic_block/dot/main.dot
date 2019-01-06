@@ -1,12 +1,22 @@
 digraph main{
 label =main
-B133[label="B133:\nASS,@422,,int_global_var\nASS,@423,,char_global_var\n" shape=box]
-B134[label="B134:\nCALL,testCallFunction,,\n" shape=box]
-B135[label="B135:\nCALL,testTrick,,\nRET,,,\n" shape=box]
+B0[label="B0:\nASS,@0,,i\nASS,@1,,sum\n" shape=box]
+B1[label="B1:\nARAS,i,i,a\nADD,i,@5,i\nJMP,,,Lab_lj_2\n" shape=box]
+B3[label="B3:\nASAR,i,a,@11\nADD,sum,@11,sum\nADD,i,@13,i\nJMP,,,Lab_lj_8\n" shape=box]
+Lab_lj_2[label="Lab_lj_2:\nLAB,,,Lab_lj_2\nGEQ,i,@4,Lab_lj_3\n" shape=box]
+Lab_lj_3[label="Lab_lj_3:\nLAB,,,Lab_lj_3\nASS,@7,,i\n" shape=box]
+Lab_lj_8[label="Lab_lj_8:\nLAB,,,Lab_lj_8\nGEQ,i,@10,Lab_lj_9\n" shape=box]
+Lab_lj_9[label="Lab_lj_9:\nLAB,,,Lab_lj_9\nPRF,sum,0,1\nRET,,,\n" shape=box]
 enter[label="enter:\n" shape=box]
 exit[label="exit:\n" shape=box]
-B133->B134
-B134->B135
-B135->exit
-enter->B133
+B0->Lab_lj_2
+B1->Lab_lj_2
+B3->Lab_lj_8
+Lab_lj_2->B1
+Lab_lj_2->Lab_lj_3
+Lab_lj_3->Lab_lj_8
+Lab_lj_8->B3
+Lab_lj_8->Lab_lj_9
+Lab_lj_9->exit
+enter->B0
 }

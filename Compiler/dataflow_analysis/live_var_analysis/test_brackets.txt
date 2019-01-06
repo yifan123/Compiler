@@ -1,0 +1,18 @@
+basic block name: B42
+def: {}
+use: {@235, judge, }
+ain: {@235, judge, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@235, judge, }
+aout: {@235, judge, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

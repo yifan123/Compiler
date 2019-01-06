@@ -1,0 +1,6 @@
+graph Fibonacci{
+label =Fibonacci
+t8[label="t8-0", shape=circle, style=filled, fillcolor=White]
+n[label="n-1", shape=circle, style=filled, fillcolor=White]
+n--t8
+}

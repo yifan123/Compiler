@@ -1,8 +1,0 @@
-digraph local_scope{
-label =local_scope
-B47[label="B47:\nASS,@133,,scope_var\nPRF,21,str,0\nPRF,scope_var,0,1\nRET,,,\n" shape=box]
-enter[label="enter:\n" shape=box]
-exit[label="exit:\n" shape=box]
-B47->exit
-enter->B47
-}

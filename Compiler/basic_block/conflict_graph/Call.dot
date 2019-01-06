@@ -1,0 +1,18 @@
+graph Call{
+label =Call
+t155[label="t155-0", shape=circle, style=filled, fillcolor=White]
+ch1[label="ch1-1", shape=circle, style=filled, fillcolor=White]
+i[label="i-2", shape=circle, style=filled, fillcolor=White]
+i1[label="i1-3", shape=circle, style=filled, fillcolor=White]
+i2[label="i2-4", shape=circle, style=filled, fillcolor=White]
+ch1--i
+ch1--i1
+ch1--i2
+ch1--t155
+i--i1
+i--i2
+i--t155
+i1--i2
+i1--t155
+i2--t155
+}

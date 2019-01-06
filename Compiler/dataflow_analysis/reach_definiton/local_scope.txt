@@ -1,0 +1,22 @@
+reach definiton information
+basic block name: B54
+gen: {<B54,0>, }
+kill: {}
+rin: {}
+rout: {<B54,0>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B54,0>, }
+rout: {<B54,0>, }
+
+du_chain
+scope_var: 
+<B54,0>: {}

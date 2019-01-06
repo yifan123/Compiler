@@ -1,18 +1,57 @@
-int test_if(int plus) {
-	const char flag = 'g';
-	char ch;
-	ch = 'a';
-	if (ch + plus > flag) {
-		printf("success1!");
-	}
-	if (ch) {
-		printf("success2!");
-	}
-	if (0) {
-		printf("fail1!");
-	}
-	return(0);
+void testIfWhile()
+{
+    const int test_if_1 = 1, test_if_2 = 2;
+    const char const_char_a = 'b', const_char_b = 'a';
+    int test_if_result, loop_num;
+
+    test_if_result = 0;
+    loop_num = 0;
+    if(const_char_a + 1 > const_char_b + 1)
+    {
+        while(test_if_result < 100)
+        {
+            test_if_result = test_if_result + loop_num;
+            loop_num = loop_num + 1;
+        }
+        switch((test_if_result - 100) * 3)
+        {
+            case 15:
+            {
+                test_if_result = -test_if_result * 10 + 2 * loop_num + 117- const_char_a;
+                loop_num = +loop_num - test_if_result + 10 * const_char_b - 100 + 42 + 34 + 2 * test_if_result;
+            }
+            default:
+            {
+                test_if_result = +test_if_result * 4 + 5 * loop_num + 24- const_char_b + 'c';
+                loop_num = -loop_num + test_if_result + 4 * const_char_b - 1653 + 453 + 555 - 4 * test_if_result;
+            }
+        }
+    }
+    
+    test_if_result = 0;
+    loop_num = 0;
+    if(test_if_1 < test_if_2)
+    {
+        while(test_if_result < 20)
+        {
+            switch(test_if_result - test_if_result / 2 * 2)
+            {
+                case 0: test_if_result = test_if_result + 1;
+                case 1: test_if_result = test_if_result + loop_num;
+            }
+            loop_num = loop_num + 1;
+        }
+        if(test_if_result == test_if_result / 2 * 2)
+        {
+        	printf(const_char_b);
+            test_if_result = +test_if_result * 7 + 2 * loop_num + 99 - const_char_b + 'g';
+            loop_num = -loop_num + test_if_result + 2 * const_char_b - 523 + 53 + 355 - 2 * test_if_result;
+        }
+    }
+    printf(test_if_result);
+    printf(loop_num);
+    
 }
-void main(){
-	test_if(20);
+void main() {
+	testIfWhile();
 }

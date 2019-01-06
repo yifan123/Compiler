@@ -1,0 +1,22 @@
+reach definiton information
+basic block name: B157
+gen: {<B157,0>, }
+kill: {}
+rin: {}
+rout: {<B157,0>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B157,0>, }
+rout: {<B157,0>, }
+
+du_chain
+judge: 
+<B157,0>: {}

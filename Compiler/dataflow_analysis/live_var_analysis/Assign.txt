@@ -1,0 +1,84 @@
+basic block name: B100
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: B94
+def: {i, }
+use: {@230, }
+ain: {@230, @233, @234, @236, @237, @239, @246, @248, @251, @253, @255, @258, assconst, }
+aout: {@233, @234, @236, @237, @239, @246, @248, @251, @253, @255, @258, assconst, i, }
+
+basic block name: B95
+def: {@235, }
+use: {@234, @236, @237, i, }
+ain: {@233, @234, @236, @237, @239, @246, @248, @251, @253, @255, @258, assconst, i, }
+aout: {@233, @234, @236, @237, @239, @246, @248, @251, @253, @255, @258, assconst, i, }
+
+basic block name: B97
+def: {}
+use: {}
+ain: {@253, @255, @258, ch, x2, y2, }
+aout: {@253, @255, @258, ch, x2, y2, }
+
+basic block name: B98
+def: {}
+use: {}
+ain: {@255, @258, ch, x2, }
+aout: {@255, @258, ch, x2, }
+
+basic block name: B99
+def: {}
+use: {}
+ain: {@258, x2, }
+aout: {@258, x2, }
+
+basic block name: Lab_lj_231
+def: {}
+use: {@233, i, }
+ain: {@233, @234, @236, @237, @239, @246, @248, @251, @253, @255, @258, assconst, i, }
+aout: {@233, @234, @236, @237, @239, @246, @248, @251, @253, @255, @258, assconst, i, }
+
+basic block name: Lab_lj_232
+def: {ch, x2, y1, y2, }
+use: {@239, @246, @248, @251, assconst, }
+ain: {@239, @246, @248, @251, @253, @255, @258, assconst, }
+aout: {@253, @255, @258, ch, x2, y2, }
+
+basic block name: Lab_lj_250
+def: {}
+use: {@253, y2, }
+ain: {@253, @255, @258, ch, x2, y2, }
+aout: {@255, @258, ch, x2, }
+
+basic block name: Lab_lj_252
+def: {}
+use: {@255, ch, }
+ain: {@255, @258, ch, x2, }
+aout: {@258, x2, }
+
+basic block name: Lab_lj_254
+def: {}
+use: {@258, x2, }
+ain: {@258, x2, }
+aout: {}
+
+basic block name: Lab_lj_256
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@230, @233, @234, @236, @237, @239, @246, @248, @251, @253, @255, @258, assconst, }
+aout: {@230, @233, @234, @236, @237, @239, @246, @248, @251, @253, @255, @258, assconst, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

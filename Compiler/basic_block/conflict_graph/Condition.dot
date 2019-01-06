@@ -1,0 +1,13 @@
+graph Condition{
+label =Condition
+cnt[label="cnt-0", shape=circle, style=filled, fillcolor=White]
+i[label="i-1", shape=circle, style=filled, fillcolor=White]
+x[label="x-2", shape=circle, style=filled, fillcolor=White]
+x1[label="x1-3", shape=circle, style=filled, fillcolor=White]
+cnt--i
+cnt--x
+cnt--x1
+i--x
+i--x1
+x--x1
+}

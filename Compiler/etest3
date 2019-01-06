@@ -1,0 +1,11 @@
+int b;
+void main(){	
+	int a,c,fun; 
+	scanf(a);
+	fun();
+	if(a>0){
+		c=b+1;
+	}
+	c=b+2;
+	printf(c);
+}

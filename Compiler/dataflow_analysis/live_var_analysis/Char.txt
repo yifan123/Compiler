@@ -1,0 +1,18 @@
+basic block name: B58
+def: {}
+use: {ch1, }
+ain: {ch1, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {ch1, }
+aout: {ch1, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

@@ -1,0 +1,30 @@
+basic block name: B144
+def: {@672, @674, @675, @676, @678, x, }
+use: {@667, @669, @671, @677, const_1, judge, }
+ain: {@667, @669, @671, @677, @683, @691, const_1, const_3, const_a, judge, }
+aout: {@678, @683, @691, const_3, const_a, }
+
+basic block name: B145
+def: {}
+use: {}
+ain: {@678, @683, @691, const_3, const_a, }
+aout: {@678, @683, @691, const_3, const_a, }
+
+basic block name: B146
+def: {@679, @680, @681, @682, @684, @686, @692, }
+use: {@678, @683, @691, const_3, const_a, }
+ain: {@678, @683, @691, const_3, const_a, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@667, @669, @671, @677, @683, @691, const_1, const_3, const_a, judge, }
+aout: {@667, @669, @671, @677, @683, @691, const_1, const_3, const_a, judge, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

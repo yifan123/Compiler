@@ -6,6 +6,9 @@
 #include<iostream>
 #include"SymTableItem.h"
 #include"SymTable.h"
+#include"optimizer.h"
+#include"error.h"
+
 using namespace std;
 extern map<int, string>stringtab;
 extern int find_sym_table(string sym, SymTableItem& item, int &aglobal, int *symtbles_index = NULL);
@@ -13,16 +16,22 @@ extern vector<SymTable>symtables;
 string cur_fun;
 extern int cur_fun_symtab;
 extern int global;
+int reg_s_used;
+int spill_reg_index = 0;
+
+extern int coiunt;
+map<string, int> global_s_reg;
+//生成优化前目标代码开始********
 void Generator::mem_instr(string instr, string reg, SymTableItem symitem, int aglobal) { //为了分辨全局和局部变量，常量和变量，特别写了这个函数
 	if (symitem.obj == constantobj) {   //可能是全局或局部常量，也可能是临时常量
 		mipsfile << "li " << reg << "," << symitem.adr << endl;
 	}
 	else {
-		if (aglobal==1) {
-			mipsfile << instr <<" "<< reg << "," << symitem.adr << "($gp)" << endl;
+		if (aglobal == 1) {
+			mipsfile << instr << " " << reg << "," << symitem.adr << "($gp)" << endl;
 		}
 		else {
-			mipsfile << instr << " " <<reg << "," << symitem.adr << "($sp)" << endl;
+			mipsfile << instr << " " << reg << "," << symitem.adr << "($sp)" << endl;
 		}
 	}
 }
@@ -39,8 +48,8 @@ void Generator::quad2mips(vector<QuadRuple> quadtable) {
 
 	find_sym_table("@program", symitem, global);
 	int func_size = symitem.func_size;
-	mipsfile << "add $gp, $sp, $0" << endl;
-	mipsfile << "subi $sp, $sp," << func_size << endl;	//开辟全局变量空间
+	mipsfile << "addi $sp, $sp," << -func_size << endl;	//开辟全局变量空间
+	mipsfile << "addu $gp, $sp, $0" << endl;
 	mipsfile << "jal main" << endl;
 	for (int i = 0; i < quadtable.size(); i++) {
 		quadruple2mips(quadtable[i]);
@@ -57,16 +66,16 @@ void Generator::quadruple2mips(QuadRuple quad) {
 		int g1;
 		int g2;
 		int g3;
-		find_sym_table(arg1, symitem1,g1);
-		find_sym_table(arg2, symitem2,g2);
-		find_sym_table(result, symitem3,g3);
+		find_sym_table(arg1, symitem1, g1);
+		find_sym_table(arg2, symitem2, g2);
+		find_sym_table(result, symitem3, g3);
 		mem_instr("lw", "$t0", symitem1, g1);
 		mem_instr("lw", "$t1", symitem2, g2);
 		if (quad.op == "ADD") {	//加法
-			mipsfile << "add $t2,$t0,$t1" << endl;
+			mipsfile << "addu $t2,$t0,$t1" << endl;
 		}
 		else if (quad.op == "SUB") { //减法
-			mipsfile << "sub $t2,$t0,$t1" << endl;
+			mipsfile << "subu $t2,$t0,$t1" << endl;
 		}
 		else if (quad.op == "MUL") {	//乘法
 			mipsfile << "mult $t0,$t1" << endl;
@@ -83,11 +92,11 @@ void Generator::quadruple2mips(QuadRuple quad) {
 		string result = quad.result;
 		SymTableItem symitem1;
 		SymTableItem symitem3;
-		int g1,g3;
-		find_sym_table(arg1, symitem1,g1);
-		find_sym_table(result, symitem3,g3);
+		int g1, g3;
+		find_sym_table(arg1, symitem1, g1);
+		find_sym_table(result, symitem3, g3);
 		mem_instr("lw", "$t0", symitem1, g1);
-		mipsfile << "sub $t2,$0,$t0" << endl;
+		mipsfile << "subu $t2,$0,$t0" << endl;
 		mem_instr("sw", "$t2", symitem3, g3);
 	}
 	else if (quad.op == "ASS") {
@@ -108,14 +117,14 @@ void Generator::quadruple2mips(QuadRuple quad) {
 		SymTableItem symitem1;
 		SymTableItem symitem2;
 		int g1, g2;
-		find_sym_table(arg1, symitem1,g1);
-		find_sym_table(arg2, symitem2,g2);
+		find_sym_table(arg1, symitem1, g1);
+		find_sym_table(arg2, symitem2, g2);
 		mem_instr("lw", "$t0", symitem1, g1);
 		if (arg2 != "$0") {
 			mem_instr("lw", "$t1", symitem2, g2);
 		}
 		else {
-			mipsfile << "add $t1,$0,$0" << endl;
+			mipsfile << "addu $t1,$0,$0" << endl;
 		}
 		if (quad.op == "LSS") {
 			mipsfile << "blt $t0,$t1," << label << endl;
@@ -157,7 +166,7 @@ void Generator::quadruple2mips(QuadRuple quad) {
 	else if (quad.op == "SW") {
 		SymTableItem symitem3;
 		int g3;
-		find_sym_table(quad.result, symitem3,g3);
+		find_sym_table(quad.result, symitem3, g3);
 		mem_instr("sw", quad.arg1, symitem3, g3);
 	}
 	else if (quad.op == "ARAS") {
@@ -165,20 +174,20 @@ void Generator::quadruple2mips(QuadRuple quad) {
 		SymTableItem symitem2;
 		SymTableItem symitem3;
 		int g1, g2, g3;
-		find_sym_table(quad.arg1, symitem1,g1);
-		find_sym_table(quad.arg2, symitem2,g2);
-		find_sym_table(quad.result, symitem3,g3);
+		find_sym_table(quad.arg1, symitem1, g1);
+		find_sym_table(quad.arg2, symitem2, g2);
+		find_sym_table(quad.result, symitem3, g3);
 		mem_instr("lw", "$t0", symitem1, g1);
 		mem_instr("lw", "$t1", symitem2, g2);
 		//mem_instr("lw", "$t2", symitem3, g3);
 		mipsfile << "sll $t1,$t1,2" << endl;
 		if (g3 == 1) {
-			mipsfile << "add $t3,$t1,$gp" << endl;
+			mipsfile << "addu $t3,$t1,$gp" << endl;
 		}
 		else {
-			mipsfile << "add $t3,$t1,$sp" << endl;
+			mipsfile << "addu $t3,$t1,$sp" << endl;
 		}
-		mipsfile << "sw $t0, "<< symitem3.adr<<"($t3)" << endl;
+		mipsfile << "sw $t0, " << symitem3.adr << "($t3)" << endl;
 	}
 	else if (quad.op == "ASAR") {
 		SymTableItem symitem1;
@@ -193,10 +202,10 @@ void Generator::quadruple2mips(QuadRuple quad) {
 		//mem_instr("lw", "$t2", symitem3, g3);
 		mipsfile << "sll $t0,$t0,2" << endl;
 		if (g2 == 1) {
-			mipsfile << "add $t3,$t0,$gp" << endl;
+			mipsfile << "addu $t3,$t0,$gp" << endl;
 		}
 		else {
-			mipsfile << "add $t3,$t0,$sp" << endl;
+			mipsfile << "addu $t3,$t0,$sp" << endl;
 		}
 		mipsfile << "lw $t2, " << symitem2.adr << "($t3)" << endl;
 		mem_instr("sw", "$t2", symitem3, g3);
@@ -208,7 +217,7 @@ void Generator::quadruple2mips(QuadRuple quad) {
 	else if (quad.op == "SCF") {
 		SymTableItem symitem3;
 		int g3;
-		find_sym_table(quad.result, symitem3,g3);
+		find_sym_table(quad.result, symitem3, g3);
 		if (symitem3.type == inttype) {
 			mipsfile << "li $v0,5" << endl;
 		}
@@ -230,7 +239,7 @@ void Generator::quadruple2mips(QuadRuple quad) {
 			}
 			SymTableItem symitem1;
 			int g1;
-			find_sym_table(quad.arg1, symitem1,g1);
+			find_sym_table(quad.arg1, symitem1, g1);
 			mem_instr("lw", "$a0", symitem1, g1);
 			mipsfile << "syscall" << endl;
 		}
@@ -239,7 +248,7 @@ void Generator::quadruple2mips(QuadRuple quad) {
 			mipsfile << "la $a0," << "string" + quad.arg1 << endl;
 			mipsfile << "syscall" << endl;
 		}
-		if (ptype == "1") {
+		if (ptype == "1"&&IS_ENTER == 1) {
 			mipsfile << "li $v0, 4" << endl;
 			mipsfile << "la $a0," << "enter" << endl;
 			mipsfile << "syscall" << endl;
@@ -248,7 +257,7 @@ void Generator::quadruple2mips(QuadRuple quad) {
 	else if (quad.op == "FUNC") {
 		string label = quad.result + ":";
 		SymTableItem func_name;
-		find_sym_table(quad.result, func_name,global);
+		find_sym_table(quad.result, func_name, global);
 		/*vector<SymTableItem>items = symtables[func_name.adr].items;
 		int func_size;
 		if (items.size() == 0) {
@@ -264,7 +273,7 @@ void Generator::quadruple2mips(QuadRuple quad) {
 		cur_fun_symtab = func_name.adr;
 
 		mipsfile << label << endl;
-		mipsfile << "subi $sp, $sp," << func_size << endl;	//开辟栈空间
+		mipsfile << "addi $sp, $sp," << -func_size << endl;	//开辟栈空间
 		mipsfile << "sw $ra,0($sp)" << endl;		//保存ra	
 		//Todo 恢复程序员寄存器
 	}
@@ -273,9 +282,9 @@ void Generator::quadruple2mips(QuadRuple quad) {
 		string real_para_num = quad.arg2;
 		SymTableItem para;
 		int g1;
-		int offset = atoi(real_para_num.c_str()) * 4+36;//36是$ra，寄存器保护区所占空间
-		find_sym_table(quad.arg1, func_name,global);
-		find_sym_table(quad.result, para,g1);
+		int offset = atoi(real_para_num.c_str()) * 4 + (4 + 4 * reg_s_num);//$ra，寄存器保护区所占空间
+		find_sym_table(quad.arg1, func_name, global);
+		find_sym_table(quad.result, para, g1);
 		/*vector<SymTableItem>items = symtables[func_name.adr].items;
 		int func_size;
 		if (items.size() == 0) {
@@ -288,7 +297,7 @@ void Generator::quadruple2mips(QuadRuple quad) {
 		}*/
 		int func_size = func_name.func_size;
 		mem_instr("lw", "$t0", para, g1);
-		mipsfile << "subi $sp,$sp," << func_size << endl;
+		mipsfile << "addi $sp,$sp," << -func_size << endl;
 		mipsfile << "sw $t0," << offset << "($sp)" << endl;
 		mipsfile << "addi $sp,$sp," << func_size << endl;
 	}
@@ -298,9 +307,9 @@ void Generator::quadruple2mips(QuadRuple quad) {
 	else if (quad.op == "RET") {
 		SymTableItem symitem1;
 		int g1;
-		find_sym_table(quad.arg1, symitem1,g1);
+		find_sym_table(quad.arg1, symitem1, g1);
 		SymTableItem func_name;
-		find_sym_table(cur_fun, func_name,global);
+		find_sym_table(cur_fun, func_name, global);
 		vector<SymTableItem>items = symtables[func_name.adr].items;
 		/*int func_size;
 		if (items.size() == 0) {
@@ -327,3 +336,728 @@ void Generator::quadruple2mips(QuadRuple quad) {
 		}
 	}
 }
+//生成优化前目标代码结束************
+
+
+//生成优化后目标代码开始********
+string num2reg(int num) {
+	// Fix
+	// $s0 -- $s7, $t0 -- $t9, $a1 -- $a3  $v1
+	// 0 -----7    8 -----17   18 -----20  21
+	if (num < 8) {
+		return "$s" + to_string(num);
+	}
+	else if (num < 18) {
+		return "$t" + to_string(num - 8);
+	}
+	else if (num < 21) {
+		return "$a" + to_string(num - 17);
+	}
+	else if (num < 22) {
+		return "$v1";
+	}
+}
+void change_symtab_reg(string var, int reg) {
+	SymTableItem symitem;
+	int g, index;
+	index = find_sym_table(var, symitem, g);
+	if (g == 1) {
+		symtables[0].items[index].reg = reg;
+	}
+	else {
+		symtables[cur_fun_symtab].items[index].reg = reg;
+	}
+}
+void Generator::o_mem_instr(string instr, string reg, SymTableItem symitem, int aglobal) { //为了分辨全局和局部变量，常量和变量，特别写了这个函数
+	if (symitem.obj == constantobj) {   //可能是全局或局部常量，也可能是临时常量
+		if (instr == "lw") {
+			mipsfile << "li " << reg << "," << symitem.adr << endl;
+		}
+	}
+	else {
+		if (aglobal == 1) {
+			mipsfile << instr << " " << reg << "," << symitem.adr << "($gp)" << endl;
+		}
+		else {
+			mipsfile << instr << " " << reg << "," << symitem.adr << "($sp)" << endl;
+		}
+	}
+	string var = symitem.name;
+	if (instr == "lw" && (reg[1] == 't' || reg[1] == 's' || reg[1] == 'a' || reg == "$v1")) {
+		int regi = atoi(reg.substr(2, reg.size()).c_str());
+		if (reg[1] == 't') {
+			regi += 8;
+		}
+		else if (reg[1] == 'a') {
+			regi += 17;
+		}
+		if (reg[1] == 'v') {
+			regi = 21;
+		}
+		for (int i = 0; i != reg_descripter[regi].size(); i++) {
+			change_symtab_reg(reg_descripter[regi][i], -1);
+		}
+		reg_descripter[regi].clear();
+		reg_descripter[regi].push_back(var);
+		change_symtab_reg(var, regi);
+	}
+	/*else if (instr == "sw") {  Fix
+		int regi = atoi(reg.c_str());
+
+	}*/
+}
+void Generator::o_quad2mips(vector<fun_blocks> &blocks) {
+	map<int, string>::iterator iter;
+	SymTableItem symitem;
+	//将源程序中的所有字符串全部放在.data区
+	mipsfile << ".data" << endl;
+	mipsfile << "enter: .asciiz \"\\n\"" << endl;
+	for (iter = stringtab.begin(); iter != stringtab.end(); iter++) {
+		mipsfile << "string" + to_string(iter->first) + ": .asciiz\"" + iter->second + "\"" << endl;
+	}
+	mipsfile << ".text" << endl;
+
+	find_sym_table("@program", symitem, global);
+	int func_size = symitem.func_size;
+	mipsfile << "addi $sp, $sp," << -func_size << endl;	//开辟全局变量空间
+	mipsfile << "addu $gp, $sp, $0" << endl;
+	mipsfile << "jal main" << endl;
+	for (int i = 0; i < blocks.size(); i++) {
+		o_fun2mips(blocks[i]);
+	}
+}
+
+void Generator::o_fun2mips(fun_blocks &fb) {
+	//进函数做的事情 Fix
+	global_s_reg = {};
+	string label = fb.func_name + ":";
+	SymTableItem func_name;
+	find_sym_table(fb.func_name, func_name, global);
+	int func_size = func_name.func_size;
+	cur_fun = fb.func_name;
+	cur_fun_symtab = func_name.adr;
+	mipsfile << label << endl;
+	mipsfile << "addi $sp, $sp," << -func_size << endl;	//开辟栈空间
+	mipsfile << "sw $ra,0($sp)" << endl;		//保存ra	
+
+	//将新的变量的值加载进全局寄存器
+	COMMENT("#将新的变量的值加载进全局寄存器");
+	int max_reg = -1;
+	for (map<string, conflict_graph_node>::iterator iter = fb.conflict_graph.begin(); iter != fb.conflict_graph.end(); iter++) {
+		if (iter->second.color >= 0) {
+			if (iter->second.color > max_reg) {
+				max_reg = iter->second.color;
+			}
+			global_s_reg[iter->first] = iter->second.color;
+			string r = num2reg(iter->second.color);
+			SymTableItem symitem;
+			int g;
+			find_sym_table(iter->first, symitem, g);
+			int max_para_addr = func_name.number * 4 + (4 + 4 * reg_s_num);
+			int real_para_num =  (symitem.adr-(4 + 4 * reg_s_num))/4;
+			if (g == 0 && symitem.obj != constantobj&&real_para_num <4&& real_para_num< func_name.number) {
+				mipsfile << "addu " + r + ",$a" + to_string(real_para_num) + ", $0" << endl;
+				int regi = iter->second.color;
+				for (int i = 0; i != reg_descripter[regi].size(); i++) {
+					change_symtab_reg(reg_descripter[regi][i], -1);
+				}
+				reg_descripter[regi].clear();
+				reg_descripter[regi].push_back(iter->first);
+				change_symtab_reg(iter->first, regi);
+			}
+			else {
+				if (g == 1 || symitem.obj == constantobj) {  //分配了全局变量或局部常量的全局寄存器不能再分配给其他变量。所以可以在一开始就加载
+					mipsfile << "#" + r + "  " + iter->first + " 分配了全局变量或局部常量的全局寄存器" << endl;
+					o_mem_instr("lw", r, symitem, g);
+				}
+				else if (symitem.adr < max_para_addr) {
+					mipsfile << "#" + r + "  " + iter->first + " 将函数参数分配给全局寄存器" << endl;
+					o_mem_instr("lw", r, symitem, g);
+				}
+			}
+		}
+		else if (iter->second.color == -1) {   //由于是寄存器传参，一进来就得保存a寄存器，所以对于没有分配到全局寄存器的参数（寄存器用完了，不然一定会分配到），先把a存进内存里
+			SymTableItem symitem;
+			int g;
+			find_sym_table(iter->first, symitem, g);
+			int real_para_num = (symitem.adr - (4 + 4 * reg_s_num)) / 4;
+			if (g == 0 && symitem.obj != constantobj && real_para_num < 4 && real_para_num < func_name.number) {
+				o_mem_instr("sw", "$a"+to_string(real_para_num), symitem, g);
+			}
+		}
+	}
+	COMMENT("#将新的变量的值加载进全局寄存器__end");
+	reg_s_used = max_reg;
+	spill_reg_index = -1;
+
+	/*if (fb.func_name != "main") {
+		for (int i = 0; i <= reg_s_num; i++) {     //保存程序员寄存器
+			string r = num2reg(i);
+			mipsfile << "sw " + r + "," + to_string(4 + 4 * i) + "($sp)" << endl;
+		}
+	}*/
+	for (int i = 0; i < fb.block_sequence.size(); i++) {
+		o_bblock2mips(fb.basic_blocks[fb.block_sequence[i]]);
+	}
+	//出函数做的事情放在了ret语句里
+	//清空临时寄存器池，更改符号表中寄存器描述符
+	for (int i = 0; i < reg_descripter.size(); i++) {
+		for (int j = 0; j < reg_descripter[i].size(); j++) {
+			change_symtab_reg(reg_descripter[i][j], -1);
+		}
+		reg_descripter[i].clear();
+	}
+}
+void Generator::o_bblock2mips(basic_block &bb) {
+	int flag = 0;  //flag：保存出口仍活跃的变量到内存这件事在o_quadruple2mips()函数中是否已经做了
+	for (int i = 0; i < bb.quadtable.size(); i++) {
+		flag = o_quadruple2mips(bb, i);
+	}
+	//出基本块干的事情 Fix
+	//保存出口仍活跃的变量到内存，一般是分配了全局寄存器但没有分到的变量
+	COMMENT("#保存出口仍活跃的变量到内存，一般是分配了全局寄存器但没有分到的变量");
+	if (bb.quadtable.size() > 0 && flag == 0) {   //不是空的基本块
+		for (set<string>::iterator iter = bb.def.begin(); iter != bb.def.end(); iter++) {
+			string var = *iter;
+			SymTableItem symitem;
+			int g;
+			find_sym_table(var, symitem, g);
+			if (symitem.reg > reg_s_used) {
+				if (bb.aout.find(var) != bb.aout.end() || g == 1) {
+					o_mem_instr("sw", num2reg(symitem.reg), symitem, g);
+				}
+			}
+		}
+		for (set<string>::iterator iter = bb.use.begin(); iter != bb.use.end(); iter++) {
+			string var = *iter;
+			SymTableItem symitem;
+			int g;
+			find_sym_table(var, symitem, g);
+			if (symitem.reg > reg_s_used) {
+				if (bb.aout.find(var) != bb.aout.end() || g == 1) {
+					o_mem_instr("sw", num2reg(symitem.reg), symitem, g);
+				}
+			}
+		}
+	}
+	COMMENT("#保存出口仍活跃的变量到内存__end");
+	//清空临时寄存器池，更改符号表中寄存器描述符
+	for (int i = reg_s_used + 1; i < reg_descripter.size(); i++) {
+		for (int j = 0; j < reg_descripter[i].size(); j++) {
+			change_symtab_reg(reg_descripter[i][j], -1);
+		}
+		reg_descripter[i].clear();
+	}
+}
+int Generator::o_quadruple2mips(basic_block &bb, int quad_index) {
+	QuadRuple quad = bb.quadtable[quad_index];
+	COMMENT("#" + quad.op + " " + quad.arg1 + " " + quad.arg2 + " " + quad.result);
+	if (quad.op == "ADD" | quad.op == "SUB" | quad.op == "MUL" | quad.op == "DIV") {
+		string r1, r2, r3;
+		int a1, a2, a3;
+		if (quad.op != "ADD"&&quad.op != "SUB") {
+			r1 = num2reg(a1 = get_reg(quad.arg1, 1));
+			r2 = num2reg(get_reg(quad.arg2, 1, { a1 }));
+			r3 = num2reg(get_reg(quad.result, 0));
+		}
+		if (quad.op == "ADD") {	//加法
+			SymTableItem symitem1;
+			SymTableItem symitem2;
+			int g1;
+			int g2;
+			find_sym_table(quad.arg1, symitem1, g1);
+			find_sym_table(quad.arg2, symitem2, g2);
+			if (symitem1.obj == constantobj) {
+				r2 = num2reg(get_reg(quad.arg2, 1));
+				r3 = num2reg(get_reg(quad.result, 0));
+				mipsfile << "addiu " + r3 + "," + r2 + "," + to_string(symitem1.adr) << endl;
+			}
+			else if (symitem2.obj == constantobj) {
+				r1 = num2reg(get_reg(quad.arg1, 1));
+				r3 = num2reg(get_reg(quad.result, 0));
+				mipsfile << "addiu " + r3 + "," + r1 + "," + to_string(symitem2.adr) << endl;
+			}
+			else {
+				r1 = num2reg(a1 = get_reg(quad.arg1, 1));
+				r2 = num2reg(get_reg(quad.arg2, 1, { a1 }));
+				r3 = num2reg(get_reg(quad.result, 0));
+				mipsfile << "addu " + r3 + "," + r1 + "," + r2 << endl;
+			}
+		}
+		else if (quad.op == "SUB") { //减法
+			SymTableItem symitem1;
+			SymTableItem symitem2;
+			int g1;
+			int g2;
+			find_sym_table(quad.arg1, symitem1, g1);
+			find_sym_table(quad.arg2, symitem2, g2);
+			if (symitem2.obj == constantobj) {
+				r1 = num2reg(get_reg(quad.arg1, 1));
+				r3 = num2reg(get_reg(quad.result, 0));
+				mipsfile << "addiu " + r3 + "," + r1 + "," + to_string(-symitem2.adr) << endl;
+			}
+			else {
+				r1 = num2reg(a1 = get_reg(quad.arg1, 1));
+				r2 = num2reg(get_reg(quad.arg2, 1, { a1 }));
+				r3 = num2reg(get_reg(quad.result, 0));
+				mipsfile << "subu " + r3 + "," + r1 + "," + r2 << endl;
+			}
+		}
+		else if (quad.op == "MUL") {	//乘法
+			mipsfile << "mult " + r1 + "," + r2 << endl;
+			mipsfile << "mflo " + r3 << endl;
+		}
+		else if (quad.op == "DIV") {	//乘法
+			mipsfile << "div " + r1 + "," + r2 << endl;
+			mipsfile << "mflo " + r3 << endl;
+		}
+	}
+	else if (quad.op == "NEG") {
+		string r1, r3;
+		r1 = num2reg(get_reg(quad.arg1, 1));
+		r3 = num2reg(get_reg(quad.result, 0));
+		mipsfile << "subu " + r3 + ",$0," + r1 << endl;
+	}
+	else if (quad.op == "ASS") {
+		SymTableItem symitem1;
+		int g1;
+		find_sym_table(quad.arg1, symitem1, g1);
+		if (symitem1.obj == constantobj) {
+			int reg3 = get_reg(quad.result, 0);
+			mipsfile << "li " << num2reg(reg3) << "," << symitem1.adr << endl;
+		}
+		else {
+			int reg1 = get_reg(quad.arg1, 1);
+			SymTableItem symitem3;
+			int g3;
+			find_sym_table(quad.result, symitem3, g3);
+			if (symitem3.reg > reg_s_used) {  //临时寄存器
+				change_symtab_reg(quad.result, reg1);
+				vector<string> tem;
+				for (int i = 0; i < reg_descripter[symitem3.reg].size(); i++) {
+					if (reg_descripter[symitem3.reg][i] != quad.result) {
+						tem.push_back(reg_descripter[symitem3.reg][i]);
+					}
+				}
+				reg_descripter[symitem3.reg].clear();
+				reg_descripter[symitem3.reg] = tem;
+				reg_descripter[reg1].push_back(quad.result);
+			}
+			else {
+				int reg3 = get_reg(quad.result, 0);
+				mipsfile << "addu " + num2reg(reg3) + ",$0," + num2reg(reg1) << endl;
+			}
+		}
+	}
+	else if (quad.op == "LSS" | quad.op == "LEQ" | quad.op == "GTR" | quad.op == "GEQ" | quad.op == "NEQ" | quad.op == "EQL") {
+		string r1, r2;
+		string label = quad.result;
+		int a1;
+		r1 = num2reg(a1 = get_reg(quad.arg1, 1));
+		if (quad.arg2 != "$0") {
+			r2 = num2reg(get_reg(quad.arg2, 1, { a1 }));
+		}
+		//保存出口仍活跃的变量到内存，一般是分配了全局寄存器但没有分到的变量
+		for (set<string>::iterator iter = bb.def.begin(); iter != bb.def.end(); iter++) {
+			string var = *iter;
+			SymTableItem symitem;
+			int g;
+			find_sym_table(var, symitem, g);
+			if (symitem.reg > reg_s_used) {
+				if (bb.aout.find(var) != bb.aout.end() || g == 1) {
+					o_mem_instr("sw", num2reg(symitem.reg), symitem, g);
+				}
+			}
+		}
+		for (set<string>::iterator iter = bb.use.begin(); iter != bb.use.end(); iter++) {
+			string var = *iter;
+			SymTableItem symitem;
+			int g;
+			find_sym_table(var, symitem, g);
+			if (symitem.reg > reg_s_used) {
+				if (bb.aout.find(var) != bb.aout.end() || g == 1) {
+					o_mem_instr("sw", num2reg(symitem.reg), symitem, g);
+				}
+			}
+		}
+		/*else {
+			mipsfile << "addu $t1,$0,$0" << endl;
+		}*/
+		if (quad.op == "LSS") {
+			mipsfile << "blt " + r1 + "," + r2 + "," << label << endl;
+		}
+		else if (quad.op == "LEQ") {
+			mipsfile << "ble " + r1 + "," + r2 + ", " << label << endl;
+		}
+		else if (quad.op == "GTR") {
+			mipsfile << "bgt " + r1 + "," + r2 + ", " << label << endl;
+		}
+		else	if (quad.op == "GEQ") {
+			mipsfile << "bge " + r1 + "," + r2 + ", " << label << endl;
+		}
+		else if (quad.op == "NEQ") {
+			if (quad.arg2 == "$0") {
+				mipsfile << "bne " + r1 + ",$0," << label << endl;
+			}
+			else {
+				mipsfile << "bne " + r1 + "," + r2 + ", " << label << endl;
+			}
+		}
+		else if (quad.op == "EQL") {
+			if (quad.arg2 == "$0") {
+				mipsfile << "beq " + r1 + ",$0," << label << endl;
+			}
+			else {
+				mipsfile << "beq " + r1 + "," + r2 + ", " << label << endl;
+			}
+		}
+		return 1;
+	}
+	else if (quad.op == "LAB") {
+		string label = quad.result + ":";
+		mipsfile << label << endl;
+	}
+	else if (quad.op == "SW") {
+		string r1;
+		r1 = num2reg(get_reg(quad.result, 0));
+		mipsfile << "addu " + r1 + "," + "$v0" + "," + "$0" << endl;
+	}
+	else if (quad.op == "ARAS") {
+		SymTableItem symitem3;
+		int g3;
+		find_sym_table(quad.result, symitem3, g3);
+		string r1, r2;
+		int a1;
+		r1 = num2reg(a1 = get_reg(quad.arg1, 1));
+		r2 = num2reg(get_reg(quad.arg2, 1, { a1 }));
+		mipsfile << "sll $fp, " + r2 + ",2" << endl;
+		if (g3 == 1) {
+			mipsfile << "addu $fp,$fp,$gp" << endl;
+		}
+		else {
+			mipsfile << "addu $fp,$fp,$sp" << endl;
+		}
+		mipsfile << "sw " + r1 + ", " << symitem3.adr << "($fp)" << endl;
+	}
+	else if (quad.op == "ASAR") {
+		SymTableItem symitem2;
+		int g2;
+		string r1, r3;
+		r1 = num2reg(get_reg(quad.arg1, 1));
+		r3 = num2reg(get_reg(quad.result, 0));
+		find_sym_table(quad.arg2, symitem2, g2);
+		mipsfile << "sll $fp, " + r1 + ",2" << endl;
+		if (g2 == 1) {
+			mipsfile << "addu $fp,$fp,$gp" << endl;
+		}
+		else {
+			mipsfile << "addu $fp,$fp,$sp" << endl;
+		}
+		mipsfile << "lw " + r3 + ", " << symitem2.adr << "($fp)" << endl;
+	}
+	else if (quad.op == "JMP") {
+		//保存出口仍活跃的变量到内存(一般是分配了全局寄存器但没有分到的变量),以及全局变量
+		for (set<string>::iterator iter = bb.def.begin(); iter != bb.def.end(); iter++) {
+			string var = *iter;
+			SymTableItem symitem;
+			int g;
+			find_sym_table(var, symitem, g);
+			if (symitem.reg > reg_s_used) {
+				if (bb.aout.find(var) != bb.aout.end() || g == 1) {
+					o_mem_instr("sw", num2reg(symitem.reg), symitem, g);
+				}
+			}
+		}
+		for (set<string>::iterator iter = bb.use.begin(); iter != bb.use.end(); iter++) {
+			string var = *iter;
+			SymTableItem symitem;
+			int g;
+			find_sym_table(var, symitem, g);
+			if (symitem.reg > reg_s_used) {
+				if (bb.aout.find(var) != bb.aout.end() || g == 1) {
+					o_mem_instr("sw", num2reg(symitem.reg), symitem, g);
+				}
+			}
+		}
+		string label = quad.result;
+		mipsfile << "j " << label << endl;
+		return 1;
+	}
+	else if (quad.op == "SCF") {
+		SymTableItem symitem3;
+		int g3;
+		find_sym_table(quad.result, symitem3, g3);
+		string r3;
+		r3 = num2reg(get_reg(quad.result, 0));
+		if (symitem3.type == inttype) {
+			mipsfile << "li $v0,5" << endl;
+		}
+		else {
+			mipsfile << "li $v0,12" << endl;
+		}
+		mipsfile << "syscall" << endl;
+		mipsfile << "addu " + r3 + "," + "$v0" + "," + "$0" << endl;
+	}
+	else if (quad.op == "PRF") {
+		string type = quad.arg2;  //int 0, char	1 ,void 2 Fix这里void可能有bug
+		string ptype = quad.result;  //0不换行，1换行
+		if (type == "0" || type == "1") {	//exp
+			if (type == "0") {
+				mipsfile << "li $v0, 1" << endl;
+			}
+			else {
+				mipsfile << "li $v0, 11" << endl;
+			}
+			string r1;
+			r1 = num2reg(get_reg(quad.arg1, 1));
+			mipsfile << "addu $a0," + r1 + "," + "$0" << endl;
+			mipsfile << "syscall" << endl;
+		}
+		else if (type == "str") {	//string
+			mipsfile << "li $v0, 4" << endl;
+			mipsfile << "la $a0," << "string" + quad.arg1 << endl;
+			mipsfile << "syscall" << endl;
+		}
+		if (ptype == "1"&&IS_ENTER == 1) {
+			mipsfile << "li $v0, 4" << endl;
+			mipsfile << "la $a0," << "enter" << endl;
+			mipsfile << "syscall" << endl;
+		}
+	}
+	else if (quad.op == "FUNC") {
+		cout << "into FUNC,error**********" << endl;
+		string label = quad.result + ":";
+		SymTableItem func_name;
+		find_sym_table(quad.result, func_name, global);
+		int func_size = func_name.func_size;
+		cur_fun = quad.result;
+		cur_fun_symtab = func_name.adr;
+
+		mipsfile << label << endl;
+		mipsfile << "addi $sp, $sp," << -func_size << endl;	//开辟栈空间
+		mipsfile << "sw $ra,0($sp)" << endl;		//保存ra	
+		//Todo 恢复程序员寄存器
+	}
+	else if (quad.op == "PARA") {
+		SymTableItem func_name;
+		string real_para_num = quad.arg2;
+		//SymTableItem para;
+		int g1;
+		int offset = atoi(real_para_num.c_str()) * 4 + (4 + 4 * reg_s_num);//36是$ra，寄存器保护区所占空间
+		find_sym_table(quad.arg1, func_name, global);
+		//find_sym_table(quad.result, para,g1);
+		int func_size = func_name.func_size;
+		string r1;
+		r1 = num2reg(get_reg(quad.result, 1));
+		if (atoi(real_para_num.c_str())  < 4) {
+			mipsfile << "addu $a"+ real_para_num+","+r1+", $0" << endl;
+		}
+		else {
+			//o_mem_instr("lw", r1, para, g1);
+			if (quad.arg2 == to_string(4)) {
+				mipsfile << "addi $sp,$sp," << -func_size << endl;
+			}
+			mipsfile << "sw " + r1 + "," << offset << "($sp)" << endl;
+			if (quad.arg2 == to_string(func_name.number - 1)) {
+				mipsfile << "addi $sp,$sp," << func_size << endl;
+			}
+		}
+	}
+	else if (quad.op == "CALL") {
+		//保存出口仍活跃的变量到内存，一般是分配了全局寄存器但没有分到的变量
+		for (set<string>::iterator iter = bb.def.begin(); iter != bb.def.end(); iter++) {
+			string var = *iter;
+			if (bb.aout.find(var) != bb.aout.end()) {
+				SymTableItem symitem;
+				int g;
+				find_sym_table(var, symitem, g);
+				//if (symitem.reg > reg_s_used) {
+				o_mem_instr("sw", num2reg(symitem.reg), symitem, g);
+				//}
+			}
+		}
+		for (set<string>::iterator iter = bb.use.begin(); iter != bb.use.end(); iter++) {
+			string var = *iter;
+			if (bb.aout.find(var) != bb.aout.end()) {
+				SymTableItem symitem;
+				int g;
+				find_sym_table(var, symitem, g);
+				//if (symitem.reg > reg_s_used) {
+				o_mem_instr("sw", num2reg(symitem.reg), symitem, g);
+				//}
+			}
+		}
+		//保存全局变量
+		for (int i = 0; i < reg_descripter.size(); i++) {
+			for (int j = 0; j < reg_descripter[i].size(); j++) {
+				SymTableItem symitem;
+				int g;
+				find_sym_table(reg_descripter[i][j], symitem, g);
+				if (g == 1) {
+					o_mem_instr("sw", num2reg(i), symitem, g);
+				}
+			}
+		}
+		for (int i = 0; i <= reg_s_used; i++) {     //保存程序员寄存器(如果是全局变量就不保存，因为前面已经保存过)
+			if (reg_descripter[i].size() == 1) {
+				SymTableItem symitem;
+				int g;
+				find_sym_table(reg_descripter[i][0], symitem, g);
+				if (g != 1) {
+					string r = num2reg(i);
+					mipsfile << "sw " + r + "," + to_string(4 + 4 * i) + "($sp)" << endl;
+				}
+			}
+			else {
+				string r = num2reg(i);
+				mipsfile << "sw " + r + "," + to_string(4 + 4 * i) + "($sp)" << endl;
+			}
+		}
+		mipsfile << "jal " << quad.arg1 << endl;
+		//恢复全局变量
+		for (int i = 0; i < reg_descripter.size(); i++) {
+			for (int j = 0; j < reg_descripter[i].size(); j++) {
+				SymTableItem symitem;
+				int g;
+				find_sym_table(reg_descripter[i][j], symitem, g);
+				if (g == 1) {
+					o_mem_instr("lw", num2reg(i), symitem, g);
+				}
+			}
+		}
+		//for (int i = 0; i <= reg_s_used; i++) {     //恢复程序员寄存器
+		//	string r = num2reg(i);
+		//	mipsfile << "lw " + r + "," + to_string(4 + 4 * i) + "($sp)" << endl;
+		//}
+
+		for (int i = 0; i <= reg_s_used; i++) {     //恢复程序员寄存器(如果是全局变量就不恢复，因为前面已经恢复过)
+			if (reg_descripter[i].size() == 1) {
+				SymTableItem symitem;
+				int g;
+				find_sym_table(reg_descripter[i][0], symitem, g);
+				if (g != 1) {
+					string r = num2reg(i);
+					mipsfile << "lw " + r + "," + to_string(4 + 4 * i) + "($sp)" << endl;
+				}
+			}
+			else {
+				string r = num2reg(i);
+				mipsfile << "lw " + r + "," + to_string(4 + 4 * i) + "($sp)" << endl;
+			}
+		}
+
+		return 1;
+	}
+	else if (quad.op == "RET") {
+		SymTableItem symitem1;
+		SymTableItem func_name;
+		find_sym_table(cur_fun, func_name, global);
+		vector<SymTableItem>items = symtables[func_name.adr].items;
+		int func_size = func_name.func_size;
+		if (cur_fun == "main") {
+			mipsfile << "li $v0," << 10 << endl;
+			mipsfile << "syscall" << endl;
+		}
+		else {
+			if (quad.arg1 != "") {
+				string r1;
+				r1 = num2reg(get_reg(quad.arg1, 1));
+				mipsfile << "addu $v0," + r1 + "," + "$0" << endl;
+			}
+			//保存全局变量
+			for (int i = 0; i < reg_descripter.size(); i++) {
+				for (int j = 0; j < reg_descripter[i].size(); j++) {
+					SymTableItem symitem;
+					int g;
+					find_sym_table(reg_descripter[i][j], symitem, g);
+					if (g == 1) {
+						o_mem_instr("sw", num2reg(i), symitem, g);
+					}
+				}
+			}
+			mipsfile << "lw $ra, 0($sp)" << endl;
+			/*for (int i = 0; i <= reg_s_num; i++) {     //恢复程序员寄存器
+				string r = num2reg(i);
+				mipsfile << "lw " + r + "," + to_string(4 + 4 * i) + "($sp)" << endl;
+			}*/
+			mipsfile << "addi $sp, $sp," << func_size << endl;
+			mipsfile << "jr $ra" << endl;
+		}
+	}
+	return 0;
+}
+
+int Generator::spill_reg(set<int> not_reg) {
+	//Fix  轮转法
+	int reg;
+	do {
+		spill_reg_index = (spill_reg_index + 1) % (reg_st_num - reg_s_used - 1);
+		reg = spill_reg_index + reg_s_used + 1;
+	} while (not_reg.find(reg) != not_reg.end());
+	SymTableItem symitem;
+	int g;
+	for (int i = 0; i < reg_descripter[reg].size(); i++) {
+		find_sym_table(reg_descripter[reg][i], symitem, g);
+		coiunt++;
+		o_mem_instr("sw", num2reg(reg), symitem, g);
+		change_symtab_reg(reg_descripter[reg][i], -1);
+	}
+	return reg;
+}
+
+//is_load ：是否需要将变量的值从内存中load到刚分配的寄存器中，1是，0否
+int Generator::get_reg(string var, int is_load, set<int> not_reg) {
+	SymTableItem symitem;
+	int g, reg, index;
+	index = find_sym_table(var, symitem, g);
+	if (symitem.reg >= 0) {  //已在寄存器中
+		return symitem.reg;
+	}
+	else {
+		int i;
+		if (global_s_reg.find(var) != global_s_reg.end()) {  //是分配了全局寄存器的变量
+			reg = global_s_reg[var];
+			string r = num2reg(reg);
+			SymTableItem symitem1;
+			int g1;
+			find_sym_table(var, symitem1, g1);
+			if (is_load) {
+				o_mem_instr("lw", r, symitem1, g1);
+			}
+			else {
+				int regi = reg;
+				for (int i = 0; i != reg_descripter[regi].size(); i++) {
+					change_symtab_reg(reg_descripter[regi][i], -1);
+				}
+				reg_descripter[regi].clear();
+				reg_descripter[regi].push_back(var);
+				change_symtab_reg(var, regi);
+			}
+		}
+		else {
+			for (i = reg_s_used + 1; i < reg_descripter.size(); i++) {
+				if (reg_descripter[i].size() == 0) {  //找到了空寄存器
+					reg = i;
+					break;
+				}
+			}
+			if (i == reg_descripter.size()) {  //var不在寄存器中且当前没有一个空寄存器
+				reg = spill_reg(not_reg);
+			}
+			if (is_load) {
+				o_mem_instr("lw", num2reg(reg), symitem, g);
+			}
+			else {
+				int regi = reg;
+				for (int i = 0; i != reg_descripter[regi].size(); i++) {
+					change_symtab_reg(reg_descripter[regi][i], -1);
+				}
+				reg_descripter[regi].clear();
+				reg_descripter[regi].push_back(var);
+				change_symtab_reg(var, regi);
+			}
+		}
+	}
+	return reg;
+}
+//生成优化后目标代码结束************

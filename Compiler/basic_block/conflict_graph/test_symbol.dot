@@ -1,0 +1,31 @@
+graph test_symbol{
+label =test_symbol
+_a1[label="_a1-0", shape=circle, style=filled, fillcolor=White]
+_a2[label="_a2-1", shape=circle, style=filled, fillcolor=White]
+_a3[label="_a3-2", shape=circle, style=filled, fillcolor=White]
+_a4[label="_a4-3", shape=circle, style=filled, fillcolor=White]
+_a5[label="_a5-4", shape=circle, style=filled, fillcolor=White]
+i[label="i--1", shape=circle, style=filled, fillcolor=Red]
+sum[label="sum--1", shape=circle, style=filled, fillcolor=Red]
+_a1--_a2
+_a1--_a3
+_a1--_a4
+_a1--_a5
+_a1--i
+_a1--sum
+_a2--_a3
+_a2--_a4
+_a2--_a5
+_a2--i
+_a2--sum
+_a3--_a4
+_a3--_a5
+_a3--i
+_a3--sum
+_a4--_a5
+_a4--i
+_a4--sum
+_a5--i
+_a5--sum
+i--sum
+}

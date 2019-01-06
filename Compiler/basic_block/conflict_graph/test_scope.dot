@@ -1,0 +1,6 @@
+graph test_scope{
+label =test_scope
+scope_var[label="scope_var-0", shape=circle, style=filled, fillcolor=White]
+tem[label="tem-1", shape=circle, style=filled, fillcolor=White]
+scope_var--tem
+}

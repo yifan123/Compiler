@@ -1,35 +1,35 @@
 digraph returnCharParameter{
 label =returnCharParameter
-B69[label="B69:\nNEQ,select,@244,Lab245\n" shape=box]
-B70[label="B70:\nRET,char_parameter_1,,\nJMP,,,Lab243\n" shape=box]
-B72[label="B72:\nRET,char_parameter_2,,\nJMP,,,Lab243\n" shape=box]
-B74[label="B74:\nRET,char_parameter_3,,\nJMP,,,Lab243\n" shape=box]
-B76[label="B76:\nRET,char_parameter_4,,\nJMP,,,Lab243\n" shape=box]
-Lab243[label="Lab243:\nLAB,,,Lab243\nRET,,,\n" shape=box]
-Lab245[label="Lab245:\nLAB,,,Lab245\nNEQ,select,@246,Lab247\n" shape=box]
-Lab247[label="Lab247:\nLAB,,,Lab247\nNEQ,select,@248,Lab249\n" shape=box]
-Lab249[label="Lab249:\nLAB,,,Lab249\nNEQ,select,@250,Lab251\n" shape=box]
-Lab251[label="Lab251:\nLAB,,,Lab251\nRET,@252,,\n" shape=box]
+B69[label="B69:\nNEQ,select,@251,Lab_lj_252\n" shape=box]
+B70[label="B70:\nRET,char_parameter_1,,\nJMP,,,Lab_lj_250\n" shape=box]
+B72[label="B72:\nRET,char_parameter_2,,\nJMP,,,Lab_lj_250\n" shape=box]
+B74[label="B74:\nRET,char_parameter_3,,\nJMP,,,Lab_lj_250\n" shape=box]
+B76[label="B76:\nRET,char_parameter_4,,\nJMP,,,Lab_lj_250\n" shape=box]
+Lab_lj_250[label="Lab_lj_250:\nLAB,,,Lab_lj_250\nRET,,,\n" shape=box]
+Lab_lj_252[label="Lab_lj_252:\nLAB,,,Lab_lj_252\nNEQ,select,@253,Lab_lj_254\n" shape=box]
+Lab_lj_254[label="Lab_lj_254:\nLAB,,,Lab_lj_254\nNEQ,select,@255,Lab_lj_256\n" shape=box]
+Lab_lj_256[label="Lab_lj_256:\nLAB,,,Lab_lj_256\nNEQ,select,@257,Lab_lj_258\n" shape=box]
+Lab_lj_258[label="Lab_lj_258:\nLAB,,,Lab_lj_258\nRET,@259,,\n" shape=box]
 enter[label="enter:\n" shape=box]
 exit[label="exit:\n" shape=box]
 B69->B70
-B69->Lab245
-B70->Lab243
+B69->Lab_lj_252
+B70->Lab_lj_250
 B70->exit
-B72->Lab243
+B72->Lab_lj_250
 B72->exit
-B74->Lab243
+B74->Lab_lj_250
 B74->exit
-B76->Lab243
+B76->Lab_lj_250
 B76->exit
-Lab243->exit
-Lab245->B72
-Lab245->Lab247
-Lab247->B74
-Lab247->Lab249
-Lab249->B76
-Lab249->Lab251
-Lab251->Lab243
-Lab251->exit
+Lab_lj_250->exit
+Lab_lj_252->B72
+Lab_lj_252->Lab_lj_254
+Lab_lj_254->B74
+Lab_lj_254->Lab_lj_256
+Lab_lj_256->B76
+Lab_lj_256->Lab_lj_258
+Lab_lj_258->Lab_lj_250
+Lab_lj_258->exit
 enter->B69
 }

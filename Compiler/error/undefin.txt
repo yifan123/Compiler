@@ -1,0 +1,14 @@
+const int fun=-3;
+int b;
+int fun1;
+void main(){	
+	int a,c; 
+	scanf(a);
+	fun1();
+	fun(2);
+	if(a>0){
+		c=b+1;
+	}
+	c=b+2;
+	printf(c);
+}

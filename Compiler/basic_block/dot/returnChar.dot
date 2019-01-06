@@ -1,6 +1,6 @@
 digraph returnChar{
 label =returnChar
-B59[label="B59:\nRET,@232,,\nRET,,,\n" shape=box]
+B59[label="B59:\nRET,@239,,\nRET,,,\n" shape=box]
 enter[label="enter:\n" shape=box]
 exit[label="exit:\n" shape=box]
 B59->exit

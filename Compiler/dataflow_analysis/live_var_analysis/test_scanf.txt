@@ -1,0 +1,18 @@
+basic block name: B147
+def: {@697, m, x, }
+use: {@694, @699, judge, }
+ain: {@694, @699, judge, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@694, @699, judge, }
+aout: {@694, @699, judge, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

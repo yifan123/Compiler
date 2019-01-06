@@ -1,0 +1,9 @@
+graph get_sum{
+label =get_sum
+a[label="a-0", shape=circle, style=filled, fillcolor=White]
+b[label="b-1", shape=circle, style=filled, fillcolor=White]
+judge[label="judge-2", shape=circle, style=filled, fillcolor=White]
+a--b
+a--judge
+b--judge
+}

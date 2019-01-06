@@ -1,0 +1,39 @@
+graph test_global_variable{
+label =test_global_variable
+_[label="_-0", shape=circle, style=filled, fillcolor=White]
+__[label="__-1", shape=circle, style=filled, fillcolor=White]
+___[label="___-2", shape=circle, style=filled, fillcolor=White]
+__a__[label="__a__-3", shape=circle, style=filled, fillcolor=White]
+_a_[label="_a_-4", shape=circle, style=filled, fillcolor=White]
+count[label="count--1", shape=circle, style=filled, fillcolor=Red]
+flag[label="flag--1", shape=circle, style=filled, fillcolor=Red]
+judge[label="judge--1", shape=circle, style=filled, fillcolor=Red]
+_--__
+_--___
+_--__a__
+_--_a_
+_--count
+_--flag
+_--judge
+__--___
+__--__a__
+__--_a_
+__--count
+__--flag
+__--judge
+___--__a__
+___--_a_
+___--count
+___--flag
+___--judge
+__a__--_a_
+__a__--count
+__a__--flag
+__a__--judge
+_a_--count
+_a_--flag
+_a_--judge
+count--flag
+count--judge
+flag--judge
+}

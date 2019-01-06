@@ -1,0 +1,18 @@
+basic block name: B82
+def: {ch1, x, x3, x4, }
+use: {}
+ain: {}
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {}
+aout: {}
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

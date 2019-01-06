@@ -1,86 +1,86 @@
 digraph testSwitchCase{
 label =testSwitchCase
-B31[label="B31:\nNEQ,test_switch_int,@177,Lab178\n" shape=box]
+B31[label="B31:\nNEQ,test_switch_int,@177,Lab_lj_178\n" shape=box]
 B32[label="B32:\n" shape=box]
-B33[label="B33:\nGTR,test_switch_int,@189,Lab188\n" shape=box]
-B34[label="B34:\nADD,test_switch_int,@190,@191\nASS,@191,,test_switch_int\n" shape=box]
-B37[label="B37:\nSUB,test_switch_int,@195,@196\nNEQ,@196,@197,Lab194\n" shape=box]
+B33[label="B33:\nGTR,test_switch_int,@189,Lab_lj_188\n" shape=box]
+B34[label="B34:\nADD,test_switch_int,@190,test_switch_int\n" shape=box]
+B37[label="B37:\nMUL,const_int_postive,const_int_negtive,@196\nSUB,test_switch_int,@196,@197\nNEQ,@197,@198,Lab_lj_194\n" shape=box]
 B38[label="B38:\n" shape=box]
-B39[label="B39:\nADD,test_switch_int,@201,@202\nMUL,@202,@203,@204\nASS,@204,,test_switch_int\nJMP,,,Lab198\n" shape=box]
-B42[label="B42:\nASS,@208,,test_switch_int\nJMP,,,Lab176\n" shape=box]
-B44[label="B44:\nASS,const_char_a,,test_switch_char\nJMP,,,Lab210\n" shape=box]
-B46[label="B46:\nASS,const_char_A,,test_switch_char\nJMP,,,Lab210\n" shape=box]
-B48[label="B48:\nASS,const_char_num,,test_switch_char\nJMP,,,Lab210\n" shape=box]
-B50[label="B50:\nASS,const_char_underline,,test_switch_char\nJMP,,,Lab210\n" shape=box]
-B52[label="B52:\nASS,const_char_add,,test_switch_char\nJMP,,,Lab210\n" shape=box]
-B54[label="B54:\nASS,const_char_mul,,test_switch_char\nJMP,,,Lab210\n" shape=box]
-B56[label="B56:\nJMP,,,Lab224\n" shape=box]
-Lab176[label="Lab176:\nLAB,,,Lab176\nNEQ,test_switch_char,@211,Lab212\n" shape=box]
-Lab178[label="Lab178:\nLAB,,,Lab178\nNEQ,test_switch_int,@192,Lab193\n" shape=box]
-Lab179[label="Lab179:\nLAB,,,Lab179\nMUL,test_switch_int,@181,@182\nADD,@182,@185,@186\nGEQ,@186,@187,Lab180\n" shape=box]
-Lab180[label="Lab180:\nLAB,,,Lab180\nJMP,,,Lab176\n" shape=box]
-Lab188[label="Lab188:\nLAB,,,Lab188\nJMP,,,Lab179\n" shape=box]
-Lab193[label="Lab193:\nLAB,,,Lab193\nNEQ,test_switch_int,@205,Lab206\n" shape=box]
-Lab194[label="Lab194:\nLAB,,,Lab194\nJMP,,,Lab176\n" shape=box]
-Lab198[label="Lab198:\nLAB,,,Lab198\nGTR,test_switch_int,@200,Lab199\n" shape=box]
-Lab199[label="Lab199:\nLAB,,,Lab199\n" shape=box]
-Lab206[label="Lab206:\nLAB,,,Lab206\nASS,@209,,test_switch_int\n" shape=box]
-Lab210[label="Lab210:\nLAB,,,Lab210\nNEQ,@225,@226,Lab227\n" shape=box]
-Lab212[label="Lab212:\nLAB,,,Lab212\nNEQ,test_switch_char,@213,Lab214\n" shape=box]
-Lab214[label="Lab214:\nLAB,,,Lab214\nNEQ,test_switch_char,@215,Lab216\n" shape=box]
-Lab216[label="Lab216:\nLAB,,,Lab216\nNEQ,test_switch_char,@217,Lab218\n" shape=box]
-Lab218[label="Lab218:\nLAB,,,Lab218\nNEQ,test_switch_char,@219,Lab220\n" shape=box]
-Lab220[label="Lab220:\nLAB,,,Lab220\nNEQ,test_switch_char,@221,Lab222\n" shape=box]
-Lab222[label="Lab222:\nLAB,,,Lab222\nASS,@223,,test_switch_char\n" shape=box]
-Lab224[label="Lab224:\nLAB,,,Lab224\nPRF,test_switch_int,0,1\nPRF,test_switch_char,1,1\nASS,@229,,int_global_var\nASS,@230,,char_global_var\nRET,,,\n" shape=box]
-Lab227[label="Lab227:\nLAB,,,Lab227\n" shape=box]
+B39[label="B39:\nADD,test_switch_int,@202,@203\nMUL,@203,@204,test_switch_int\nJMP,,,Lab_lj_199\n" shape=box]
+B42[label="B42:\nASS,@209,,test_switch_int\nJMP,,,Lab_lj_176\n" shape=box]
+B44[label="B44:\nASS,const_char_a,,test_switch_char\nJMP,,,Lab_lj_211\n" shape=box]
+B46[label="B46:\nASS,const_char_A,,test_switch_char\nJMP,,,Lab_lj_211\n" shape=box]
+B48[label="B48:\nASS,const_char_num,,test_switch_char\nJMP,,,Lab_lj_211\n" shape=box]
+B50[label="B50:\nASS,const_char_underline,,test_switch_char\nJMP,,,Lab_lj_211\n" shape=box]
+B52[label="B52:\nASS,const_char_add,,test_switch_char\nJMP,,,Lab_lj_211\n" shape=box]
+B54[label="B54:\nASS,const_char_mul,,test_switch_char\nJMP,,,Lab_lj_211\n" shape=box]
+B56[label="B56:\nJMP,,,Lab_lj_231\n" shape=box]
+Lab_lj_176[label="Lab_lj_176:\nLAB,,,Lab_lj_176\nNEQ,test_switch_char,@212,Lab_lj_213\n" shape=box]
+Lab_lj_178[label="Lab_lj_178:\nLAB,,,Lab_lj_178\nNEQ,test_switch_int,@192,Lab_lj_193\n" shape=box]
+Lab_lj_179[label="Lab_lj_179:\nLAB,,,Lab_lj_179\nMUL,test_switch_int,@181,@182\nADD,@182,@185,@186\nGEQ,@186,@187,Lab_lj_180\n" shape=box]
+Lab_lj_180[label="Lab_lj_180:\nLAB,,,Lab_lj_180\nJMP,,,Lab_lj_176\n" shape=box]
+Lab_lj_188[label="Lab_lj_188:\nLAB,,,Lab_lj_188\nJMP,,,Lab_lj_179\n" shape=box]
+Lab_lj_193[label="Lab_lj_193:\nLAB,,,Lab_lj_193\nNEQ,test_switch_int,@206,Lab_lj_207\n" shape=box]
+Lab_lj_194[label="Lab_lj_194:\nLAB,,,Lab_lj_194\nJMP,,,Lab_lj_176\n" shape=box]
+Lab_lj_199[label="Lab_lj_199:\nLAB,,,Lab_lj_199\nGTR,test_switch_int,@201,Lab_lj_200\n" shape=box]
+Lab_lj_200[label="Lab_lj_200:\nLAB,,,Lab_lj_200\n" shape=box]
+Lab_lj_207[label="Lab_lj_207:\nLAB,,,Lab_lj_207\nASS,@210,,test_switch_int\n" shape=box]
+Lab_lj_211[label="Lab_lj_211:\nLAB,,,Lab_lj_211\nNEQ,@232,@233,Lab_lj_234\n" shape=box]
+Lab_lj_213[label="Lab_lj_213:\nLAB,,,Lab_lj_213\nNEQ,test_switch_char,@215,Lab_lj_216\n" shape=box]
+Lab_lj_216[label="Lab_lj_216:\nLAB,,,Lab_lj_216\nNEQ,test_switch_char,@218,Lab_lj_219\n" shape=box]
+Lab_lj_219[label="Lab_lj_219:\nLAB,,,Lab_lj_219\nNEQ,test_switch_char,@221,Lab_lj_222\n" shape=box]
+Lab_lj_222[label="Lab_lj_222:\nLAB,,,Lab_lj_222\nNEQ,test_switch_char,@224,Lab_lj_225\n" shape=box]
+Lab_lj_225[label="Lab_lj_225:\nLAB,,,Lab_lj_225\nNEQ,test_switch_char,@227,Lab_lj_228\n" shape=box]
+Lab_lj_228[label="Lab_lj_228:\nLAB,,,Lab_lj_228\nASS,@230,,test_switch_char\n" shape=box]
+Lab_lj_231[label="Lab_lj_231:\nLAB,,,Lab_lj_231\nPRF,test_switch_int,0,1\nPRF,test_switch_char,1,1\nASS,@236,,int_global_var\nASS,@237,,char_global_var\nRET,,,\n" shape=box]
+Lab_lj_234[label="Lab_lj_234:\nLAB,,,Lab_lj_234\n" shape=box]
 enter[label="enter:\n" shape=box]
 exit[label="exit:\n" shape=box]
 B31->B32
-B31->Lab178
+B31->Lab_lj_178
 B33->B34
-B33->Lab188
-B34->Lab188
+B33->Lab_lj_188
+B34->Lab_lj_188
 B37->B38
-B37->Lab194
-B39->Lab198
-B42->Lab176
-B44->Lab210
-B46->Lab210
-B48->Lab210
-B50->Lab210
-B52->Lab210
-B54->Lab210
-B56->Lab224
-Lab176->B44
-Lab176->Lab212
-Lab178->B37
-Lab178->Lab193
-Lab179->B33
-Lab179->Lab180
-Lab180->Lab176
-Lab188->Lab179
-Lab193->B42
-Lab193->Lab206
-Lab194->Lab176
-Lab198->B39
-Lab198->Lab199
-Lab199->Lab194
-Lab206->Lab176
-Lab210->B56
-Lab210->Lab227
-Lab212->B46
-Lab212->Lab214
-Lab214->B48
-Lab214->Lab216
-Lab216->B50
-Lab216->Lab218
-Lab218->B52
-Lab218->Lab220
-Lab220->B54
-Lab220->Lab222
-Lab222->Lab210
-Lab224->exit
-Lab227->Lab224
+B37->Lab_lj_194
+B39->Lab_lj_199
+B42->Lab_lj_176
+B44->Lab_lj_211
+B46->Lab_lj_211
+B48->Lab_lj_211
+B50->Lab_lj_211
+B52->Lab_lj_211
+B54->Lab_lj_211
+B56->Lab_lj_231
+Lab_lj_176->B44
+Lab_lj_176->Lab_lj_213
+Lab_lj_178->B37
+Lab_lj_178->Lab_lj_193
+Lab_lj_179->B33
+Lab_lj_179->Lab_lj_180
+Lab_lj_180->Lab_lj_176
+Lab_lj_188->Lab_lj_179
+Lab_lj_193->B42
+Lab_lj_193->Lab_lj_207
+Lab_lj_194->Lab_lj_176
+Lab_lj_199->B39
+Lab_lj_199->Lab_lj_200
+Lab_lj_200->Lab_lj_194
+Lab_lj_207->Lab_lj_176
+Lab_lj_211->B56
+Lab_lj_211->Lab_lj_234
+Lab_lj_213->B46
+Lab_lj_213->Lab_lj_216
+Lab_lj_216->B48
+Lab_lj_216->Lab_lj_219
+Lab_lj_219->B50
+Lab_lj_219->Lab_lj_222
+Lab_lj_222->B52
+Lab_lj_222->Lab_lj_225
+Lab_lj_225->B54
+Lab_lj_225->Lab_lj_228
+Lab_lj_228->Lab_lj_211
+Lab_lj_231->exit
+Lab_lj_234->Lab_lj_231
 enter->B31
 }

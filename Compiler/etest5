@@ -1,0 +1,4 @@
+void main(){    
+    const b=3;
+    b=1; 
+}

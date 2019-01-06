@@ -1,26 +1,50 @@
-basic block name: B133
-def: {char_global_var, int_global_var, }
-use: {@422, @423, }
-ain: {@422, @423, }
-aout: {}
+basic block name: B0
+def: {i, sum, }
+use: {@0, @1, }
+ain: {@0, @1, @10, @13, @4, @5, @7, }
+aout: {@10, @13, @4, @5, @7, i, sum, }
 
-basic block name: B134
+basic block name: B1
 def: {}
-use: {}
-ain: {}
-aout: {}
+use: {@5, i, }
+ain: {@10, @13, @4, @5, @7, i, sum, }
+aout: {@10, @13, @4, @5, @7, i, sum, }
 
-basic block name: B135
+basic block name: B3
+def: {@11, }
+use: {@13, i, sum, }
+ain: {@10, @13, i, sum, }
+aout: {@10, @13, i, sum, }
+
+basic block name: Lab_lj_2
 def: {}
-use: {}
-ain: {}
+use: {@4, i, }
+ain: {@10, @13, @4, @5, @7, i, sum, }
+aout: {@10, @13, @4, @5, @7, i, sum, }
+
+basic block name: Lab_lj_3
+def: {i, }
+use: {@7, }
+ain: {@10, @13, @7, sum, }
+aout: {@10, @13, i, sum, }
+
+basic block name: Lab_lj_8
+def: {}
+use: {@10, i, }
+ain: {@10, @13, i, sum, }
+aout: {@10, @13, i, sum, }
+
+basic block name: Lab_lj_9
+def: {}
+use: {sum, }
+ain: {sum, }
 aout: {}
 
 basic block name: enter
 def: {}
 use: {}
-ain: {@422, @423, }
-aout: {@422, @423, }
+ain: {@0, @1, @10, @13, @4, @5, @7, }
+aout: {@0, @1, @10, @13, @4, @5, @7, }
 
 basic block name: exit
 def: {}

@@ -1,0 +1,60 @@
+basic block name: B101
+def: {ret, x, }
+use: {@260, @261, @263, c1, }
+ain: {@260, @261, @263, @266, @268, @269, @271, c1, }
+aout: {@266, @268, @269, @271, c1, ret, x, }
+
+basic block name: B102
+def: {}
+use: {}
+ain: {@266, @268, @269, @271, c1, ret, x, }
+aout: {@266, @268, @269, @271, c1, ret, x, }
+
+basic block name: B103
+def: {ret, }
+use: {@268, }
+ain: {@268, }
+aout: {ret, }
+
+basic block name: B105
+def: {ret, }
+use: {@271, }
+ain: {@271, }
+aout: {ret, }
+
+basic block name: Lab_lj_262
+def: {@265, }
+use: {@266, c1, x, }
+ain: {@266, @268, @269, @271, c1, ret, x, }
+aout: {@265, @268, @269, @271, ret, }
+
+basic block name: Lab_lj_264
+def: {}
+use: {ret, }
+ain: {ret, }
+aout: {}
+
+basic block name: Lab_lj_267
+def: {}
+use: {@265, @269, }
+ain: {@265, @269, @271, ret, }
+aout: {@271, ret, }
+
+basic block name: Lab_lj_270
+def: {}
+use: {}
+ain: {ret, }
+aout: {ret, }
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@260, @261, @263, @266, @268, @269, @271, c1, }
+aout: {@260, @261, @263, @266, @268, @269, @271, c1, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

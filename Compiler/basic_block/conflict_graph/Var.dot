@@ -1,0 +1,13 @@
+graph Var{
+label =Var
+a1[label="a1-0", shape=circle, style=filled, fillcolor=White]
+ch1[label="ch1-1", shape=circle, style=filled, fillcolor=White]
+i1[label="i1-2", shape=circle, style=filled, fillcolor=White]
+x2[label="x2-3", shape=circle, style=filled, fillcolor=White]
+a1--ch1
+a1--i1
+a1--x2
+ch1--i1
+ch1--x2
+i1--x2
+}

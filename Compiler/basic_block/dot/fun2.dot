@@ -1,0 +1,8 @@
+digraph fun2{
+label =fun2
+B1[label="B1:\nADD,a,b,@1\nADD,@1,c,@2\nRET,@2,,\nRET,,,\n" shape=box]
+enter[label="enter:\n" shape=box]
+exit[label="exit:\n" shape=box]
+B1->exit
+enter->B1
+}

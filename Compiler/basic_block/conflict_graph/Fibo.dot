@@ -1,0 +1,6 @@
+graph Fibo{
+label =Fibo
+t122[label="t122-0", shape=circle, style=filled, fillcolor=White]
+n[label="n-1", shape=circle, style=filled, fillcolor=White]
+n--t122
+}

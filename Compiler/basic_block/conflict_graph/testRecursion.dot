@@ -1,23 +1,4 @@
 graph testRecursion{
 label =testRecursion
-t396[label="t396", shape=circle, style=filled, fillcolor=White]
-t399[label="t399", shape=circle, style=filled, fillcolor=White]
-t401[label="t401", shape=circle, style=filled, fillcolor=White]
-t404[label="t404", shape=circle, style=filled, fillcolor=White]
-t405[label="t405", shape=circle, style=filled, fillcolor=White]
-i[label="i", shape=circle, style=filled, fillcolor=White]
-i--t399
-i--t401
-i--t404
-i--t405
-t396--t399
-t396--t401
-t396--t404
-t396--t405
-t399--t401
-t399--t404
-t399--t405
-t401--t404
-t401--t405
-t404--t405
+i[label="i-0", shape=circle, style=filled, fillcolor=White]
 }

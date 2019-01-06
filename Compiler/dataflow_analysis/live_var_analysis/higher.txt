@@ -1,0 +1,18 @@
+basic block name: B7
+def: {}
+use: {@21, }
+ain: {@21, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@21, }
+aout: {@21, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

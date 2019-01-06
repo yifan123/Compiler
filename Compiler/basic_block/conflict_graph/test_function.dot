@@ -1,0 +1,4 @@
+graph test_function{
+label =test_function
+t663[label="t663-0", shape=circle, style=filled, fillcolor=White]
+}

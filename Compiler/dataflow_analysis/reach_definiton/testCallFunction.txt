@@ -1,0 +1,190 @@
+reach definiton information
+basic block name: B130
+gen: {<B130,0>, }
+kill: {}
+rin: {}
+rout: {<B130,0>, }
+
+basic block name: B131
+gen: {}
+kill: {}
+rin: {<B130,0>, }
+rout: {<B130,0>, }
+
+basic block name: B132
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B133
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B135
+gen: {<B135,0>, <B135,1>, }
+kill: {}
+rin: {<B130,0>, }
+rout: {<B130,0>, <B135,0>, <B135,1>, }
+
+basic block name: B136
+gen: {}
+kill: {}
+rin: {<B130,0>, <B135,0>, <B135,1>, }
+rout: {<B130,0>, <B135,0>, <B135,1>, }
+
+basic block name: B137
+gen: {<B137,0>, }
+kill: {}
+rin: {<B130,0>, <B135,0>, <B135,1>, }
+rout: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+
+basic block name: B138
+gen: {}
+kill: {}
+rin: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+rout: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+
+basic block name: B139
+gen: {}
+kill: {}
+rin: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+rout: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+
+basic block name: B140
+gen: {}
+kill: {}
+rin: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+rout: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+
+basic block name: B141
+gen: {}
+kill: {}
+rin: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+rout: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+
+basic block name: B142
+gen: {}
+kill: {}
+rin: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+rout: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+
+basic block name: B143
+gen: {}
+kill: {}
+rin: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+rout: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+
+basic block name: B145
+gen: {}
+kill: {}
+rin: {<B130,0>, }
+rout: {<B130,0>, }
+
+basic block name: B146
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B147
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B149
+gen: {}
+kill: {}
+rin: {<B130,0>, }
+rout: {<B130,0>, }
+
+basic block name: B150
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B151
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B153
+gen: {}
+kill: {}
+rin: {<B130,0>, }
+rout: {<B130,0>, }
+
+basic block name: B154
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: B155
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: Lab_lj_418
+gen: {}
+kill: {}
+rin: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+rout: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+
+basic block name: Lab_lj_420
+gen: {}
+kill: {}
+rin: {<B130,0>, }
+rout: {<B130,0>, }
+
+basic block name: Lab_lj_422
+gen: {}
+kill: {}
+rin: {<B130,0>, }
+rout: {<B130,0>, }
+
+basic block name: Lab_lj_432
+gen: {}
+kill: {}
+rin: {<B130,0>, }
+rout: {<B130,0>, }
+
+basic block name: Lab_lj_434
+gen: {}
+kill: {}
+rin: {<B130,0>, }
+rout: {<B130,0>, }
+
+basic block name: Lab_lj_436
+gen: {}
+kill: {}
+rin: {<B130,0>, }
+rout: {<B130,0>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+rout: {<B130,0>, <B135,0>, <B135,1>, <B137,0>, }
+
+du_chain
+@423: 
+<B135,0>: {}
+@424: 
+<B135,1>: {}
+@425: 
+<B137,0>: {}
+test_select: 
+<B130,0>: {<Lab_lj_420,1>, <Lab_lj_422,1>, <Lab_lj_432,1>, <Lab_lj_434,1>, }

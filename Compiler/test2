@@ -1,0 +1,25 @@
+int fun1(int a,int b){
+    return (a+b);
+}
+int fun2(int a,int b,int c){
+    return (a+b+c);
+}
+int fun3(int a,int b,int c,int d){
+    return (a+b+c+d);
+}
+int fun4(int a,int b,int c,int d,int e){
+    return (a+b+c+d+e);
+}
+
+void main(){    
+    int a,b,c,d,e;
+    a=1;
+    b=2;
+    c=3;
+    d=4;
+    e=5; 
+    printf(fun1(a,b));
+    printf(fun2(a,b,c));
+    printf(fun3(a,b,c,d));
+    printf(fun4(a,b,c,d,e));
+}

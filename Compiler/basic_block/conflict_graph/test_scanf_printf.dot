@@ -1,0 +1,6 @@
+graph test_scanf_printf{
+label =test_scanf_printf
+b[label="b-0", shape=circle, style=filled, fillcolor=White]
+c[label="c-1", shape=circle, style=filled, fillcolor=White]
+b--c
+}

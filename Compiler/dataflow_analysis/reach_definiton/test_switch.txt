@@ -1,0 +1,40 @@
+reach definiton information
+basic block name: B21
+gen: {<B21,0>, }
+kill: {}
+rin: {}
+rout: {<B21,0>, }
+
+basic block name: B22
+gen: {}
+kill: {}
+rin: {<B21,0>, }
+rout: {<B21,0>, }
+
+basic block name: Lab_lj_48
+gen: {}
+kill: {}
+rin: {<B21,0>, }
+rout: {<B21,0>, }
+
+basic block name: Lab_lj_50
+gen: {}
+kill: {}
+rin: {<B21,0>, }
+rout: {<B21,0>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B21,0>, }
+rout: {<B21,0>, }
+
+du_chain
+flag: 
+<B21,0>: {}

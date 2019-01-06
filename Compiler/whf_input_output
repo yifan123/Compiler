@@ -1,0 +1,98 @@
+test Var begin, total 4 case\n
+test Var 1 pass\n
+test Var 4 pass\n
+test Var 2 pass\n
+test Var 3 pass\n
+test Op begin, total 7 case\n
+-6
+2
+8
+2
+-2
+-2
+2
+test Assign begin, total 4 case\n
+test Assign 1 pass\n
+test Assign 2 pass\n
+test Assign 3 pass\n
+test Assign 4 pass\n
+test Condition begin, total 5 case without 3\n
+test Condition 1 pass\n
+test Condition 2 pass\n
+test Condition 4 pass\n
+test Condition 5 pass\n
+test Printf begin, total 5 case\n
+-3000
+a
+20
+195
+test\n printf!#$%^&*()@|\t\\{}[]<>=+-;:~ exp is 50
+test Switch begin, total 2 case\n
+test Switch 1 pass\n
+test Switch 2 pass\n
+test Call begin, total 4 case\n
+test Call 1 pass\n
+test Call 2 pass\n
+test Call 3 pass\n
+test Call 4 pass\n
+1
+_23
+24
+test Scanf begin, total 4 case
+_
+23
+24
+this is not 3 :1
+
+-- program is finished running --
+
+
+Reset: reset completed.
+
+test Var begin, total 4 case\n
+test Var 1 pass\n
+test Var 4 pass\n
+test Var 2 pass\n
+test Var 3 pass\n
+test Op begin, total 7 case\n
+-6
+2
+8
+2
+-2
+-2
+2
+test Assign begin, total 4 case\n
+test Assign 1 pass\n
+test Assign 2 pass\n
+test Assign 3 pass\n
+test Assign 4 pass\n
+test Condition begin, total 5 case without 3\n
+test Condition 1 pass\n
+test Condition 2 pass\n
+test Condition 4 pass\n
+test Condition 5 pass\n
+test Printf begin, total 5 case\n
+-3000
+a
+20
+195
+test\n printf!#$%^&*()@|\t\\{}[]<>=+-;:~ exp is 50
+test Switch begin, total 2 case\n
+test Switch 1 pass\n
+test Switch 2 pass\n
+test Call begin, total 4 case\n
+test Call 1 pass\n
+test Call 2 pass\n
+test Call 3 pass\n
+test Call 4 pass\n
+-100
+B23
+11
+test Scanf begin, total 4 case
+B
+23
+11
+this is not 3 :-100
+
+-- program is finished running --

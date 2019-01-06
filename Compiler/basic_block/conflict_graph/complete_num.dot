@@ -1,0 +1,62 @@
+graph complete_num{
+label =complete_num
+MAX_NUM[label="MAX_NUM-0", shape=circle, style=filled, fillcolor=White]
+a[label="a-1", shape=circle, style=filled, fillcolor=White]
+b[label="b-2", shape=circle, style=filled, fillcolor=White]
+h[label="h-1", shape=circle, style=filled, fillcolor=White]
+i[label="i-3", shape=circle, style=filled, fillcolor=White]
+j[label="j-4", shape=circle, style=filled, fillcolor=White]
+k2[label="k2-2", shape=circle, style=filled, fillcolor=White]
+leap[label="leap-4", shape=circle, style=filled, fillcolor=White]
+m[label="m--1", shape=circle, style=filled, fillcolor=Red]
+n[label="n--1", shape=circle, style=filled, fillcolor=Red]
+s[label="s-1", shape=circle, style=filled, fillcolor=White]
+val[label="val--1", shape=circle, style=filled, fillcolor=Red]
+MAX_NUM--a
+MAX_NUM--b
+MAX_NUM--h
+MAX_NUM--i
+MAX_NUM--j
+MAX_NUM--k2
+MAX_NUM--leap
+MAX_NUM--m
+MAX_NUM--n
+MAX_NUM--s
+MAX_NUM--val
+a--b
+a--i
+a--j
+a--n
+a--val
+b--h
+b--i
+b--j
+b--leap
+b--m
+b--n
+b--val
+h--i
+h--k2
+h--leap
+h--m
+h--val
+i--j
+i--k2
+i--leap
+i--m
+i--n
+i--s
+i--val
+j--n
+j--s
+j--val
+k2--leap
+k2--m
+k2--val
+leap--m
+leap--val
+m--val
+n--s
+n--val
+s--val
+}

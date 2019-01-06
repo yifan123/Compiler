@@ -1,0 +1,4 @@
+graph factorial{
+label =factorial
+n[label="n-0", shape=circle, style=filled, fillcolor=White]
+}

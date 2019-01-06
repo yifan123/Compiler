@@ -1,0 +1,4 @@
+graph test_printf{
+label =test_printf
+t678[label="t678-0", shape=circle, style=filled, fillcolor=White]
+}

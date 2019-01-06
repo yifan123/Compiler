@@ -1,0 +1,4 @@
+graph higher{
+label =higher
+a[label="a-0", shape=circle, style=filled, fillcolor=White]
+}

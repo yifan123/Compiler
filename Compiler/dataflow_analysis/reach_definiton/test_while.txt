@@ -1,0 +1,76 @@
+reach definiton information
+basic block name: B15
+gen: {<B15,0>, <B15,1>, }
+kill: {<B16,1>, <B18,0>, <B18,1>, <Lab_lj_29,1>, }
+rin: {}
+rout: {<B15,0>, <B15,1>, }
+
+basic block name: B16
+gen: {<B16,1>, }
+kill: {<B15,1>, <B18,1>, <Lab_lj_29,1>, }
+rin: {<B15,0>, <B15,1>, <B16,1>, }
+rout: {<B15,0>, <B16,1>, }
+
+basic block name: B18
+gen: {<B18,0>, <B18,1>, }
+kill: {<B15,0>, <B15,1>, <B16,1>, <Lab_lj_29,1>, }
+rin: {<B15,0>, <B18,0>, <B18,1>, <Lab_lj_29,1>, }
+rout: {<B18,0>, <B18,1>, }
+
+basic block name: B20
+gen: {}
+kill: {}
+rin: {<B15,0>, <B18,0>, <B18,1>, <Lab_lj_29,1>, }
+rout: {<B15,0>, <B18,0>, <B18,1>, <Lab_lj_29,1>, }
+
+basic block name: Lab_lj_28
+gen: {}
+kill: {}
+rin: {<B15,0>, <B15,1>, <B16,1>, }
+rout: {<B15,0>, <B15,1>, <B16,1>, }
+
+basic block name: Lab_lj_29
+gen: {<Lab_lj_29,1>, }
+kill: {<B15,1>, <B16,1>, <B18,1>, }
+rin: {<B15,0>, <B15,1>, <B16,1>, }
+rout: {<B15,0>, <Lab_lj_29,1>, }
+
+basic block name: Lab_lj_37
+gen: {}
+kill: {}
+rin: {<B15,0>, <B18,0>, <B18,1>, <Lab_lj_29,1>, }
+rout: {<B15,0>, <B18,0>, <B18,1>, <Lab_lj_29,1>, }
+
+basic block name: Lab_lj_38
+gen: {}
+kill: {}
+rin: {<B15,0>, <B18,0>, <B18,1>, <Lab_lj_29,1>, }
+rout: {<B15,0>, <B18,0>, <B18,1>, <Lab_lj_29,1>, }
+
+basic block name: Lab_lj_45
+gen: {}
+kill: {}
+rin: {<B15,0>, <B18,0>, <B18,1>, <Lab_lj_29,1>, }
+rout: {<B15,0>, <B18,0>, <B18,1>, <Lab_lj_29,1>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B15,0>, <B18,0>, <B18,1>, <Lab_lj_29,1>, }
+rout: {<B15,0>, <B18,0>, <B18,1>, <Lab_lj_29,1>, }
+
+du_chain
+i: 
+<B15,1>: {<B16,0>, <B16,1>, <Lab_lj_28,1>, }
+<B16,1>: {<B16,0>, <B16,1>, <Lab_lj_28,1>, }
+<B18,1>: {<B18,0>, <B18,1>, <Lab_lj_37,1>, }
+<Lab_lj_29,1>: {<B18,0>, <B18,1>, <Lab_lj_37,1>, }
+sum: 
+<B15,0>: {<B18,0>, <Lab_lj_38,1>, }
+<B18,0>: {<B18,0>, <Lab_lj_38,1>, }

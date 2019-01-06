@@ -1,0 +1,164 @@
+reach definiton information
+basic block name: B83
+gen: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+kill: {<B91,0>, <B91,3>, }
+rin: {}
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+
+basic block name: B84
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+
+basic block name: B85
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+
+basic block name: B86
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+
+basic block name: B87
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+
+basic block name: B88
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+
+basic block name: B89
+gen: {<B89,0>, }
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, }
+
+basic block name: B90
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, }
+
+basic block name: B91
+gen: {<B91,0>, <B91,1>, <B91,2>, <B91,3>, }
+kill: {<B83,0>, <B83,1>, }
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, <B91,0>, <B91,1>, <B91,2>, <B91,3>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+rout: {<B83,2>, <B83,3>, <B89,0>, <B91,0>, <B91,1>, <B91,2>, <B91,3>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+
+basic block name: B93
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, <B91,0>, <B91,1>, <B91,2>, <B91,3>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, <B91,0>, <B91,1>, <B91,2>, <B91,3>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+
+basic block name: Lab_lj_189
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+
+basic block name: Lab_lj_192
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+
+basic block name: Lab_lj_196
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+
+basic block name: Lab_lj_198
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+
+basic block name: Lab_lj_200
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, }
+
+basic block name: Lab_lj_202
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, }
+
+basic block name: Lab_lj_205
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, }
+
+basic block name: Lab_lj_207
+gen: {<Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, <B91,0>, <B91,1>, <B91,2>, <B91,3>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, <B91,0>, <B91,1>, <B91,2>, <B91,3>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+
+basic block name: Lab_lj_208
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, <B91,0>, <B91,1>, <B91,2>, <B91,3>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, <B91,0>, <B91,1>, <B91,2>, <B91,3>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+
+basic block name: Lab_lj_228
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, <B91,0>, <B91,1>, <B91,2>, <B91,3>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, <B91,0>, <B91,1>, <B91,2>, <B91,3>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, <B91,0>, <B91,1>, <B91,2>, <B91,3>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+rout: {<B83,0>, <B83,1>, <B83,2>, <B83,3>, <B89,0>, <B91,0>, <B91,1>, <B91,2>, <B91,3>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,3>, <Lab_lj_207,4>, <Lab_lj_207,5>, <Lab_lj_207,6>, <Lab_lj_207,7>, }
+
+du_chain
+@209: 
+<Lab_lj_207,1>: {<Lab_lj_207,2>, }
+@210: 
+<Lab_lj_207,2>: {<Lab_lj_207,3>, }
+@214: 
+<Lab_lj_207,3>: {<Lab_lj_207,8>, }
+@215: 
+<Lab_lj_207,4>: {<Lab_lj_207,5>, }
+@216: 
+<Lab_lj_207,5>: {<Lab_lj_207,6>, }
+@220: 
+<Lab_lj_207,6>: {<Lab_lj_207,7>, }
+@221: 
+<Lab_lj_207,7>: {<Lab_lj_207,8>, }
+@224: 
+<B91,1>: {<B91,2>, }
+@226: 
+<B91,2>: {<B91,3>, }
+ch: 
+<B89,0>: {}
+cnt: 
+<B83,0>: {<B91,0>, <Lab_lj_208,1>, <Lab_lj_228,1>, }
+<B91,0>: {<B91,0>, <Lab_lj_208,1>, <Lab_lj_228,1>, }
+i: 
+<B83,1>: {<B91,1>, <Lab_lj_207,7>, }
+<B91,3>: {<B91,1>, <Lab_lj_207,7>, }
+x: 
+<B83,2>: {<Lab_lj_200,1>, <Lab_lj_207,1>, <Lab_lj_207,2>, <Lab_lj_207,4>, <Lab_lj_207,5>, }
+x1: 
+<B83,3>: {<B86,0>, }

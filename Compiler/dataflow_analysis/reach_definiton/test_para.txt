@@ -1,0 +1,74 @@
+reach definiton information
+basic block name: B158
+gen: {<B158,0>, }
+kill: {}
+rin: {}
+rout: {<B158,0>, }
+
+basic block name: B159
+gen: {}
+kill: {}
+rin: {<B158,0>, }
+rout: {<B158,0>, }
+
+basic block name: B160
+gen: {<B160,0>, }
+kill: {}
+rin: {<B158,0>, }
+rout: {<B158,0>, <B160,0>, }
+
+basic block name: B161
+gen: {}
+kill: {}
+rin: {<B158,0>, <B160,0>, }
+rout: {<B158,0>, <B160,0>, }
+
+basic block name: B162
+gen: {<B162,0>, }
+kill: {}
+rin: {<B158,0>, <B160,0>, }
+rout: {<B158,0>, <B160,0>, <B162,0>, }
+
+basic block name: B163
+gen: {}
+kill: {}
+rin: {<B158,0>, <B160,0>, <B162,0>, }
+rout: {<B158,0>, <B160,0>, <B162,0>, }
+
+basic block name: B164
+gen: {}
+kill: {}
+rin: {<B158,0>, <B160,0>, <B162,0>, }
+rout: {<B158,0>, <B160,0>, <B162,0>, }
+
+basic block name: B165
+gen: {}
+kill: {}
+rin: {<B158,0>, <B160,0>, <B162,0>, }
+rout: {<B158,0>, <B160,0>, <B162,0>, }
+
+basic block name: B166
+gen: {}
+kill: {}
+rin: {<B158,0>, <B160,0>, <B162,0>, }
+rout: {<B158,0>, <B160,0>, <B162,0>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B158,0>, <B160,0>, <B162,0>, }
+rout: {<B158,0>, <B160,0>, <B162,0>, }
+
+du_chain
+@746: 
+<B160,0>: {}
+@749: 
+<B162,0>: {}
+judge: 
+<B158,0>: {}

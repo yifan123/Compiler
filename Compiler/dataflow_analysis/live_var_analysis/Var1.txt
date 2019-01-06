@@ -1,0 +1,36 @@
+basic block name: B29
+def: {i, x2, x3, }
+use: {@60, @61, @62, }
+ain: {@60, @61, @62, @65, @66, @67, @69, }
+aout: {@65, @66, @67, @69, i, }
+
+basic block name: B30
+def: {}
+use: {@66, @67, i, }
+ain: {@65, @66, @67, @69, i, }
+aout: {@65, @66, @67, @69, i, }
+
+basic block name: Lab_lj_63
+def: {}
+use: {@65, i, }
+ain: {@65, @66, @67, @69, i, }
+aout: {@65, @66, @67, @69, i, }
+
+basic block name: Lab_lj_64
+def: {ch1, }
+use: {@69, }
+ain: {@69, }
+aout: {}
+
+basic block name: enter
+def: {}
+use: {}
+ain: {@60, @61, @62, @65, @66, @67, @69, }
+aout: {@60, @61, @62, @65, @66, @67, @69, }
+
+basic block name: exit
+def: {}
+use: {}
+ain: {}
+aout: {}
+

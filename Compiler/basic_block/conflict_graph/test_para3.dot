@@ -1,0 +1,6 @@
+graph test_para3{
+label =test_para3
+a[label="a-0", shape=circle, style=filled, fillcolor=White]
+b[label="b-1", shape=circle, style=filled, fillcolor=White]
+a--b
+}

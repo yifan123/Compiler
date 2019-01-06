@@ -1,0 +1,289 @@
+
+const int i1 = 0, i2 = 1;
+const char c1 = 'n', c2 = '1';
+
+int x1, x2, a1[1024], x3, a[2], x4;
+char ch1, ch2, str1[2048], ch3, ch4;
+
+void Op (char op, int x, int y) {
+    switch (op) {
+        case '+': printf(x+y);
+        case '-': {
+            if (x>y) printf(x-y);
+            if (x<=y) printf(-(x-y));     
+        }
+        case '*': printf(x*y);
+        case '/': {
+            if (x!=0){
+                if (y!=0) {
+                    if (x>0) {
+                        if (y>0) {
+                            if(x>y) printf(x/y);
+                            if(x<=y) printf(y/x);
+                        }
+                        if (y<0) {
+                            if(x>=-y) printf(x/y);
+                            if(x<-y) printf(y/x);
+                        }
+                    }
+                    if (x<0) {
+                        if (y>0) {
+                            if(-x>y) printf(x/y);
+                            if(-x<=y) printf(y/x);
+                        }
+                        if (y<0) {
+                            if(-x>=-y) printf(x/y);
+                            if(-x<-y) printf(y/x);
+                        }
+                    }
+                }
+                if (y==0)printf("y is zero");
+            }
+            if (x==0)printf("x is zero");
+        }
+        default: printf("invalid op");
+    }
+}
+
+void Var1 () {
+    int i;
+    i = 0;
+    x3 = 3;
+    x2 = 2;
+    while (i < 1024) {
+        a1[i] = i;
+        str1[i] = 'i';
+        i = i + 1;
+    }
+    ch1 = 'c';
+}
+void Var (char ch1) {
+    const int i1 = 1;
+    const char c1 = 'N';
+    int a1;   
+    int x2;
+
+    x1 = 1;
+    a1 = 1;
+    x2 = -2;
+    str1[5] = 'I';
+    printf("test Var begin, total 4 case\n");
+    switch (i1) {
+        case 0: printf("test Var 1 fail\n");
+        case 1: {
+            switch (i2) {
+                case 1: {
+                    if ((c1) == ('N')) printf("test Var 1 pass\n");
+                    switch (ch1) {
+                        case 'c': printf("test Var 4 fail\n");
+                        case 'C': printf("test Var 4 pass\n");
+                        default:;
+                    }
+                }
+                default: printf("test Var 1 fail\n");
+            }
+        }
+    }
+    if (x2 == -2) {
+         if (x3 == 3) {
+             if (a1 == 1) printf("test Var 2 pass\n");
+         }
+    }    
+    if ((str1[4]) == ('i'))  {
+        if ((str1[5]) == ('I')) printf("test Var 3 pass\n");
+    }    
+}
+
+int Fibo(int n) {
+    if (n < 0) {
+        printf("invalid fibo input");
+        return(-+0--0);
+    }
+    if (n == 1) return(1);
+    if (n == 2) return(1);
+    return(Fibo(n-1) + Fibo(n-2));
+}
+
+int Add (int i1, int i2) {
+    return (i1 + i2);
+}
+char Char (char ch1) {
+    return (ch1);
+}
+
+char Call (int i1, int i2, char ch1) {
+    int i,j;
+    i = 2;
+    a1[0] = 1;
+    a1[1] = 1;
+    while (i<=i1+i2) {
+        a1[i] = a1[i-1]+a1[i-2];
+        i = i + 1;
+    }
+    printf("test Call begin, total 4 case\n");
+    if (Fibo(Fibo(Fibo(i1-i2)+1)) == 21) printf("test Call 1 pass\n");
+    if (Add(a1[Add(i1,i2)],Fibo(a1[i-1])) == 29) printf("test Call 2 pass\n");
+    if (Add(+'A',-'x') == -55) printf("test Call 3 pass\n");
+
+    return (Char(ch1));
+}
+
+
+void Printf() {
+    int x1;
+
+    x1 = -3000;
+    x3 = 3;
+
+    printf("test Printf begin, total 5 case\n");
+    printf(x1*i2);
+    printf('a');
+    printf(20);
+    printf('a'+'b');
+    printf("test\n printf!#$%^&*()@|\t\\{}[]<>=+-;:~ exp is ",--1+'1');
+}
+
+void Scanf() {
+    int x3,x;
+    scanf(x3);
+    scanf(ch1,x4,x);
+    printf("test Scanf begin, total 4 case");
+    printf(ch1);
+    printf(x4);
+    printf(x);
+    printf("this is not 3 :",x3);
+}
+
+int Condition () {
+    int x;
+    int i;
+    int cnt;
+    char ch;
+
+    cnt = 0;
+    i = 44;
+    x = 1;
+    x1 = 23;
+
+    printf("test Condition begin, total 5 case without 3\n");
+
+    if (1 < 2) printf("test Condition 1 pass\n");
+
+    if ('a'+1) {
+        if (1) {
+            if (x1) printf("test Condition 2 pass\n");
+        }
+    }
+
+    if (0) printf("test Condition 3 fail\n");
+   
+    if (x == 1) {
+        ch = 'z';
+        if ((ch )>= ('a')) {
+            printf("test Condition 4 pass\n");
+        }        
+    }
+
+    
+    while (x+x*x-'x'*('2') < x+x*x-'x'*('2')+i) {
+        cnt = cnt + 1;
+        i = - (-i + 4);
+    }
+
+    if (cnt == 11) printf("test Condition 5 pass\n");
+    return (cnt);
+    
+}
+
+void Assign () {
+    const int assconst = 1;
+    int x1[1024];
+    int y1, y2;
+    int i;
+    char str[1024], ch;
+    
+    i = 0;
+    while (i < 10) {
+        x1[i*4] = i;
+        str[i] = 'i';
+        i = i + 1;
+    }
+
+    y1 = x1[12];
+    y2 = x1[-'a' + 'b' + 1];
+    ch = str[2];
+    x2 = assconst;
+
+    printf("test Assign begin, total 4 case\n");
+
+    if (y1 == 3) printf("test Assign 1 pass\n");
+    if (y2 == 0) printf("test Assign 2 pass\n");
+    if ((ch) == ('i')) printf("test Assign 3 pass\n"); 
+    if (x2 == 1) printf("test Assign 4 pass\n");   
+}
+
+int Label (char c1) {
+    int x;
+    int ret;
+    x = -'0';
+    ret = 0;
+    if ((c1) == ('n')) printf("test Label 1 fail\n");
+    switch (x + c1) {
+        case 0: ret = 1;
+        case 2: ret = 2;
+        default:;
+    }
+    return(ret);
+}
+void Switch () {
+    int x;
+    char str[2];
+
+    x = 2;
+    str[1] = '0';
+
+    printf("test Switch begin, total 2 case\n");
+
+    switch (Label(str[x-1])) {
+            case -12: ;
+            case 1: printf("test Switch 1 pass\n");
+            default: printf("test Switch 1 fail\n");       
+        }
+    switch (str[Label(str[x-1])]) {
+            case 'a': ;
+            case '0':printf("test Switch 2 pass\n");
+            case 'Z':  printf("test Switch 2 fail\n");
+            case '_':  printf("test Switch 2 fail\n");   
+        }
+
+}
+
+
+void test () {
+    Var1();
+    Var('C');
+    printf("test Op begin, total 7 case\n");
+    Op('+',-2,-4);
+    Op('-',-2,-4);
+    Op('*',-2,-4);
+    Op('/',-2,-4);
+    Op('/',2,-4);
+    Op('/',4,-2);
+   Op('/',2,4) ;
+    Assign();
+    x1 = Condition();
+    Printf();
+    Switch();
+    if ((Call(5,0,'_'))) printf("test Call 4 pass\n");
+    Scanf();
+
+}
+
+
+void main () {
+    test();
+   
+}
+
+
+

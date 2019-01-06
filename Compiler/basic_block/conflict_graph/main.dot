@@ -1,3 +1,6 @@
 graph main{
 label =main
+i[label="i-0", shape=circle, style=filled, fillcolor=White]
+sum[label="sum-1", shape=circle, style=filled, fillcolor=White]
+i--sum
 }

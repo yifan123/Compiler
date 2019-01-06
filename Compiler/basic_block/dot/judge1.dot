@@ -1,18 +1,18 @@
 digraph judge1{
 label =judge1
-B92[label="B92:\nASS,@346,,ret\nGEQ,a,b,Lab347\n" shape=box]
-B93[label="B93:\nLSS,c,d,Lab348\n" shape=box]
-B94[label="B94:\nASS,@349,,ret\n" shape=box]
-Lab347[label="Lab347:\nLAB,,,Lab347\nRET,ret,,\nRET,,,\n" shape=box]
-Lab348[label="Lab348:\nLAB,,,Lab348\n" shape=box]
+B103[label="B103:\nASS,@358,,ret\nGEQ,a,b,Lab_lj_359\n" shape=box]
+B104[label="B104:\nLSS,c,d,Lab_lj_360\n" shape=box]
+B105[label="B105:\nASS,@361,,ret\n" shape=box]
+Lab_lj_359[label="Lab_lj_359:\nLAB,,,Lab_lj_359\nRET,ret,,\nRET,,,\n" shape=box]
+Lab_lj_360[label="Lab_lj_360:\nLAB,,,Lab_lj_360\n" shape=box]
 enter[label="enter:\n" shape=box]
 exit[label="exit:\n" shape=box]
-B92->B93
-B92->Lab347
-B93->B94
-B93->Lab348
-B94->Lab348
-Lab347->exit
-Lab348->Lab347
-enter->B92
+B103->B104
+B103->Lab_lj_359
+B104->B105
+B104->Lab_lj_360
+B105->Lab_lj_360
+Lab_lj_359->exit
+Lab_lj_360->Lab_lj_359
+enter->B103
 }

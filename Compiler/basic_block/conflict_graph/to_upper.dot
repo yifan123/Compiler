@@ -1,0 +1,6 @@
+graph to_upper{
+label =to_upper
+a[label="a-0", shape=circle, style=filled, fillcolor=White]
+b[label="b-1", shape=circle, style=filled, fillcolor=White]
+a--b
+}

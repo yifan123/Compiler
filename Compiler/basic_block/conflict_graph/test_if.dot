@@ -1,0 +1,6 @@
+graph test_if{
+label =test_if
+ch[label="ch-0", shape=circle, style=filled, fillcolor=White]
+plus[label="plus-1", shape=circle, style=filled, fillcolor=White]
+ch--plus
+}

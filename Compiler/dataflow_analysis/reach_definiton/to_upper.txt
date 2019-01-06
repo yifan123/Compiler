@@ -1,0 +1,22 @@
+reach definiton information
+basic block name: B24
+gen: {<B24,0>, }
+kill: {}
+rin: {}
+rout: {<B24,0>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B24,0>, }
+rout: {<B24,0>, }
+
+du_chain
+@51: 
+<B24,0>: {}

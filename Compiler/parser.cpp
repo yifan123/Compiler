@@ -4,14 +4,7 @@
 #include"QuadRuple.h"
 using namespace std;
 //#define __DEBUG
-#ifdef __DEBUG
-//#define DEBUG(info)    printf(info)
-//#define DEBUG (printf("(%d)-<%s>: ",__LINE__, __FUNCTION__), printf)
-#define DEBUG printf("(%d)---: ",lexer.line);printf
-#else
-#define DEBUG(info)
-#endif
-#define HAS_RETURN 1
+
 extern vector<QuadRuple> quadtable;
 //extern SymTable symtable;
 extern vector<SymTable>symtables;
@@ -74,7 +67,7 @@ int find_sym_table_declare(string sym, SymTableItem& item) {
 }
 
 string newlab() {
-	string a = "Lab";
+	string a = "Lab_lj_";
 	string b = to_string(lab_index++);
 	return a + b;
 }
@@ -244,7 +237,8 @@ void Parser::main_def() {
 	cur_fucname = "main";
 	int tem_symbol_index = symtables[0].offset;
 	runstack_index = 0;
-	runstack_index += 4;//为$ra，寄存器保护区分配地址
+	//runstack_index += 4;//为$ra，寄存器保护区分配地址
+	runstack_index += (4 + 4 * reg_s_num);//为$ra，寄存器保护区分配地址
 	if (symtables[0].enter("main", funcobj, voidtype, cur_fun_symtab, 0) < 0) {
 		error(lexer.line, MULTI_ID_DEF);
 		skip();
@@ -448,7 +442,7 @@ void Parser::fun_def() {
 		skip();
 	}
 	runstack_index = 0;//运行栈归零，相当于为子函数开辟新的运行栈
-	runstack_index += 36;//为$ra，寄存器保护区分配地址
+	runstack_index += (4 + 4 * reg_s_num);//为$ra，寄存器保护区分配地址
 	number = parmeter_list(cur_fun_symtab);
 	symtables[0].items[tem_symbol_index].number = number;
 
@@ -819,9 +813,11 @@ void Parser::callfun_statement(string &fun_value, TabType &fun_type) {
 	SymTableItem symitem;
 	vector<string> save_para;
 	func_name = lexer.token.id;
-	if (find_sym_table(func_name, symitem, global) < 0) {   //在符号表中查不到标识符
+	int nofun_flag = 0;
+	if ((find_sym_table(func_name, symitem, global) < 0)||symitem.obj!=funcobj) {   //在符号表中查不到标识符或查到的标识符不是函数
 		error(lexer.line, UNDEF_ID);
 		skip();
+		nofun_flag = 1;
 	}
 	form_para_num = symitem.number;
 	fun_type = symitem.type;
@@ -841,9 +837,11 @@ void Parser::callfun_statement(string &fun_value, TabType &fun_type) {
 			}
 			expression(exp_name, ptype);
 			//if (ptype != symtables[symtable.items[tem_symbol_index].adr].items[0].type) {
-			if (ptype != symtables[symitem.adr].items[real_para_num].type) {
-				error(lexer.line, FUNC_RPARA_TYPE_ERROR);
-				skip();
+			if (nofun_flag == 0) {
+				if (ptype != symtables[symitem.adr].items[real_para_num].type) {
+					error(lexer.line, FUNC_RPARA_TYPE_ERROR);
+					skip();
+				}
 			}
 			save_para.push_back(exp_name);
 			real_para_num++;
@@ -1238,8 +1236,16 @@ void Parser::item(string &item_name, TabType &item_type) {
 	dst_name = factor_name;
 	SymTableItem symitem1;
 	SymTableItem symitem2;
+	SymTableItem symitem3;
 	int g1;
 	int g2;
+	int g3;
+	find_sym_table(factor_name, symitem3, g3);
+	if (g3 == 1) {
+		tem_name = newtvar();
+		dst_name = tem_name;
+		quadtable.push_back(QuadRuple("ASS", factor_name, "", tem_name));
+	}
 	int result = 0;
 	while (lexer.token.sym == MULT || lexer.token.sym == DIV)
 	{

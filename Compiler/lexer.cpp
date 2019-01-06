@@ -12,17 +12,27 @@ void Lexer::backspace() {
 	if (index < 0) {
 		printf("some error happen\n");
 		error();
+		system("pause");
+		exit(0);
 	}
 }
 
 Lexer::Lexer(string filename) {
 	infile.open(filename);
+	if (infile.fail()){
+		cout << "File not found" << endl;
+		error();
+		system("pause");
+		exit(0);
+	}
 	index = 0;
 	infile.get(ch);
 	while (!infile.eof()) {  //将源代码一次性全部读入到buffer中
 		if (index > max_source_length) {
 			cout << "source file is too big!"<<endl;
 			error();
+			system("pause");
+			exit(0);
 		}
 		buffer[index++] = ch;
 		infile.get(ch);
@@ -55,6 +65,8 @@ void Lexer::getch() {
 	if (buffer[index] == '\0') {
 		printf("source programer is not complete\n");
 		error();
+		system("pause");
+		exit(0);
 	}
 	ch = buffer[index];
 }

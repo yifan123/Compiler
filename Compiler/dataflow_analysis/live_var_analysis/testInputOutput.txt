@@ -1,14 +1,14 @@
-basic block name: B90
+basic block name: B101
 def: {char_global_var, char_test_input, int_global_var, int_test_input, }
-use: {@344, @345, }
-ain: {@344, @345, }
+use: {@356, @357, }
+ain: {@356, @357, }
 aout: {}
 
 basic block name: enter
 def: {}
 use: {}
-ain: {@344, @345, }
-aout: {@344, @345, }
+ain: {@356, @357, }
+aout: {@356, @357, }
 
 basic block name: exit
 def: {}

@@ -1,0 +1,68 @@
+reach definiton information
+basic block name: B25
+gen: {<B25,0>, <B25,1>, <B25,2>, }
+kill: {}
+rin: {}
+rout: {<B25,0>, <B25,1>, <B25,2>, }
+
+basic block name: B26
+gen: {}
+kill: {}
+rin: {<B25,0>, <B25,1>, <B25,2>, }
+rout: {<B25,0>, <B25,1>, <B25,2>, }
+
+basic block name: B27
+gen: {<B27,0>, }
+kill: {}
+rin: {<B25,0>, <B25,1>, <B25,2>, }
+rout: {<B25,0>, <B25,1>, <B25,2>, <B27,0>, }
+
+basic block name: B28
+gen: {}
+kill: {}
+rin: {<B25,0>, <B25,1>, <B25,2>, <B27,0>, }
+rout: {<B25,0>, <B25,1>, <B25,2>, <B27,0>, }
+
+basic block name: B29
+gen: {<B29,0>, }
+kill: {}
+rin: {<B25,0>, <B25,1>, <B25,2>, <B27,0>, }
+rout: {<B25,0>, <B25,1>, <B25,2>, <B27,0>, <B29,0>, }
+
+basic block name: B30
+gen: {}
+kill: {}
+rin: {<B25,0>, <B25,1>, <B25,2>, <B27,0>, <B29,0>, }
+rout: {<B25,0>, <B25,1>, <B25,2>, <B27,0>, <B29,0>, }
+
+basic block name: B31
+gen: {<B31,0>, }
+kill: {}
+rin: {<B25,0>, <B25,1>, <B25,2>, <B27,0>, <B29,0>, }
+rout: {<B25,0>, <B25,1>, <B25,2>, <B27,0>, <B29,0>, <B31,0>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B25,0>, <B25,1>, <B25,2>, <B27,0>, <B29,0>, <B31,0>, }
+rout: {<B25,0>, <B25,1>, <B25,2>, <B27,0>, <B29,0>, <B31,0>, }
+
+du_chain
+@53: 
+<B27,0>: {}
+@55: 
+<B29,0>: {}
+@57: 
+<B31,0>: {}
+a: 
+<B25,0>: {}
+b: 
+<B25,1>: {<B27,2>, }
+c: 
+<B25,2>: {<B29,2>, }

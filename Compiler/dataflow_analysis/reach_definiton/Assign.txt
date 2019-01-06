@@ -1,0 +1,99 @@
+reach definiton information
+basic block name: B100
+gen: {}
+kill: {}
+rin: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+rout: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+
+basic block name: B94
+gen: {<B94,0>, }
+kill: {<B95,3>, }
+rin: {}
+rout: {<B94,0>, }
+
+basic block name: B95
+gen: {<B95,0>, <B95,3>, }
+kill: {<B94,0>, }
+rin: {<B94,0>, <B95,0>, <B95,3>, }
+rout: {<B95,0>, <B95,3>, }
+
+basic block name: B97
+gen: {}
+kill: {}
+rin: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+rout: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+
+basic block name: B98
+gen: {}
+kill: {}
+rin: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+rout: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+
+basic block name: B99
+gen: {}
+kill: {}
+rin: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+rout: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+
+basic block name: Lab_lj_231
+gen: {}
+kill: {}
+rin: {<B94,0>, <B95,0>, <B95,3>, }
+rout: {<B94,0>, <B95,0>, <B95,3>, }
+
+basic block name: Lab_lj_232
+gen: {<Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+kill: {}
+rin: {<B94,0>, <B95,0>, <B95,3>, }
+rout: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+
+basic block name: Lab_lj_250
+gen: {}
+kill: {}
+rin: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+rout: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+
+basic block name: Lab_lj_252
+gen: {}
+kill: {}
+rin: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+rout: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+
+basic block name: Lab_lj_254
+gen: {}
+kill: {}
+rin: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+rout: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+
+basic block name: Lab_lj_256
+gen: {}
+kill: {}
+rin: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+rout: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+
+basic block name: enter
+gen: {}
+kill: {}
+rin: {}
+rout: {}
+
+basic block name: exit
+gen: {}
+kill: {}
+rin: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+rout: {<B94,0>, <B95,0>, <B95,3>, <Lab_lj_232,1>, <Lab_lj_232,2>, <Lab_lj_232,3>, <Lab_lj_232,4>, }
+
+du_chain
+@235: 
+<B95,0>: {<B95,1>, }
+ch: 
+<Lab_lj_232,3>: {<Lab_lj_252,1>, }
+i: 
+<B94,0>: {<B95,0>, <B95,1>, <B95,2>, <B95,3>, <Lab_lj_231,1>, }
+<B95,3>: {<B95,0>, <B95,1>, <B95,2>, <B95,3>, <Lab_lj_231,1>, }
+x2: 
+<Lab_lj_232,4>: {<Lab_lj_254,1>, }
+y1: 
+<Lab_lj_232,1>: {}
+y2: 
+<Lab_lj_232,2>: {<Lab_lj_250,1>, }

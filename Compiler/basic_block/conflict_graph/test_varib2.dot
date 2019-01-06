@@ -1,0 +1,4 @@
+graph test_varib2{
+label =test_varib2
+judge[label="judge-0", shape=circle, style=filled, fillcolor=White]
+}
